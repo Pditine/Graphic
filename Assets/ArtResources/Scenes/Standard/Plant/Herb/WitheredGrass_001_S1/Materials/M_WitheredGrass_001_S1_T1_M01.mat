@@ -1,0 +1,112 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-3109803060995914118
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 5
+--- !u!21 &2100000
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: M_WitheredGrass_001_S1_T1_M01
+  m_Shader: {fileID: 4800000, guid: c418e87c5b8d54b469b52a6e9ba728b0, type: 3}
+  m_ValidKeywords: []
+  m_InvalidKeywords:
+  - _SPECULARHIGHLIGHTS_OFF
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 1
+  m_DoubleSidedGI: 1
+  m_CustomRenderQueue: 2000
+  stringTagMap:
+    RenderType: Opaque
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _BaseMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _BumpMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _GrassLutTex:
+        m_Texture: {fileID: 2800000, guid: e4d6ac2c3bf37034185ce99424c0f496, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MetallicGlossMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Normal_M_SMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _AlphaClip: 0
+    - _Blend: 0
+    - _BumpScale: 1
+    - _Cull: 0
+    - _Cutoff: 0.673
+    - _DstBlend: 0
+    - _EmissionStrength: 0
+    - _EnvironmentReflections: 1
+    - _GlobalOcclusionAddValue: 0
+    - _GlossMapScale: 0
+    - _GrassMaxSmoothnessVal: 1
+    - _GrassOcclusionStrength: 0.663
+    - _GrassTopColorRange: 0.41
+    - _GrassTopColorType: 0.141
+    - _GrassTopColorWeightAdd: 1.53
+    - _GrassWindGustSpePow: 20
+    - _GrassWindGustSpeTint: 0.078
+    - _HorizonFade: 0.5
+    - _LDotNSScale: 0.41
+    - _LDotNSSmooth: 0.5
+    - _LDotNSStrength: 0.141
+    - _LdotNToggle: 0
+    - _Metallic: 0
+    - _OcclusionAddValue: 0.5
+    - _QueueOffset: 0
+    - _ReceiveShadows: 1
+    - _ShadowViewDirOffset: 0
+    - _Smoothness: 0
+    - _SmoothnessTextureChannel: 0
+    - _SpecularHighlights: 0
+    - _SrcBlend: 1
+    - _StencilMask: 128
+    - _StencilPass: 0
+    - _StencilRef: 128
+    - _StencilZFail: 0
+    - _Surface: 0
+    - _TextureArray: 0
+    - _Transparency: 1
+    - _VertexColor: 0
+    - _VertexDarkening: 0.844
+    - _WindBranchScaleStretch: 1
+    - _WindCaculateCenterPosByOffset: 1
+    - _WindGlobalStretch: 0.115
+    - _WindMaskMode: 1
+    - _WindNoiseShadowStrength: 1
+    - _WindRandomStretch: 0.28
+    - _WindVertexToRootPow: 1
+    - _WindVertexToRootPowScale: 1
+    - _WorkflowMode: 1
+    - _ZWrite: 1
+    m_Colors:
+    - _BaseColor: {r: 0.38568816, g: 0.47058824, b: 0.17647062, a: 1}
+  m_BuildTextureStacks: []

@@ -1,0 +1,139 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: M_Camellia_001_S1_T1_M01
+  m_Shader: {fileID: 4800000, guid: c789cf1dc002f5d4f8fae320320d22d5, type: 3}
+  m_ValidKeywords:
+  - _ALPHATEST_ON
+  m_InvalidKeywords:
+  - _LDOTNTOGGLE_ON
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 1
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _BaseMap:
+        m_Texture: {fileID: 2800000, guid: 37c3c365ca15cce45a3eb480e8d854e1, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _BumpMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _EmissionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _EmissionMaskMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MetallicGlossMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Normal_M_SMap:
+        m_Texture: {fileID: 2800000, guid: 478bc5866b761524fa82d7f10692ce9e, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _OcclusionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SpecGlossMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _AlphaClip: 1
+    - _BackFaceSmoothness: 0
+    - _BackFaceStr: 0.327
+    - _BackSubScatterAttenByDistance: 1
+    - _BackSubScatterDistortion: 0.802
+    - _BackSubScatterParams: 0
+    - _BackSubScatterPower: 1
+    - _BackSubScatterScale: 1
+    - _BackSubScatterThicknessScale: 0.41
+    - _BackSubScatterToggle: 0
+    - _Blend: 0
+    - _BumpScale: 1
+    - _Cull: 0
+    - _Cutoff: 0.5
+    - _DstBlend: 0
+    - _EnvironmentReflections: 1
+    - _GlobalCBufferIndex: 0
+    - _GlossMapScale: 0
+    - _Glossiness: 0
+    - _GlossyReflections: 0
+    - _GrassMaxSmoothnessVal: 1
+    - _GroupAdvanced: 0
+    - _HorizonFade: 0.5
+    - _LDotNSScale: 0.5
+    - _LDotNSSmooth: 0.5
+    - _LDotNSStrength: 0.5
+    - _LdotNToggle: 1
+    - _Metallic: 1
+    - _OcclusionAddValue: 0.5
+    - _OcclusionStrength: 1
+    - _QueueOffset: 0
+    - _RandomYScale: 1
+    - _RandomYScaleMax: 1
+    - _RandomYScaleTilling: 1
+    - _ReceiveShadows: 1
+    - _ScreenDoorFadeDistance: 5
+    - _ScreenDoorFadeRange: 2
+    - _ScreenDoorParams: 0
+    - _ScreenDoorToggle: 0
+    - _ShadowViewDirOffset: 0
+    - _Smoothness: 1
+    - _SmoothnessTextureChannel: 0
+    - _SpecularHighlights: 1
+    - _SrcBlend: 1
+    - _StencilComp: 3
+    - _StencilMask: 128
+    - _StencilPass: 0
+    - _StencilRef: 0
+    - _StencilZFail: 0
+    - _Surface: 0
+    - _SurfaceInputs: 0
+    - _SurfaceOptions: 0
+    - _Transparency: 1
+    - _UVOffsetParams: 0
+    - _UVOffsetScale: 1
+    - _UVOffsetToggle: 0
+    - _UselessParams: 0
+    - _VertexColor: 0
+    - _WindBranchScaleStretch: 1
+    - _WindCaculateCenterPosByOffset: 0
+    - _WindGlobalStretch: 0
+    - _WindMaskMode: 0
+    - _WindNoiseShadowStrength: 1
+    - _WindParams: 0
+    - _WindRandomStretch: 0
+    - _WindVertexToRootPow: 1
+    - _WindVertexToRootPowScale: 1
+    - _WorkflowMode: 1
+    - _ZWrite: 1
+    - _Ztest: 8
+    m_Colors:
+    - _BackSubScatterColor: {r: 0.80610347, g: 0.9245283, b: 0.16135636, a: 1}
+    - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
+  m_BuildTextureStacks: []

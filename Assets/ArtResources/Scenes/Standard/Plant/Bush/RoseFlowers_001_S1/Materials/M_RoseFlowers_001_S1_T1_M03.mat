@@ -1,0 +1,128 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: M_RoseFlowers_001_S1_T1_M03
+  m_Shader: {fileID: 4800000, guid: c789cf1dc002f5d4f8fae320320d22d5, type: 3}
+  m_ValidKeywords:
+  - _ALPHATEST_ON
+  m_InvalidKeywords:
+  - _BACKSUBSCATTERTOGGLE_ON
+  - _LDOTNTOGGLE_ON
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 1
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _BaseMap:
+        m_Texture: {fileID: 2800000, guid: c5188076cc4a1234c802b32da880d2e6, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _BumpMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _EmissionMaskMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MetallicGlossMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Normal_M_SMap:
+        m_Texture: {fileID: 2800000, guid: 842d04f68e68e0d4c9e3725b036c2c39, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _AlphaClip: 1
+    - _BackFaceStr: 0.297
+    - _BackSubScatterAttenByDistance: 1
+    - _BackSubScatterDistortion: 1
+    - _BackSubScatterParams: 0
+    - _BackSubScatterPower: 1
+    - _BackSubScatterScale: 1
+    - _BackSubScatterThicknessScale: 1
+    - _BackSubScatterToggle: 0
+    - _Blend: 0
+    - _BumpScale: 1
+    - _Cull: 0
+    - _Cutoff: 0.5
+    - _DstBlend: 0
+    - _EmiMaskSMax: 1
+    - _EmiMaskSMin: 0
+    - _EmiMaskSize: 1
+    - _EmiMaskSpeed: 1
+    - _EmiMaskType: 0
+    - _EmissionStrength: 0
+    - _EnvironmentReflections: 1
+    - _GlobalCBufferIndex: 0
+    - _GlossMapScale: 1
+    - _GrassMaxSmoothnessVal: 1
+    - _GroupAdvanced: 0
+    - _HorizonFade: 0.5
+    - _LDotNSScale: 0.5
+    - _LDotNSSmooth: 0.5
+    - _LDotNSStrength: 0.5
+    - _LdotNToggle: 1
+    - _Metallic: 1
+    - _OcclusionAddValue: 0.5
+    - _QueueOffset: 0
+    - _RandomYScale: 1
+    - _RandomYScaleMax: 1
+    - _RandomYScaleTilling: 1
+    - _ReceiveShadows: 1
+    - _SRPBatchEnable: 1
+    - _ScreenDoorFadeDistance: 5
+    - _ScreenDoorFadeRange: 2
+    - _ScreenDoorParams: 0
+    - _ScreenDoorToggle: 0
+    - _ShadowViewDirOffset: 0
+    - _Smoothness: 1
+    - _SmoothnessTextureChannel: 0
+    - _SpecularHighlights: 1
+    - _SrcBlend: 1
+    - _StencilMask: 128
+    - _StencilParams: 0
+    - _StencilPass: 0
+    - _StencilPassReadMask: 0
+    - _StencilPassRef: 0
+    - _StencilPassWriteMask: 0
+    - _StencilRef: 128
+    - _StencilWritePassEnable: 0
+    - _StencilZFail: 0
+    - _Surface: 0
+    - _SurfaceInputs: 0
+    - _SurfaceOptions: 0
+    - _TextureArray: 0
+    - _Transparency: 1
+    - _UVOffsetParams: 0
+    - _UVOffsetScale: 1
+    - _UVOffsetToggle: 0
+    - _UselessParams: 0
+    - _VertexColor: 0
+    - _WindBranchScaleStretch: 1
+    - _WindCaculateCenterPosByOffset: 0
+    - _WindGlobalStretch: 0.059
+    - _WindMaskMode: 1
+    - _WindNoiseShadowStrength: 1
+    - _WindParams: 0
+    - _WindRandomStretch: 0.131
+    - _WindVertexToRootPow: 1
+    - _WindVertexToRootPowScale: 1
+    - _WorkflowMode: 0
+    - _ZWrite: 1
+    m_Colors:
+    - _BackSubScatterColor: {r: 1, g: 1, b: 1, a: 1}
+    - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
+  m_BuildTextureStacks: []

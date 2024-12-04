@@ -1,0 +1,127 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: M_FruitTree_001_S1_T1_M01
+  m_Shader: {fileID: 4800000, guid: d1576bac214a70044bdca75e0f51a9db, type: 3}
+  m_ValidKeywords: []
+  m_InvalidKeywords:
+  - _BACKSUBSCATTERTOGGLE_ON
+  - _METALLICSPECGLOSSMAP
+  - _WINDCACULATECENTERPOSBYOFFSET_ON
+  - _WINDISLEAF_ON
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _BaseMap:
+        m_Texture: {fileID: 2800000, guid: 0a9876f7e750d3a43a6ad29d9f66f5e0, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _BumpMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _EmissionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 2800000, guid: 9b448e90005e10a4097751ebc0e0d13b, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MetallicGlossMap:
+        m_Texture: {fileID: 2800000, guid: b71131776a05a3846902d5295468eb69, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Normal_M_SMap:
+        m_Texture: {fileID: 2800000, guid: 4663b4cec5f0edc42b2be95045275c4e, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _OcclusionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SpecGlossMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _AlphaClip: 0
+    - _BackFaceStr: 0
+    - _BackSubScatterAttenByDistance: 1
+    - _BackSubScatterDistortion: 1
+    - _BackSubScatterPower: 1
+    - _BackSubScatterScale: 1
+    - _BackSubScatterThicknessScale: 1
+    - _BackSubScatterToggle: 0
+    - _Blend: 0
+    - _BumpScale: 1
+    - _Cull: 2
+    - _Cutoff: 0.5
+    - _DstBlend: 0
+    - _EnvironmentReflections: 1
+    - _FlipBack: 0
+    - _GlobalCBufferIndex: 0
+    - _GlossMapScale: 0
+    - _Glossiness: 0
+    - _GlossyReflections: 0
+    - _GrassMaxSmoothnessVal: 1
+    - _GrassOcclusionStrength: 0.25
+    - _GroupAdvanced: 0
+    - _HorizonFade: 0.5
+    - _LDotNSScale: 0.5
+    - _LDotNSSmooth: 0.5
+    - _LDotNSStrength: 0.5
+    - _LdotNToggle: 0
+    - _Metallic: 0
+    - _OcclusionAddValue: 0.5
+    - _OcclusionStrength: 1
+    - _QueueOffset: 0
+    - _ReceiveShadows: 1
+    - _ScreenDoorToggle: 0
+    - _ShadowViewDirOffset: 0
+    - _Smoothness: 1
+    - _SmoothnessTextureChannel: 0
+    - _SpecularHighlights: 1
+    - _SrcBlend: 1
+    - _StencilComp: 3
+    - _StencilRef: 0
+    - _Surface: 0
+    - _SurfaceInputs: 0
+    - _SurfaceOptions: 0
+    - _Transparency: 1
+    - _VertexColor: 0
+    - _VertexDarkening: 0.1
+    - _WindBranchScaleStretch: 0
+    - _WindCaculateCenterPosByOffset: 1
+    - _WindGlobalStretch: 0.008
+    - _WindLeafScalePow: 0
+    - _WindLeafScaleStretch: 0
+    - _WindMaskMode: 1
+    - _WindNoiseShadowStrength: 1
+    - _WindRandomStretch: 0.097
+    - _WindVertexToRootPow: 1.56
+    - _WindVertexToRootPowScale: 1
+    - _WindisLeaf: 0
+    - _WorkflowMode: 1
+    - _ZWrite: 1
+    - _Ztest: 8
+    m_Colors:
+    - _BackSubScatterColor: {r: 1, g: 1, b: 1, a: 1}
+    - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
+  m_BuildTextureStacks: []

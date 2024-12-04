@@ -1,0 +1,151 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: M_Banyan_007_S1_T2_M01
+  m_Shader: {fileID: 4800000, guid: d1576bac214a70044bdca75e0f51a9db, type: 3}
+  m_ValidKeywords:
+  - _ALPHATEST_ON
+  m_InvalidKeywords:
+  - _BACKSUBSCATTERTOGGLE_ON
+  - _LDOTNTOGGLE_ON
+  - _WINDCACULATECENTERPOSBYOFFSET_ON
+  - _WINDISLEAF_ON
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 1
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _BaseMap:
+        m_Texture: {fileID: 2800000, guid: ce12af7edf3ef184ea23d1cdd50fb620, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _BumpMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _EmissionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MetallicGlossMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Normal_M_SMap:
+        m_Texture: {fileID: 2800000, guid: abe235e75f9934a4cba762be66c1e93b, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _OcclusionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SpecGlossMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _AlphaClip: 1
+    - _BackFaceStr: 0
+    - _BackSubScatterAttenByDistance: 1
+    - _BackSubScatterDistortion: 0.888
+    - _BackSubScatterOptions: 0
+    - _BackSubScatterPower: 6.57
+    - _BackSubScatterScale: 1
+    - _BackSubScatterThicknessScale: 0.25
+    - _BackSubScatterToggle: 1
+    - _Blend: 0
+    - _BumpScale: 1
+    - _Cull: 0
+    - _Cutoff: 0.6
+    - _DstBlend: 0
+    - _EmissionStrength: 0
+    - _EnvironmentReflections: 1
+    - _FlipBack: 0
+    - _GlobalCBufferIndex: 0
+    - _GlossMapScale: 0
+    - _Glossiness: 0
+    - _GlossyReflections: 0
+    - _GrassMaxSmoothnessVal: 1
+    - _GrassOcclusionStrength: 0.25
+    - _GroupAdvanced: 0
+    - _HorizonFade: 0.5
+    - _LDotNSScale: 0.593
+    - _LDotNSSmooth: 0.133
+    - _LDotNSStrength: 0.435
+    - _LdotNToggle: 1
+    - _LightDotNumrlOptions: 0
+    - _Metallic: 1
+    - _OcclusionAddValue: 0.5
+    - _OcclusionStrength: 1
+    - _QueueOffset: 0
+    - _RandomYScale: 1
+    - _RandomYScaleMax: 1
+    - _RandomYScaleTilling: 1
+    - _ReceiveShadows: 1
+    - _SRPBatchEnable: 1
+    - _ScreenDoorDistance: 4
+    - _ScreenDoorFadeDistance: 5
+    - _ScreenDoorFadeRange: 2
+    - _ScreenDoorOptions: 0
+    - _ScreenDoorToggle: 0
+    - _ShadowViewDirOffset: 0
+    - _Smoothness: 1
+    - _SmoothnessTextureChannel: 0
+    - _SpecularHighlights: 1
+    - _SrcBlend: 1
+    - _StencilComp: 3
+    - _StencilMask: 128
+    - _StencilPass: 0
+    - _StencilRef: 0
+    - _StencilZFail: 0
+    - _Surface: 0
+    - _SurfaceInputs: 0
+    - _SurfaceOptions: 0
+    - _TextureArray: 0
+    - _Transparency: 1
+    - _UVOffsetScale: 1
+    - _UVOffsetToggle: 0
+    - _VertexColor: 0
+    - _VertexDarkening: 0.1
+    - _WindBranchScaleStretch: 1
+    - _WindCaculateCenterPosByOffset: 1
+    - _WindCusHangPointToggle: 0
+    - _WindGlobalStretch: 0.006
+    - _WindLeafScalePow: 0.83
+    - _WindLeafScaleStretch: 0.126
+    - _WindMaskMode: 1
+    - _WindModeType: 0
+    - _WindNoiseShadowStrength: 1
+    - _WindOptions: 1
+    - _WindRandomStretch: 0.253
+    - _WindVertexToRootPow: 1.19
+    - _WindVertexToRootPowScale: 1
+    - _WindisLeaf: 1
+    - _WorkflowMode: 1
+    - _ZWrite: 1
+    - _Ztest: 8
+    m_Colors:
+    - _BackSubScatterColor: {r: 0.8679245, g: 0.5092222, b: 0.28248486, a: 1}
+    - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
+    - _WindCusHangPointPivotOS: {r: 1, g: 1, b: 0, a: 0}
+    - _WindCusHangPointPositionOS: {r: 0, g: 0, b: 0, a: 0}
+    - _WindCusHangPointWeight: {r: 0, g: 0, b: 0, a: 0}
+  m_BuildTextureStacks: []
