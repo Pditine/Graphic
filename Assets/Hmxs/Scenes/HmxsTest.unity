@@ -152,19 +152,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 191d032ee7d8499cb2d6d44d5ec4331f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waterMaterial: {fileID: 2100000, guid: 6302dfd90780a0e4cb65aa83d35281cd, type: 2}
+  water: {fileID: 4373080666312314095}
+  waterMaterial: {fileID: 2100000, guid: c91a79496bdbc234a8b5dc66c1215717, type: 2}
+  waterColorTextureSize: {x: 128, y: 4}
   waterColorGradient:
     serializedVersion: 2
-    key0: {r: 1, g: 1, b: 1, a: 1}
-    key1: {r: 1, g: 1, b: 1, a: 1}
+    key0: {r: 0.5981132, g: 0.98392457, b: 1, a: 1}
+    key1: {r: 0.37169808, g: 0.60807526, b: 1, a: 1}
     key2: {r: 0, g: 0, b: 0, a: 0}
     key3: {r: 0, g: 0, b: 0, a: 0}
     key4: {r: 0, g: 0, b: 0, a: 0}
     key5: {r: 0, g: 0, b: 0, a: 0}
     key6: {r: 0, g: 0, b: 0, a: 0}
     key7: {r: 0, g: 0, b: 0, a: 0}
-    ctime0: 0
-    ctime1: 65535
+    ctime0: 2120
+    ctime1: 59753
     ctime2: 0
     ctime3: 0
     ctime4: 0
@@ -172,14 +174,14 @@ MonoBehaviour:
     ctime6: 0
     ctime7: 0
     atime0: 0
-    atime1: 65535
+    atime1: 56861
     atime2: 0
     atime3: 0
     atime4: 0
     atime5: 0
     atime6: 0
     atime7: 0
-    m_Mode: 0
+    m_Mode: 2
     m_ColorSpace: 0
     m_NumColorKeys: 2
     m_NumAlphaKeys: 2
@@ -2484,7 +2486,6 @@ Transform:
   - {fileID: 1025681518732089786}
   - {fileID: 1025681519836831654}
   - {fileID: 487885704387555203}
-  - {fileID: 4373080666312314089}
   - {fileID: 4674286093344753006}
   - {fileID: 1051749621}
   - {fileID: 2109572463}
@@ -12066,6 +12067,7 @@ GameObject:
   - component: {fileID: 1694180182}
   - component: {fileID: 1694180181}
   - component: {fileID: 1694180180}
+  - component: {fileID: 1694180183}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -12147,6 +12149,50 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1694180183
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1694180179}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_RenderShadows: 1
+  m_RequiresDepthTextureOption: 2
+  m_RequiresOpaqueTextureOption: 2
+  m_CameraType: 0
+  m_Cameras: []
+  m_RendererIndex: -1
+  m_VolumeLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  m_VolumeTrigger: {fileID: 0}
+  m_VolumeFrameworkUpdateModeOption: 2
+  m_RenderPostProcessing: 0
+  m_Antialiasing: 0
+  m_AntialiasingQuality: 2
+  m_StopNaN: 0
+  m_Dithering: 0
+  m_ClearDepth: 1
+  m_AllowXRRendering: 1
+  m_AllowHDROutput: 1
+  m_UseScreenCoordOverride: 0
+  m_ScreenSizeOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_ScreenCoordScaleBias: {x: 0, y: 0, z: 0, w: 0}
+  m_RequiresDepthTexture: 0
+  m_RequiresColorTexture: 0
+  m_Version: 2
+  m_TaaSettings:
+    quality: 3
+    frameInfluence: 0.1
+    jitterScale: 1
+    mipBias: 0
+    varianceClampScale: 0.9
+    contrastAdaptiveSharpening: 0
 --- !u!1001 &1695502117
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -20692,7 +20738,7 @@ Transform:
   m_LocalScale: {x: 10, y: 10, z: 10}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 332009622}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4373080666312314092
 GameObject:
@@ -20740,7 +20786,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 6302dfd90780a0e4cb65aa83d35281cd, type: 2}
+  - {fileID: 2100000, guid: c91a79496bdbc234a8b5dc66c1215717, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -21002,3 +21048,4 @@ SceneRoots:
   - {fileID: 1767812734}
   - {fileID: 332009622}
   - {fileID: 2379461}
+  - {fileID: 4373080666312314089}
