@@ -3,7 +3,10 @@
 #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
 #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/DeclareDepthTexture.hlsl"
 
-float _WaterDepthFadeFactor;
+CBUFFER_START(StylizedWater)
+    float _WaterDepthFadeFactor;
+CBUFFER_END
+
 TEXTURE2D(_WaterColorTex);
 SAMPLER(sampler_WaterColorTex);
 

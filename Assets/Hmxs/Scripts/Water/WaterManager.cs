@@ -33,7 +33,7 @@ namespace Hmxs.Scripts.Water
             // create texture
             var texture = new Texture2D(waterColorTextureSize.x, waterColorTextureSize.y, TextureFormat.ARGB32, false, false)
             {
-                name = "_WaterColorGradientTex",
+                name = "DepthColorGradientTex",
                 wrapMode = TextureWrapMode.Clamp,
                 filterMode = FilterMode.Point
             };
@@ -50,7 +50,7 @@ namespace Hmxs.Scripts.Water
 #if UNITY_EDITOR
 
         [Button(SdfIconType.Save)]
-        private void SaveWaterColorTexture()
+        private void SaveWaterColorTexture(string postfix = "")
         {
             // save it to disk
             var texture = UpdateWaterColorTexture(false);
@@ -65,7 +65,9 @@ namespace Hmxs.Scripts.Water
                 Debug.LogError("Failed to get target folder.");
                 return;
             }
-            string path = Path.Combine(targetFolder, $"{waterMaterial.name}_{texture.name}.png");
+            string path = postfix.Equals("") ?
+                Path.Combine(targetFolder, $"{waterMaterial.name}_{texture.name}.png") :
+                Path.Combine(targetFolder, $"{waterMaterial.name}_{postfix}.png");
             try
             {
                 byte[] pngData = texture.EncodeToPNG();
