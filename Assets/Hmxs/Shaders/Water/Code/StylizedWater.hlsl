@@ -3,7 +3,12 @@
 #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
 #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/DeclareDepthTexture.hlsl"
 
-float _WaterDepthFadeFactor;
+CBUFFER_START(StylizedWater)
+    float _WaterDepthFadeFactor;
+CBUFFER_END
+
+TEXTURE2D(_WaterColorTex);
+SAMPLER(sampler_WaterColorTex);
 
 struct Attributes
 {
@@ -27,7 +32,7 @@ half GetWaterDepthRelativeToCamera(float4 positionSS, float2 uvSS)
     half sceneDepthEye = LinearEyeDepth(sceneDepth, _ZBufferParams); // Sample the scene depth and convert it to linear eye depth.
     half scenePos = positionSS.w;
     half waterDepth = sceneDepthEye - scenePos; // waterDepth = SceneDepth - ScenePosition
-    waterDepth = 1 - saturate(waterDepth * _WaterDepthFadeFactor); // Linearly interpolate(can be changed to other interpolation methods)
+    waterDepth = saturate(waterDepth * _WaterDepthFadeFactor); // Linearly interpolate(can be changed to other interpolation methods)
     return waterDepth;
 }
 
@@ -38,7 +43,7 @@ half GetWaterDepthWorldSpace(float3 positionWS, float4 positionSS, float3 viewDi
     half sceneDepthEye = LinearEyeDepth(sceneDepth, _ZBufferParams); // Sample the scene depth and convert it to linear eye depth.
     float3 scenePos = -viewDirWS / positionSS.w * sceneDepthEye + GetCameraPositionWS(); // Calculate the vector from the camera to the river bottom.
     half waterDepth = positionWS.y - scenePos.y; // waterDepth = River.y - RiverBottom.y
-    waterDepth = saturate(exp(-waterDepth * _WaterDepthFadeFactor)); // Exponential interpolation(can be changed to other interpolation methods)
+    waterDepth = 1 - saturate(exp(-waterDepth * _WaterDepthFadeFactor)); // Exponential interpolation(can be changed to other interpolation methods)
     return waterDepth;
 }
 
@@ -55,7 +60,7 @@ Varyings vert(Attributes IN)
 
 half4 frag(Varyings input) : SV_Target
 {
-    // half waterDepth = GetWaterDepthRelative(input.positionSS, input.positionSS.xy / input.positionSS.w);
     half waterDepth = GetWaterDepthWorldSpace(input.positionWS, input.positionSS, input.viewDirWS, input.positionSS.xy / input.positionSS.w);
-    return half4(waterDepth, waterDepth, waterDepth, 1);
+    half4 waterDepthColor = SAMPLE_TEXTURE2D(_WaterColorTex, sampler_WaterColorTex, float2(waterDepth, 0.5));
+    return waterDepthColor;
 }
