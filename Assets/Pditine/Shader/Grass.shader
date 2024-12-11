@@ -11,17 +11,14 @@ Shader "LiJianhao/Grass"
         Pass
         {
             CGPROGRAM
-            #pragma exclude_renderers d3d11
+            // #pragma exclude_renderers d3d11
             #pragma vertex vert
             #pragma fragment frag
             #pragma multi_compile_fog
-            #pragma geometry geo
+            // #pragma geometry geo
+            #pragma target 4.0
 
             #include "UnityCG.cginc"
-
-            #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
-            #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Lighting.hlsl"
-            #include "Packages/com.unity.render-pipelines.core/ShaderLibrary/SpaceTransforms.hlsl"
             
             struct geometryOutput
             {
@@ -62,22 +59,21 @@ Shader "LiJianhao/Grass"
                 return col;
             }
 
-            [maxvertexcount(3)]
-            void geo(triangle float4[3] : SV_POSITION, inout TriangleStream<geometryOutput> triStream)
-            {
-                geometryOutput o;
-
-                o.pos = UnityObjectToClipPos(float4(0.5, 0, 0, 1));
-                triStream.Append(o);
-
-                o.pos = UnityObjectToClipPos(float4(-0.5, 0, 0, 1));
-                triStream.Append(o);
-                
-                o.pos = UnityObjectToClipPos(float4(0, 1, 0, 1));
-                triStream.Append(o);
-            }
-            ENDCG
+//            [maxvertexcount(3)]
+//            void geo(triangle float4[3] : SV_POSITION, inout TriangleStream<geometryOutput> triStream)
+//            {
+//                geometryOutput o;
+//
+//                o.pos = UnityObjectToClipPos(float4(0.5, 0, 0, 1));
+//                triStream.Append(o);
+//
+//                o.pos = UnityObjectToClipPos(float4(-0.5, 0, 0, 1));
+//                triStream.Append(o);
+//                
+//                o.pos = UnityObjectToClipPos(float4(0, 1, 0, 1));
+//                triStream.Append(o);
+//            }
+                ENDCG
         }
     }
-	Fallback "Packages/com.unity.render-pipelines.universal/SimpleLit"
 }

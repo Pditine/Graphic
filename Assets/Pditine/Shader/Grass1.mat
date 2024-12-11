@@ -23,6 +23,10 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - _Tex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _WindDistortionMap:
         m_Texture: {fileID: 2800000, guid: 283694b8d18b1b24ea61a7138277adc7, type: 3}
         m_Scale: {x: 1, y: 1}
@@ -36,11 +40,14 @@ Material:
     - _BladeHeightRandom: 0.3
     - _BladeWidth: 0.05
     - _BladeWidthRandom: 0.02
+    - _Exposure: 1
+    - _Rotation: 0
     - _TessellationUniform: 1
     - _TranslucentGain: 0.5
     - _WindStrength: 1
     m_Colors:
     - _BottomColor: {r: 0.53785217, g: 1, b: 0.28773582, a: 1}
+    - _Tint: {r: 0.5, g: 0.5, b: 0.5, a: 0.5}
     - _TopColor: {r: 0.43544197, g: 1, b: 0, a: 1}
     - _WindFrequency: {r: 0.05, g: 0.05, b: 0, a: 0}
   m_BuildTextureStacks: []
