@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: GeoGrass
+  m_Name: GeoGrass 1
   m_Shader: {fileID: 4800000, guid: f1309d777c1704d47a0bd4fdaf12a95a, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -26,12 +26,12 @@ Material:
     m_Ints: []
     m_Floats:
     - _DistanceDetail: 0
-    - _Height: 1.58
-    - _RandomHeight: 0.1
+    - _Height: 0.24
+    - _RandomHeight: 2.26
     - _RandomWidth: 0.1
-    - _TessellationUniform: 10
-    - _Width: 0.09
-    - _WindStrength: 0.2
+    - _TessellationUniform: 4
+    - _Width: 0.03
+    - _WindStrength: 0.08
     m_Colors:
     - _Color: {r: 0.23529413, g: 0.5, b: 0.125, a: 1}
     - _Color2: {r: 0.19032812, g: 1, b: 0.06132078, a: 1}

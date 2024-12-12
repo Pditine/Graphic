@@ -242,6 +242,7 @@ Shader "LiJianhao/Grass"
 			#pragma domain domain
 			#pragma target 4.6
 			#pragma multi_compile_shadowcaster
+
 			
 			float4 frag(geometryOutput i) : SV_Target
 			{
