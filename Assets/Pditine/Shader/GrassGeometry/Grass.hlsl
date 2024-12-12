@@ -3,7 +3,7 @@
 // Based on https://roystan.net/articles/grass-shader.html
 
 // Structs
-struct Attributes {
+struct a2v {
 	float4 positionOS   : POSITION;
 	float3 normal		: NORMAL;
 	float4 tangent		: TANGENT;
@@ -88,7 +88,7 @@ CBUFFER_END
 
 // Vertex, Geometry & Fragment Shaders
 
-Varyings vert (Attributes input) {
+Varyings vert (a2v input) {
 	Varyings output = (Varyings)0;
 
 	VertexPositionInputs vertexInput = GetVertexPositionInputs(input.positionOS.xyz);

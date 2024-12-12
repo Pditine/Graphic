@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: GeoGrass
-  m_Shader: {fileID: 4800000, guid: f1309d777c1704d47a0bd4fdaf12a95a, type: 3}
+  m_Name: Custom_GeometryGrass
+  m_Shader: {fileID: 4800000, guid: 7c7548952416c7e4794014ae3e17bc62, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -25,14 +25,21 @@ Material:
     m_TexEnvs: []
     m_Ints: []
     m_Floats:
-    - _DistanceDetail: 0
-    - _Height: 1.58
-    - _RandomHeight: 0.1
-    - _RandomWidth: 0.1
-    - _TessellationUniform: 3.29
-    - _Width: 0.09
-    - _WindStrength: 0.2
+    - _AmbientStrength: 0.5
+    - _BladeCurve: 4
+    - _BladeForward: 0.38
+    - _GrassHeight: 3.48
+    - _GrassNumber: 10
+    - _GrassWidth: 0.21
+    - _MaxDist: 60
+    - _MinDist: 40
+    - _Rad: 1
+    - _Radius: 1
+    - _RandomHeight: 0.22
+    - _Strength: 5
+    - _WindSpeed: 100
+    - _WindStrength: 0.05
     m_Colors:
-    - _Color: {r: 0.23529413, g: 0.5, b: 0.125, a: 1}
-    - _Color2: {r: 0.19032812, g: 1, b: 0.06132078, a: 1}
+    - _BottomColor: {r: 0.9339623, g: 0.2951673, b: 0.86405176, a: 1}
+    - _TopColor: {r: 1, g: 0.8160377, b: 0.9485059, a: 1}
   m_BuildTextureStacks: []
