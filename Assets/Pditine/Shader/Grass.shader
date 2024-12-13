@@ -25,7 +25,7 @@ Shader "LiJianhao/Grass"
 	CGINCLUDE
 	#include "UnityCG.cginc"
 	#include "Autolight.cginc"
-	#include "CustomTessellation.cginc"
+	#include "CustomTessellation2.cginc"
 	
 	struct geometryOutput
 	{

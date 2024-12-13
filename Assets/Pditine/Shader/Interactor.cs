@@ -6,7 +6,7 @@ namespace Pditine.Shader
     {
         void Update()
         {
-            UnityEngine.Shader.SetGlobalVector("_PositionMoving", transform.position);
+            UnityEngine.Shader.SetGlobalVector("_InteractorPosition", transform.position);
         }
     }
 }
