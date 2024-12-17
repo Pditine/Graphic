@@ -19,6 +19,7 @@ Shader"LiJianhao/Grass2"
 		_MinDist("Min Distance", Float) = 40
 		_MaxDist("Max Distance", Float) = 60
 		_TessellationUniform ("Tessellation Uniform", Range(1, 64)) = 1
+		_LightValue("Light Value", Range(0,1)) = 0.5
 		_WindDistortionMap("Wind Distortion Map", 2D) = "white" {}
 		_WindSpeed("Wind Speed", Vector) = (0.05, 0.05, 0, 0)
 		_WindStrength("Wind Strength", Range(0,0.1)) = 0.05
@@ -86,6 +87,7 @@ Shader"LiJianhao/Grass2"
 	float _GrassNumber;
 	float _GrassSegments;
 	float _TessellationUniform;
+	float _LightValue;
 	sampler2D _WindDistortionMap;
 	float4 _WindDistortionMap_ST;
 	float4 _WindSpeed;
@@ -336,20 +338,20 @@ Shader"LiJianhao/Grass2"
 			float4 baseColor = lerp(_BottomColor, _TopColor, saturate(i.uv.y));
 			
 			float4 lightColor = baseColor * float4(mainLight.color,1);
-
 			lightColor += float4(extraLights,1);
+			// 通过LightValue插值颜色，否则颜色会太亮，同时增加光对明暗效果的影响
+			float lightValue = (lightColor.r + lightColor.g + lightColor.b) /3 * _LightValue;
+			lightColor = lerp( baseColor - float4(0.5,0.5,0.5,0), lightColor, lightValue); 
+				
 			float4 final = lightColor * shadow;
 			final += saturate((1 - shadow) * baseColor * 0.2);
-
-			// float fogFactor = i.fogFactor;
-			// 	
-			// final.rgb = MixFog(final.rgb, fogFactor);
+				
 			final += (unity_AmbientSky * _AmbientStrength);
 		   return final;
 		   }
 		   ENDHLSL
 	   }
-		
+// 草相互接收阴影效果会非常奇怪
 //		Pass
 //		{
 //			Name "ShadowCaster"

@@ -34,7 +34,9 @@ Material:
     - _BladeForward: 0.38
     - _GrassHeight: 3.48
     - _GrassNumber: 1
+    - _GrassSegments: 5
     - _GrassWidth: 0.15
+    - _LightValue: 0.105
     - _MaxDist: 60
     - _MinDist: 40
     - _Rad: 0
