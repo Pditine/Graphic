@@ -1,11 +1,8 @@
-﻿Shader "Custom/Cloud" {
+﻿// 云的渲染
+Shader "LiJianhao/Cloud" {
 	Properties {
 		_MainTex ("Main Texture", 2D) = "white" {}
-//		[HDR]_BaseColor ("Color", Color) = (0, 0.66, 0.73, 1)
-//		_CloudTopColor("CloudTopColor",Color)=(1,1,1,1)
-//		_CloudBottomColor("CloudBottomColor",Color)=(0.2,0.2,0.2,1)
 		_Dissolve("Dissolve",Range(0,1)) = 1
-		//_GIIndex("GI index",Range(0,1))=0
 	}
 	SubShader {
 		Tags {
@@ -17,6 +14,7 @@
 		HLSLINCLUDE
 		#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
 
+		// 常量缓冲区，节约性能
 		CBUFFER_START(UnityPerMaterial)
 		float4 _MainTex_ST;
 		float4 _BaseColor;
@@ -27,41 +25,35 @@
 
 		Pass {
 			Name "UnLit"
-//			Tags { "LightMode"="UniversalForward" }
-			Cull Front
-			Blend SrcAlpha OneMinusSrcAlpha
+			Cull Front // 剔除正面
+			Blend SrcAlpha OneMinusSrcAlpha // Result=(Source×SrcAlpha)+(Destination×(1−SrcAlpha))
 			ZWrite Off
-			//ZTest Always
 			HLSLPROGRAM
-			#pragma vertex LitPassVertex
-			#pragma fragment LitPassFragment
-
+			#pragma vertex vert
+			#pragma fragment frag
 			
-
-			// Includes
 			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Lighting.hlsl"
-
-			// Structs
-			struct Attributes {
+			
+			struct a2v {
 				float4 positionOS	: POSITION;
 				float4 normalOS		: NORMAL;
 				float2 uv		    : TEXCOORD0;
 				float2 lightmapUV	: TEXCOORD1;
 			};
 
-			struct Varyings {
+			struct v2f {
 				float4 positionCS 	: SV_POSITION;
 				float2 uv		    : TEXCOORD0;
 				float3 normalWS		: TEXCOORD1;
 				float3 positionWS	: TEXCOORD2;
 				DECLARE_LIGHTMAP_OR_SH(lightmapUV, vertexSH, 3);
 			};
-
-			// Textures, Samplers & Global Properties
-			TEXTURE2D(_MainTex);
-			SAMPLER(sampler_MainTex);
+			
+			TEXTURE2D(_MainTex); // Texture2D textureName
+			SAMPLER(sampler_MainTex); // SamplerState samplerName
 			float4 _SunDir;
 
+			/// 绕Y轴旋转
 			float3 RotateAroundY(float3 postion,float speed)
 			{
 				speed *= _Time.x;
@@ -70,25 +62,8 @@
 				float z = -sin(speed)*postion.x+cos(speed)*postion.z;
 				return float3(x,y,z);
 			}
-			
-			// Vertex Shader
-			Varyings LitPassVertex(Attributes Input) {
-				Varyings Output;
 
-				VertexPositionInputs positionInputs = GetVertexPositionInputs(Input.positionOS.xyz);
-				//Output.positionCS = positionInputs.positionCS;
-				Output.positionWS = positionInputs.positionWS;
-				float3 newWorldPos = (positionInputs.positionWS)+GetCameraPositionWS();
-				//newWorldPos= RotateAroundY(newWorldPos,1);
-				Output.positionCS = TransformWorldToHClip(newWorldPos);
-
-				VertexNormalInputs normalInputs = GetVertexNormalInputs(Input.normalOS.xyz);
-				Output.normalWS = normalInputs.normalWS;
-				OUTPUT_SH(Output.normalWS.xyz, Output.vertexSH);
-				Output.uv = TRANSFORM_TEX(Input.uv, _MainTex);
-				return Output;
-			}
-
+			// 旋转UV
 			float2 RotateUV(float2 uv,float degress)
 			{
 				degress = DegToRad(degress);
@@ -97,43 +72,53 @@
 				return float2(u,v);
 			}
 			
-			// Fragment Shader
-			half4 LitPassFragment(Varyings Input) : SV_Target {
-				half4 baseMap = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex,Input.uv);
+			v2f vert(a2v i)
+			{
+				v2f o;
+				VertexPositionInputs positionInputs = GetVertexPositionInputs(i.positionOS.xyz);
+				//Output.positionCS = positionInputs.positionCS;
+				o.positionWS = positionInputs.positionWS;
+
+				// 添加摄像机位置的偏移
+				float3 newWorldPos = (positionInputs.positionWS)+GetCameraPositionWS();
+				o.positionCS = TransformWorldToHClip(newWorldPos);
+				
+				VertexNormalInputs normalInputs = GetVertexNormalInputs(i.normalOS.xyz);
+				o.normalWS = normalInputs.normalWS;
+				// 球谐光照系数
+				OUTPUT_SH(o.normalWS.xyz, o.vertexSH);
+				o.uv = TRANSFORM_TEX(i.uv, _MainTex);
+				return o;
+			}
+			
+			half4 frag(v2f i) : SV_Target
+			{
+				half4 baseMap = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex,i.uv);
 
 				Light light = GetMainLight();
 				light.direction = _SunDir.xyz;
-				//r for diffuse
-				//float simpleLight=saturate(light.direction.y)*baseMap.r;
-				float simpleLight = saturate(dot(light.direction.y,Input.normalWS))*baseMap.r;
-				//g for backLight
-				float3 pixelDir = normalize(Input.positionWS);
+				float simpleLight = saturate(dot(light.direction.y,i.normalWS))*baseMap.r;
+				float3 pixelDir = normalize(i.positionWS);
 				float backLight = baseMap.g*saturate(dot(pixelDir,light.direction));
-				float newDir = light.direction;
-				float newDot = dot(newDir,float3(0,1,0));
-				//backLight*=newDot;
-				//b for sdf dissolve
 				float alpha = saturate((baseMap.b)-_Dissolve)*baseMap.a;
 
 				backLight = 5*pow(backLight,8);
-				// Diffuse
+
 				float3 diffuse = lerp(_CloudBottomColor,_CloudTopColor,simpleLight+backLight);
 				half3 color = diffuse * _BaseColor.rgb*light.color;
-
-				// Get Baked GI
-				half3 bakedGI = SAMPLE_GI(Input.lightmapUV, Input.vertexSH, Input.normalWS);
+				
+				half3 bakedGI = SAMPLE_GI(Input.lightmapUV, i.vertexSH, i.normalWS);
 				color+= bakedGI*_GIIndex;
-
-				//test
-				half3 reflDir = reflect(-GetWorldSpaceViewDir(Input.positionWS),Input.normalWS);
-				float3 test= GlossyEnvironmentReflection(reflDir,Input.positionWS,1,1);
+				
+				half3 reflDir = reflect(-GetWorldSpaceViewDir(i.positionWS),i.normalWS);
+				float3 test= GlossyEnvironmentReflection(reflDir,i.positionWS,1,1);
 				color+=test;
 				return half4(color, alpha);
 			}
 			ENDHLSL
 		}
 		
-		// ShadowCaster, for casting shadows
+		// todo:ShadowCaster, for casting shadows
 
 	}
 }

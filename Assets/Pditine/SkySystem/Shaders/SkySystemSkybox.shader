@@ -1,11 +1,10 @@
-﻿Shader "Custom/Skybox" {
+﻿Shader "LiJianhao/SkyBox" {
 	Properties {
 		_Color("Color",Color) = (1,1,1,1)
 		_MainTex ("Albedo (RGB)", 2D) = "white" {}
 	}
 	SubShader {
 		Pass{
-			
 			Tags {
 				"Queue"="Background" 
 					"RenderType"="Background" 
@@ -16,13 +15,12 @@
 			ZWrite Off
 			HLSLPROGRAM
 			
-			
 			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
 			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Lighting.hlsl"
 			#pragma target 3.0
 
-			#pragma vertex MySkyboxVert
-			#pragma fragment MySkyboxFrag
+			#pragma vertex vert
+			#pragma fragment frag
 
 			TEXTURE2D(_MainTex);
 			SAMPLER(sampler_MainTex);
@@ -36,56 +34,36 @@
 			SAMPLER(sampler_MoonTexture);
 			TEXTURECUBE(_StarTexture);
 			SAMPLER(sampler_StarTexture);
-		
 			float4 _Color,_MoonGlowColor,_SunGlowColor;
 			float4 _SunDir,_SunHalo,_MoonDir;		
 			float _StarIntensity,_SunIntensity,_MoonIntensity,_MoonDistance;
-			struct Attributes
+			
+			struct a2v
 			{
-				float4 positionOS	: POSITION;
+				float4 positionOS : POSITION;
 				float2 uv:TEXCOORD0;
 			};
 
-			struct Varyings
+			struct v2f
 			{
-				float4 positionCS 	: SV_POSITION;
+				float4 positionCS : SV_POSITION;
 				float2 uv : TEXCOORD0;
 				float3 positionWS : TEXCOORD1;
-				float4 sunAndMoonPos:TEXCOORD2;
-				float3 positionOS:TEXCOORD3;
+				float4 sunAndMoonPos : TEXCOORD2;
+				float3 positionOS : TEXCOORD3;
 			};
 
-			Varyings MySkyboxVert(Attributes input)
-			{
-				Varyings output = (Varyings)0;
-				UNITY_SETUP_INSTANCE_ID(input); 
-				UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO(o); 
-				output.positionCS = mul(UNITY_MATRIX_MVP, input.positionOS);
-				output.uv = input.uv;
-				output.positionWS = TransformObjectToWorld(input.positionOS);
-
-				float3 rSun = normalize(cross(_SunDir.xyz, float3(0, -1, 0)));
-				float3 uSun = cross(_SunDir.xyz, rSun);
-				float3 rMoon = normalize(cross(_MoonDir.xyz, float3(0, -1, 0)));
-				float3 uMoon = cross(_MoonDir.xyz, rMoon);
-				output.sunAndMoonPos.xy = float2(dot(rSun, input.positionOS.xyz), dot(uSun, input.positionOS.xyz))  + 0.5;
-				output.sunAndMoonPos.zw = float2(dot(rMoon, input.positionOS.xyz), dot(uMoon, input.positionOS.xyz))*_MoonDistance + 0.5;
-				output.positionOS = input.positionOS;
-				return output;
-			}
-
-			void SetMoon(Varyings input,inout float3 color)
+			void SetMoon(v2f input,inout float3 color)
 			{
 				float3 viewDir = normalize(GetWorldSpaceViewDir(input.positionWS));
 				float hideBackMoon = saturate(dot(_MoonDir.xyz, viewDir));
 				float4 moonTex = _MoonIntensity*SAMPLE_TEXTURE2D(_MoonTexture,sampler_MoonTexture,input.sunAndMoonPos.zw)*hideBackMoon;
-				
 				//moon glow
 				color += _MoonGlowColor*pow(hideBackMoon,1024)+moonTex;
-
 				color = lerp(moonTex.rgb,color,1-moonTex.a).rgb;
 			}
-			float3 SetSun(Varyings input,float mask,float horizontalLine)
+			
+			float3 SetSun(v2f input,float mask,float horizontalLine)
 			{
 				float3 sunColor = _SunGlowColor.rgb;
 				float3 sunLightDir = -_SunDir.xyz;
@@ -99,6 +77,7 @@
 				
 				return sunDisc+(sun+horizontalLine)*_SunIntensity*sunColor*Pow4(sundot);
 			}
+			
 			float3 RotateAroundY(float3 postion,float speed)
 			{
 				speed *= _Time.x;
@@ -108,28 +87,39 @@
 				return float3(x,y,z);
 			}
 
+			v2f vert(a2v i)
+			{
+				v2f output = (v2f)0;
+				UNITY_SETUP_INSTANCE_ID(input); 
+				UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO(o); 
+				output.positionCS = mul(UNITY_MATRIX_MVP, i.positionOS);
+				output.uv = i.uv;
+				output.positionWS = TransformObjectToWorld(i.positionOS);
+
+				float3 rSun = normalize(cross(_SunDir.xyz, float3(0, -1, 0)));
+				float3 uSun = cross(_SunDir.xyz, rSun);
+				float3 rMoon = normalize(cross(_MoonDir.xyz, float3(0, -1, 0)));
+				float3 uMoon = cross(_MoonDir.xyz, rMoon);
+				output.sunAndMoonPos.xy = float2(dot(rSun, i.positionOS.xyz), dot(uSun, i.positionOS.xyz))  + 0.5;
+				output.sunAndMoonPos.zw = float2(dot(rMoon, i.positionOS.xyz), dot(uMoon, i.positionOS.xyz))*_MoonDistance + 0.5;
+				output.positionOS = i.positionOS;
+				return output;
+			}
 			
-			half4 MySkyboxFrag(Varyings input) : SV_Target
+			half4 frag(v2f input) : SV_Target
 			{
 				float worldUp = (normalize(input.positionWS).y);
-				float worldForward = (normalize(input.positionWS).z);
-				//float worldRight = (normalize(input.positionWS).x)*0.5+0.5;
 				float3 dayGradient = SAMPLE_TEXTURE2D(_SkyRampMap,sampler_SkyRampMap,worldUp*0.5+0.5);
 				float3 nightGradient = SAMPLE_TEXTURE2D(_SkyWorldYRampMap,sampler_SkyWorldYRampMap,worldUp*0.5+0.5);
 
 				//horizontalLine
 				//worldUp = worldUp*2+1;
-				float horizontalLine = abs(input.uv.y);
-				horizontalLine = smoothstep(0.248,0.255,horizontalLine);
 				float horizon = abs(input.uv.y*5)+0.3;
 				horizon = 1-smoothstep(0.0,0.6,horizon);
-				float horizonGlow = saturate((1 - horizon) * GetMainLight().direction.y);
 				//worldUpMask 比地平线稍低的渐变
 				float worldUpMask = worldUp+0.1;
 				worldUpMask = smoothstep(0,0.1,worldUpMask);
 				
-				
-
 				float3 color=0;
 				
 				float3 skyGradient = lerp(dayGradient,nightGradient,saturate((1-saturate(_SunDir.y*5))));
@@ -139,15 +129,9 @@
 				//Moon
 				//color =0;
 				SetMoon(input, color);
-
 				//star
-				float3 viewDir = normalize(GetWorldSpaceViewDir(input.positionWS));
 				float3 star = _StarIntensity*SAMPLE_TEXTURECUBE(_StarTexture,sampler_StarTexture,RotateAroundY(input.positionOS.xyz,0.1));;
 				color += star;
-				
-				float sunNightStep = smoothstep(-0.3,0.25,GetMainLight().direction.y);
-				//return saturate(1-_SunDir.y);
-				//return float4(SetSun(input,worldUpMask,horizon),1);
 				return float4((color),1);
 			}
 			ENDHLSL

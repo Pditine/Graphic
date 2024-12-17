@@ -55,7 +55,7 @@ public class SkySystemData : ScriptableObject
     public int cullingMask;
     public void SaveSystemData()
     {
-        string path = Application.streamingAssetsPath + "/TestData.json";
+        string path = "Assets/Pditine/SkySystem/Data/TestData.json";
         SaveSystemData(path);
     }
     public void SaveSystemData(string path)
@@ -70,7 +70,7 @@ public class SkySystemData : ScriptableObject
     
     public void LoadSystemData()
     {
-        string path = Application.streamingAssetsPath + "/TestData.json";
+        string path = "Assets/Pditine/SkySystem/Data/TestData.json";
         LoadSystemData(path);
     }
 

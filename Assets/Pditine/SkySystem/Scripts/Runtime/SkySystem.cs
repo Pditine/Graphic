@@ -19,7 +19,7 @@ namespace SkySystem
     }
     
     [ExecuteInEditMode]
-    public class SkySystem:MonoBehaviour
+    public class SkySystem : MonoBehaviour
     {
         private static SkySystem instance;
         public static SkySystem Instance
@@ -27,206 +27,202 @@ namespace SkySystem
             get
             {
                 if (instance == null)
-                    instance = GameObject.FindObjectOfType<SkySystem>();
+                    instance = FindObjectOfType<SkySystem>();
                 return instance;
             }
         }
-
-        [Title("动态天空盒系统", "--leardo", TitleAlignments.Centered)]
-        [PropertyOrder(1), PropertyRange(0,24)] [ShowInInspector]
+        
+        [PropertyRange(0,24)] [ShowInInspector]
         public float Hour
         {
             get => data.hour;
-            set { data.hour = value; }
+            set => data.hour = value;
         }
 
-        [PropertyOrder(2)] [ShowInInspector] public bool auto = true;
-        [PropertyOrder(1)] [ShowInInspector]
+        public bool auto = true;
+        [ShowInInspector]
         public bool timeControlEverything
         {
             get => data.timeControlEverything;
-            set { data.timeControlEverything = value; }
+            set => data.timeControlEverything = value;
         }
-
-        //Test
-        [PropertyOrder(2)]
+        
         public Light mainLight;
-        [PropertyOrder(2)]
         public Vector3 LightDirection;
 
         //sky
         private SkyElement skySettings;
-         [PropertyOrder(3)][FoldoutGroup("Sky",true)]
+        [FoldoutGroup("Sky",true)]
         public Gradient daySkyGradient;
-        [PropertyOrder(3)][FoldoutGroup("Sky",true)]
+        [FoldoutGroup("Sky",true)]
         public Gradient nightSkyGradient;
 
         //sun
         private SunElement sunSettings;
-        [PropertyOrder(4)] [ShowInInspector][FoldoutGroup("Sun",true)]
+        [ShowInInspector][FoldoutGroup("Sun",true)]
         public Gradient sunDiscGradient;
-        [PropertyOrder(4)] [ShowInInspector][FoldoutGroup("Sun",true)]
+        [ShowInInspector][FoldoutGroup("Sun",true)]
         public Vector2 sunRotation
         {
             get => sunSettings.sunRotation;
-            set { sunSettings.sunRotation = value; }
+            set => sunSettings.sunRotation = value;
         }
-        [PropertyOrder(4)] [ShowInInspector][FoldoutGroup("Sun",true)]
+        [ShowInInspector][FoldoutGroup("Sun",true)]
         public Vector4 sunHalo
         {
             get => sunSettings.sunHalo;
-            set { sunSettings.sunHalo = value; }
+            set => sunSettings.sunHalo = value;
         }  
-        [PropertyOrder(5)] [ShowInInspector][FoldoutGroup("Sun",true)]
+        [ShowInInspector][FoldoutGroup("Sun",true)]
         public Gradient sunColorGradient;
-        [PropertyOrder(5)] [ShowInInspector][FoldoutGroup("Sun",true)]
+        [ShowInInspector][FoldoutGroup("Sun",true)]
         public float sunIntensity
         {
             get => sunSettings.sunIntensity;
-            set { sunSettings.sunIntensity = value; }
+            set => sunSettings.sunIntensity = value;
         }
          
         //moon
         private MoonElement moonSettings;
-        [PropertyOrder(5)] [ShowInInspector][FoldoutGroup("moon",true)]
+        [ShowInInspector][FoldoutGroup("moon",true)]
         public Texture2D moonTexture
         {
             get => moonSettings.moonTexture;
-            set { moonSettings.moonTexture = value; }
+            set => moonSettings.moonTexture = value;
         }
-        [PropertyOrder(5)] [ShowInInspector][FoldoutGroup("moon",true)]
+        [ShowInInspector][FoldoutGroup("moon",true)]
         public Vector2 moonRotation
         {
             get => moonSettings.moonRotation;
-            set { moonSettings.moonRotation = value; }
+            set => moonSettings.moonRotation = value;
         }
-        [PropertyOrder(5)][FoldoutGroup("moon",true)]
+        [FoldoutGroup("moon",true)]
         public Gradient moonColorGradient;
-        [PropertyOrder(5)] [ShowInInspector][FoldoutGroup("moon",true)]
+        [ShowInInspector][FoldoutGroup("moon",true)]
         public float moonIntensity
         {
             get => moonSettings.moonIntensity;
-            set { moonSettings.moonIntensity = value; }
+            set => moonSettings.moonIntensity = value;
         }
-        [PropertyOrder(5)] [ShowInInspector][FoldoutGroup("moon",true)]
+        [ShowInInspector][FoldoutGroup("moon",true)]
         public float moonDistance
         {
             get => moonSettings.moonDistance;
-            set { moonSettings.moonDistance = value; }
+            set => moonSettings.moonDistance = value;
         }
-        [PropertyOrder(6)] [ShowInInspector][FoldoutGroup("moon",true)]
+        [ShowInInspector][FoldoutGroup("moon",true)]
         public Texture starTexture
         {
             get => moonSettings.starTexture;
-            set { moonSettings.starTexture = value; }
+            set => moonSettings.starTexture = value;
         }
-        [PropertyOrder(6)] [ShowInInspector,InspectorRange(0f,1f)][FoldoutGroup("moon",true)]
+        [ShowInInspector,InspectorRange(0f,1f)][FoldoutGroup("moon",true)]
         public float starIntensity
         {
             get => moonSettings.starIntensity;
-            set { moonSettings.starIntensity = value; }
+            set => moonSettings.starIntensity = value;
         }
         
         
         //light
         private LightElement lightingSettings;
-        [PropertyOrder(6)] [ShowInInspector][FoldoutGroup("Lighting",true)]
+        [ShowInInspector][FoldoutGroup("Lighting",true)]
         public float lightIntensity
         {
             get => lightingSettings.lightIntensity;
-            set { lightingSettings.lightIntensity = value; }
+            set => lightingSettings.lightIntensity = value;
         }
-        [PropertyOrder(6)] [ShowInInspector][FoldoutGroup("Lighting",true)]
+        [ShowInInspector][FoldoutGroup("Lighting",true)]
         public Vector2 lightRotation
         {
             get => lightingSettings.lightRotation;
-            set { lightingSettings.lightRotation = value; }
+            set => lightingSettings.lightRotation = value;
         }
-        [PropertyOrder(7)]
+        
         [SerializeField][FoldoutGroup("Lighting",true)]
         public Gradient sunLightGradient;
-        [PropertyOrder(7)][FoldoutGroup("Lighting",true)]
+        [FoldoutGroup("Lighting",true)]
         public Gradient moonLightGradient;
 
         private CloudElement cloudSettings;
 
-        [PropertyOrder(7)] [ShowInInspector] [FoldoutGroup("Cloud", true)]
+        [ShowInInspector] [FoldoutGroup("Cloud", true)]
         public Color cloudTint
         {
             get => cloudSettings.tint;
-            set { cloudSettings.tint = value; }
+            set => cloudSettings.tint = value;
         }
-        [PropertyOrder(7)] [ShowInInspector] [FoldoutGroup("Cloud", true)]
+        [ShowInInspector] [FoldoutGroup("Cloud", true)]
         public Color cloudTopColor
         {
             get => cloudSettings.cloudTopColor;
-            set { cloudSettings.cloudTopColor = value; }
+            set => cloudSettings.cloudTopColor = value;
         }
-        [PropertyOrder(7)] [ShowInInspector] [FoldoutGroup("Cloud", true)]
+        [ShowInInspector] [FoldoutGroup("Cloud", true)]
         public Color cloudBottomColor
         {
             get => cloudSettings.cloudBottomColor;
-            set { cloudSettings.cloudBottomColor = value; }
+            set => cloudSettings.cloudBottomColor = value;
         }
 
-        [PropertyOrder(7)] [ShowInInspector] [FoldoutGroup("Cloud", true),PropertyRange(0f,1f)]
+        [ShowInInspector] [FoldoutGroup("Cloud", true),PropertyRange(0f,1f)]
         public float GIIndex
         {
             get => cloudSettings.GIIndex;
-            set { cloudSettings.GIIndex = value; }
+            set => cloudSettings.GIIndex = value;
         }
         private ProbeElement probeSettings;
-        [PropertyOrder(8)][FoldoutGroup("EnvironmentSettings",true)]
+        [FoldoutGroup("EnvironmentSettings",true)]
         public Gradient fogColorGradient;
-        [PropertyOrder(8)] [ShowInInspector][FoldoutGroup("EnvironmentSettings",true)]
+        [ShowInInspector][FoldoutGroup("EnvironmentSettings",true)]
         public AmbientMode ambientMode
         {
             get => probeSettings.ambientMode;
-            set { probeSettings.ambientMode = value; }
+            set => probeSettings.ambientMode = value;
         }
-        [PropertyOrder(8)] [ShowInInspector][FoldoutGroup("EnvironmentSettings",true)]
+        [ShowInInspector][FoldoutGroup("EnvironmentSettings",true)]
         public ReflectionProbeMode reflectionProbeMode
         {
             get => probeSettings.mode;
-            set { probeSettings.mode = value; }
+            set => probeSettings.mode = value;
         }
 
-        [PropertyOrder(8)] [ShowInInspector][FoldoutGroup("EnvironmentSettings",true)]
+        [ShowInInspector][FoldoutGroup("EnvironmentSettings",true)]
         public ReflectionResolution reflectionResolition
         {
             get => (ReflectionResolution)probeSettings.resolution;
-            set { probeSettings.resolution = (int)value; }
+            set => probeSettings.resolution = (int)value;
         }
-        [PropertyOrder(8)] [ShowInInspector][FoldoutGroup("EnvironmentSettings",true)]
+        [ShowInInspector][FoldoutGroup("EnvironmentSettings",true)]
         public bool boxProjection
         {
             get => probeSettings.boxProjection;
-            set { probeSettings.boxProjection = value; }
+            set => probeSettings.boxProjection = value;
         }
-        [PropertyOrder(8)] [ShowInInspector][FoldoutGroup("EnvironmentSettings",true)]
+        [ShowInInspector][FoldoutGroup("EnvironmentSettings",true)]
         public bool HDR
         {
             get => probeSettings.HDR;
-            set { probeSettings.HDR = value; }
+            set => probeSettings.HDR = value;
         }
-        [PropertyOrder(8)] [ShowInInspector][FoldoutGroup("EnvironmentSettings",true)]
+        [ShowInInspector][FoldoutGroup("EnvironmentSettings",true)]
         public ReflectionProbeClearFlags clearFlags
         {
             get => probeSettings.clearFlags;
-            set { probeSettings.clearFlags = value; }
+            set => probeSettings.clearFlags = value;
         }
 
-        [PropertyOrder(9)] [ShowInInspector][FoldoutGroup("EnvironmentSettings",true)]
+        [ShowInInspector][FoldoutGroup("EnvironmentSettings",true)]
         public Texture skyboxCubemap
         {
             get => probeSettings.cubemap;
-            set { probeSettings.cubemap=value; }
+            set => probeSettings.cubemap=value;
         }
-        [PropertyOrder(9)] [ShowInInspector][FoldoutGroup("EnvironmentSettings",true)]
+        [ShowInInspector][FoldoutGroup("EnvironmentSettings",true)]
         public LayerMask cullingMask
         {
             get => probeSettings.cullingMask;
-            set { probeSettings.cullingMask = value; }
+            set => probeSettings.cullingMask = value;
         }
         
         //private
@@ -234,10 +230,8 @@ namespace SkySystem
         private Material defaultSkyboxMat;
         private SkySystemData data;
         [Title("辅助功能")]
-        [PropertyOrder(252)]
-        [Sirenix.OdinInspector.FilePath][BoxGroup("others")]
+        [FilePath][BoxGroup("others")]
         public string dataPath=Application.streamingAssetsPath + "/TestData.json";
-        [PropertyOrder(253)]
         [Button("保存数据",Icon = SdfIconType.SaveFill)][BoxGroup("others")]
         private void SaveData()
         {
@@ -285,7 +279,6 @@ namespace SkySystem
             //保存到json
             data.SaveSystemData(dataPath);
         }
-        [PropertyOrder(253)]
         [Button("读取数据",Icon = SdfIconType.Download)][BoxGroup("others")]
         private void LoadData()
         {
@@ -334,10 +327,9 @@ namespace SkySystem
         }
         
         
-        [PropertyOrder(254)]
         [FolderPath][BoxGroup]
         public string path="Assets/SkySystem/Resources/Textures/Skyboxs";
-        [PropertyOrder(255)][BoxGroup]
+        [BoxGroup]
         [Button("渲染当前天空盒保存在路径里")]
         private void RenderSkybox()
         {
@@ -386,7 +378,7 @@ namespace SkySystem
         {
             if (skyboxMat==null)
             {
-                skyboxMat = new Material(Shader.Find("Custom/Skybox"));
+                skyboxMat = new Material(Shader.Find("LiJianhao/SkyBox"));
             }
             if (skyboxMat!=null)
             {
@@ -395,11 +387,11 @@ namespace SkySystem
                 //RenderSettings.sun = mainLight;
             }
             //data.LoadSystemData();
-            if (data==null)
-            {
+            // if (data==null)
+            // {
                 data = ScriptableObject.CreateInstance<SkySystemData>();
                 data.LoadSystemData();
-            }
+            // }
             timeControlEverything = data.timeControlEverything;
             
             skySettings = new SkyElement(data);
