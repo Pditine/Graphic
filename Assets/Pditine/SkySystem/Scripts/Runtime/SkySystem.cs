@@ -21,14 +21,14 @@ namespace SkySystem
     [ExecuteInEditMode]
     public class SkySystem : MonoBehaviour
     {
-        private static SkySystem instance;
+        private static SkySystem _instance;
         public static SkySystem Instance
         { 
             get
             {
-                if (instance == null)
-                    instance = FindObjectOfType<SkySystem>();
-                return instance;
+                if (_instance == null)
+                    _instance = FindObjectOfType<SkySystem>();
+                return _instance;
             }
         }
         
@@ -50,14 +50,14 @@ namespace SkySystem
         public Light mainLight;
         public Vector3 LightDirection;
 
-        //sky
+        // sky
         private SkyElement skySettings;
         [FoldoutGroup("Sky",true)]
         public Gradient daySkyGradient;
         [FoldoutGroup("Sky",true)]
         public Gradient nightSkyGradient;
 
-        //sun
+        // sun
         private SunElement sunSettings;
         [ShowInInspector][FoldoutGroup("Sun",true)]
         public Gradient sunDiscGradient;
@@ -82,7 +82,7 @@ namespace SkySystem
             set => sunSettings.sunIntensity = value;
         }
          
-        //moon
+        // moon
         private MoonElement moonSettings;
         [ShowInInspector][FoldoutGroup("moon",true)]
         public Texture2D moonTexture
@@ -124,7 +124,7 @@ namespace SkySystem
         }
         
         
-        //light
+        // light
         private LightElement lightingSettings;
         [ShowInInspector][FoldoutGroup("Lighting",true)]
         public float lightIntensity
@@ -225,7 +225,7 @@ namespace SkySystem
             set => probeSettings.cullingMask = value;
         }
         
-        //private
+        // private
         private Material skyboxMat;
         private Material defaultSkyboxMat;
         private SkySystemData data;
@@ -235,19 +235,19 @@ namespace SkySystem
         [Button("保存数据",Icon = SdfIconType.SaveFill)][BoxGroup("others")]
         private void SaveData()
         {
-            //获取各element的数据
+            // 获取各element的数据
             data.hour = Hour;
             data.timeControlEverything = timeControlEverything;
-            //sky
+            // sky
             data.daySkyGradient = daySkyGradient;
             data.nightSkyGradient = nightSkyGradient;
-            //sun
+            // sun
             data.sunDiscGradient = sunDiscGradient;
             data.sunRotation = sunRotation;
             data.sunHalo = sunHalo;
             data.sunIntensity = sunIntensity;
             data.sunColorGradient = sunColorGradient;
-            //moon
+            // moon
             data.moonTexture = moonTexture;
             data.moonRotation = moonRotation;
             data.moonIntensity = moonIntensity;
@@ -255,18 +255,18 @@ namespace SkySystem
             data.moonColorGradient = moonColorGradient;
             data.starTexture = starTexture;
             data.starIntensity = starIntensity;
-            //lighting
+            // lighting
             data.lightIntensity = lightIntensity;
             data.sunLightGradient = sunLightGradient;
             data.moonLightGradient = moonLightGradient;
             data.lightRotation = lightRotation;
-            //cloud
+            // cloud
             data.tint = cloudTint;
             data.cloudTopColor = cloudTopColor;
             data.cloudBottomColor = cloudBottomColor;
             data.GIIndex = GIIndex;
             data.fogColorGradient = fogColorGradient;
-            //probe
+            // probe
             data.ambientMode = ambientMode;
             data.mode = reflectionProbeMode;
             data.cubemap = skyboxCubemap;
@@ -276,27 +276,27 @@ namespace SkySystem
             data.clearFlags = clearFlags;
             data.cullingMask = cullingMask;
             
-            //保存到json
+            // 保存到json
             data.SaveSystemData(dataPath);
         }
         [Button("读取数据",Icon = SdfIconType.Download)][BoxGroup("others")]
         private void LoadData()
         {
-            //从json获取数据
+            // 从json获取数据
             data.LoadSystemData(dataPath);
-            //赋予各element
+            // 赋予各element
             Hour = data.hour;
             timeControlEverything = data.timeControlEverything;
-            //sky
+            // sky
             daySkyGradient = data.daySkyGradient;
             nightSkyGradient = data.nightSkyGradient;
-            //sun
+            // sun
             sunDiscGradient = data.sunDiscGradient;
             sunRotation = data.sunRotation;
             sunHalo = data.sunHalo;
             sunIntensity = data.sunIntensity;
             sunColorGradient = data.sunColorGradient;
-            //moon
+            // moon
             moonTexture = data.moonTexture;
             moonRotation = data.moonRotation;
             moonIntensity = data.moonIntensity;
@@ -304,18 +304,18 @@ namespace SkySystem
             moonColorGradient = data.moonColorGradient;
             starTexture = data.starTexture;
             starIntensity = data.starIntensity;
-            //lighting
+            // lighting
             lightIntensity = data.lightIntensity;
             sunLightGradient = data.sunLightGradient;
             moonLightGradient = data.moonLightGradient;
             lightRotation = data.lightRotation;
-            //cloud
+            // cloud
             cloudTint = data.tint;
             cloudTopColor = data.cloudTopColor;
             cloudBottomColor = data.cloudBottomColor;
             GIIndex = data.GIIndex;
             fogColorGradient = data.fogColorGradient;
-            //probe
+            // probe
             ambientMode = data.ambientMode;
             reflectionProbeMode = data.mode;
             skyboxCubemap = data.cubemap;
@@ -323,9 +323,8 @@ namespace SkySystem
             reflectionResolition = data.resolution;
             HDR = data.HDR;
             clearFlags = data.clearFlags;
-            cullingMask = (LayerMask)data.cullingMask;
+            cullingMask = data.cullingMask;
         }
-        
         
         [FolderPath][BoxGroup]
         public string path="Assets/SkySystem/Resources/Textures/Skyboxs";
@@ -373,7 +372,6 @@ namespace SkySystem
             
         }
         
-
         private void OnEnable()
         {
             if (skyboxMat==null)
