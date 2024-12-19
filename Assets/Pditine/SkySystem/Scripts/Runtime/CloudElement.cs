@@ -7,7 +7,6 @@ namespace SkySystem
     [Serializable]
     public class CloudElement:BaseElement
     {
-        //public Texture2D mainTexture;
         public Color tint;
         public Color cloudTopColor;
         public Color cloudBottomColor;
@@ -20,8 +19,7 @@ namespace SkySystem
             cloudBottomColor = data.cloudBottomColor;
             GIIndex = data.GIIndex;
         }
-
-
+        
         public void ManualUpdate(float time)
         {
             Shader.SetGlobalColor("_BaseColor",tint);
@@ -29,10 +27,6 @@ namespace SkySystem
             Shader.SetGlobalColor("_CloudBottomColor",cloudBottomColor);
             Shader.SetGlobalFloat("_GIIndex",GIIndex);
         }
-        
-        
-        
-        
         
         private Texture2D applyGradient(Gradient ramp)
         {
@@ -52,6 +46,4 @@ namespace SkySystem
             return tempTex;
         }
     }
-    
-    
 }

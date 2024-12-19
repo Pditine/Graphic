@@ -9,7 +9,6 @@ namespace SkySystem
     [Serializable]
     public class ProbeElement : BaseElement
     {
-        //private
         private ReflectionProbe _probe;
         private Camera renderCam;
 
@@ -18,7 +17,6 @@ namespace SkySystem
             get => RenderSettings.ambientMode;
             set{RenderSettings.ambientMode = value;}
         }
-        //public
         public ReflectionProbeMode mode
         {
             get => _probe.mode;

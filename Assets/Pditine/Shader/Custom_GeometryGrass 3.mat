@@ -32,14 +32,14 @@ Material:
     - _AmbientStrength: 0.5
     - _BladeCurve: 4
     - _BladeForward: 0.38
-    - _GrassHeight: 3.95
+    - _GrassHeight: 5.1
     - _GrassNumber: 0.04
     - _GrassSegments: 5
     - _GrassWidth: 0.24
     - _LightValue: 0.256
     - _MaxDist: 60
     - _MinDist: 40
-    - _Rad: 0
+    - _Rad: 1
     - _Radius: 2
     - _RandomHeight: 0.22
     - _Strength: 5

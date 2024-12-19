@@ -79,12 +79,13 @@ Shader "LiJianhao/Cloud" {
 				//Output.positionCS = positionInputs.positionCS;
 				o.positionWS = positionInputs.positionWS;
 
-				// 添加摄像机位置的偏移
-				float3 newWorldPos = (positionInputs.positionWS)+GetCameraPositionWS();
+				// 添加摄像机位置的偏移，使云与摄像机保持相对位置
+				float3 newWorldPos = positionInputs.positionWS + GetCameraPositionWS();
 				o.positionCS = TransformWorldToHClip(newWorldPos);
 				
 				VertexNormalInputs normalInputs = GetVertexNormalInputs(i.normalOS.xyz);
 				o.normalWS = normalInputs.normalWS;
+				
 				// 球谐光照系数
 				OUTPUT_SH(o.normalWS.xyz, o.vertexSH);
 				o.uv = TRANSFORM_TEX(i.uv, _MainTex);
@@ -96,8 +97,10 @@ Shader "LiJianhao/Cloud" {
 				half4 baseMap = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex,i.uv);
 
 				Light light = GetMainLight();
-				light.direction = _SunDir.xyz;
-				float simpleLight = saturate(dot(light.direction.y,i.normalWS))*baseMap.r;
+				light.direction = _SunDir.xyz; // 在编辑器中设置
+
+				// 衡量光在垂直方向上的强度
+				float simpleLight = saturate(dot(light.direction, i.normalWS))*baseMap.r;
 				float3 pixelDir = normalize(i.positionWS);
 				float backLight = baseMap.g*saturate(dot(pixelDir,light.direction));
 				float alpha = saturate((baseMap.b)-_Dissolve)*baseMap.a;

@@ -225,7 +225,6 @@ namespace SkySystem
             set => probeSettings.cullingMask = value;
         }
         
-        // private
         private Material skyboxMat;
         private Material defaultSkyboxMat;
         private SkySystemData data;
