@@ -7,14 +7,14 @@ namespace SkySystem
         [SerializeField] private Transform followTarget;
         [SerializeField] private float speed;
         [SerializeField]private float yScale = 1.0f;
-        private Vector3 positionOffset;
-        private Quaternion rotationOffset;
-        private float angle;
+        private Vector3 _positionOffset;
+        private Quaternion _rotationOffset;
+        private float _angle;
         private void Awake()
         {
-            positionOffset = transform.position - followTarget.position;
-            var dir = -positionOffset.normalized;
-            rotationOffset = Quaternion.LookRotation(dir);
+            _positionOffset = transform.position - followTarget.position;
+            var dir = -_positionOffset.normalized;
+            _rotationOffset = Quaternion.LookRotation(dir);
         }
 
         private void Update()
@@ -24,11 +24,11 @@ namespace SkySystem
 
         private void Sync()
         {
-            angle += Time.deltaTime * speed;
-            Quaternion currentRotation = Quaternion.Euler(0, angle, 0);
+            _angle += Time.deltaTime * speed;
+            var currentRotation = Quaternion.Euler(0, _angle, 0);
             transform.position = new Vector3(followTarget.position.x, followTarget.position.y * yScale,
-                                     followTarget.position.z) + currentRotation * positionOffset;
-            transform.rotation = currentRotation * rotationOffset;
+                                     followTarget.position.z) + currentRotation * _positionOffset;
+            transform.rotation = currentRotation * _rotationOffset;
         }
     }
 }
