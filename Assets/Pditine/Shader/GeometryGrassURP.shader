@@ -19,7 +19,7 @@ Shader"LiJianhao/Grass2"
 		_MinDist("Min Distance", Float) = 40
 		_MaxDist("Max Distance", Float) = 60
 		_TessellationUniform ("Tessellation Uniform", Range(1, 64)) = 1
-		_LightValue("Light Value", Range(0,1)) = 0.5
+		_LightValue("Light Value", Range(0,5)) = 0.5
 		_WindDistortionMap("Wind Distortion Map", 2D) = "white" {}
 		_WindSpeed("Wind Speed", Vector) = (0.05, 0.05, 0, 0)
 		_WindStrength("Wind Strength", Range(0,0.1)) = 0.05

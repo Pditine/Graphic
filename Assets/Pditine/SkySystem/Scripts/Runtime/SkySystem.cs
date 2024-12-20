@@ -37,9 +37,11 @@ namespace SkySystem
         {
             get => data.hour;
             set => data.hour = value;
+            // ChangeMainLightDirection(value);
         }
 
         public bool auto = true;
+        public float timeSpeed = 1;
         [ShowInInspector]
         public bool timeControlEverything
         {
@@ -228,10 +230,10 @@ namespace SkySystem
         private Material skyboxMat;
         private Material defaultSkyboxMat;
         private SkySystemData data;
-        [Title("辅助功能")]
-        [FilePath][BoxGroup("others")]
+        // [Title("辅助功能")]
+        // [FilePath][BoxGroup("others")]
         public string dataPath=Application.streamingAssetsPath + "/TestData.json";
-        [Button("保存数据",Icon = SdfIconType.SaveFill)][BoxGroup("others")]
+        // [Button("保存数据",Icon = SdfIconType.SaveFill)][BoxGroup("others")]
         private void SaveData()
         {
             // 获取各element的数据
@@ -278,7 +280,7 @@ namespace SkySystem
             // 保存到json
             data.SaveSystemData(dataPath);
         }
-        [Button("读取数据",Icon = SdfIconType.Download)][BoxGroup("others")]
+        // [Button("读取数据",Icon = SdfIconType.Download)][BoxGroup("others")]
         private void LoadData()
         {
             // 从json获取数据
@@ -325,33 +327,12 @@ namespace SkySystem
             cullingMask = data.cullingMask;
         }
         
-        [FolderPath][BoxGroup]
+        // [FolderPath][BoxGroup]
         public string path="Assets/SkySystem/Resources/Textures/Skyboxs";
-        [BoxGroup]
-        [Button("渲染当前天空盒保存在路径里")]
+        // [BoxGroup]
+        // [Button("渲染当前天空盒保存在路径里")]
         private void RenderSkybox()
         {
-            //创建目录
-            // string texturePath = path;
-            // if (!Directory.Exists(texturePath))
-            // {
-            //     Directory.CreateDirectory(texturePath);
-            // }
-            // TextureFormat format = probe.hdr ? TextureFormat.RGBAFloat : TextureFormat.RGBA64;
-            // Cubemap cubemap = new Cubemap(probe.resolution,format,false);
-            //
-            // renderCam.enabled = true;
-            //     
-            // renderCam.RenderToCubemap(cubemap);
-            // Texture2D tex = GetTexture2DByCubeMap(cubemap, format);
-            // SaveTexture2DFile(tex, texturePath+"/Skybox_"+SkySystem.Instance.Hour+".png");
-            //     
-            // AssetDatabase.Refresh();
-            // SetTextureAsCubemap(texturePath);
-            // //收尾工作
-            // DestroyImmediate(cubemap);
-            // cubemap = null;
-            // AssetDatabase.Refresh();
             probeSettings.RenderSkybox(path);
         }
         private void Start()
@@ -362,13 +343,6 @@ namespace SkySystem
             }
             if( Application.isPlaying)
                 DontDestroyOnLoad(gameObject);
-        }
-        private void Awake()
-        {
-            //实例化GameObject&绑定
-
-            //获取defaultData 并实例化各个Object
-            
         }
         
         private void OnEnable()
@@ -381,14 +355,11 @@ namespace SkySystem
             {
                 defaultSkyboxMat = RenderSettings.skybox;
                 RenderSettings.skybox = skyboxMat;
-                //RenderSettings.sun = mainLight;
             }
-            //data.LoadSystemData();
-            // if (data==null)
-            // {
-                data = ScriptableObject.CreateInstance<SkySystemData>();
-                data.LoadSystemData();
-            // }
+
+            data = ScriptableObject.CreateInstance<SkySystemData>();
+            data.LoadSystemData();
+            
             timeControlEverything = data.timeControlEverything;
             
             skySettings = new SkyElement(data);
@@ -419,7 +390,7 @@ namespace SkySystem
                 moonSettings = new MoonElement(data);
             }
             moonTexture = moonSettings.moonTexture;
-            starTexture = moonSettings.starTexture;
+            // starTexture = moonSettings.starTexture;
             moonRotation = moonSettings.moonRotation;
             moonColorGradient = moonSettings.moonColorGradient;
             starIntensity = moonSettings.starIntensity;
@@ -482,7 +453,7 @@ namespace SkySystem
         {
             if (auto)
             {
-                Hour += Time.deltaTime/2;
+                Hour += Time.deltaTime/2 * timeSpeed;
                 Hour %= 24;
             }
             
@@ -511,40 +482,6 @@ namespace SkySystem
             }
             data.SaveSystemData();
         }
-        private void SaveTexture2DFile(Texture2D texture, string path)
-        {
-            if (File.Exists(path))
-            {
-                File.Delete(path);
-            }
-            
-            byte[] vs = texture.EncodeToPNG();
-            FileStream fileStream = new FileStream(path, FileMode.Create, FileAccess.Write);
-            fileStream.Write(vs , 0 , vs.Length);
-            fileStream.Dispose();
-            fileStream.Close();
-        }
-        
-        private void Convert2EXR(RenderTexture renderTexture, string path)
-        {
-            
-            int width = renderTexture.width;
-            int height = renderTexture.height;
-            Texture2D texture2D = new Texture2D(width, height, TextureFormat.RGBAFloat, false);
-            
-            RenderTexture.active = renderTexture;
-            texture2D.ReadPixels(new Rect(0,0,width,height),0,0);
-            texture2D.Apply();
-            byte[] vs = texture2D.EncodeToEXR(Texture2D.EXRFlags.CompressZIP);
-
-            FileStream fileStream = new FileStream(path, FileMode.Create, FileAccess.Write);
-            fileStream.Write(vs , 0 , vs.Length);
-            fileStream.Dispose();
-            fileStream.Close();
-            Debug.Log("保存成功");
-            DestroyImmediate(texture2D);
-        }
-        
         
         public static Texture2D FlipPixels(Texture2D texture, bool flipX, bool flipY)
         {
@@ -579,7 +516,5 @@ namespace SkySystem
             texture.Apply();
             return texture;
         }
-
-        
     }
 }

@@ -26,6 +26,7 @@ namespace SkySystem
             Shader.SetGlobalColor("_CloudTopColor",cloudTopColor);
             Shader.SetGlobalColor("_CloudBottomColor",cloudBottomColor);
             Shader.SetGlobalFloat("_GIIndex",GIIndex);
+            Shader.SetGlobalFloat("_CloudTime",time);
         }
         
         private Texture2D applyGradient(Gradient ramp)

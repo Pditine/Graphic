@@ -8,40 +8,47 @@ Shader "LiJianhao/Cloud" {
 		Tags {
 			"RenderPipeline"="UniversalPipeline"
 			"RenderType"="Opaque"
-			"Queue"="Transparent"
+			"Queue"= "Transparent"
+			
 		}
 
 		HLSLINCLUDE
 		#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
-
-		// 常量缓冲区，节约性能
+		
 		CBUFFER_START(UnityPerMaterial)
 		float4 _MainTex_ST;
 		float4 _BaseColor;
-		float4 _CloudTopColor,_CloudBottomColor;
-		float _Dissolve,_GIIndex;
+		float4 _CloudTopColor, _CloudBottomColor;
+		float _Dissolve, _GIIndex, _CloudTime;
 		CBUFFER_END
 		ENDHLSL
 
 		Pass {
 			Name "UnLit"
-			Cull Front // 剔除正面
+			Cull Front // 剔除背面
 			Blend SrcAlpha OneMinusSrcAlpha // Result=(Source×SrcAlpha)+(Destination×(1−SrcAlpha))
+			
+			// 云不应写入深度，并且应该被所有物体遮挡
+			Tags { "Queue" = "Background" }
 			ZWrite Off
+			ZTest Always
+			
 			HLSLPROGRAM
 			#pragma vertex vert
 			#pragma fragment frag
 			
 			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Lighting.hlsl"
 			
-			struct a2v {
+			struct a2v
+			{
 				float4 positionOS	: POSITION;
 				float4 normalOS		: NORMAL;
 				float2 uv		    : TEXCOORD0;
 				float2 lightmapUV	: TEXCOORD1;
 			};
 
-			struct v2f {
+			struct v2f
+			{
 				float4 positionCS 	: SV_POSITION;
 				float2 uv		    : TEXCOORD0;
 				float3 normalWS		: TEXCOORD1;
@@ -52,25 +59,6 @@ Shader "LiJianhao/Cloud" {
 			TEXTURE2D(_MainTex); // Texture2D textureName
 			SAMPLER(sampler_MainTex); // SamplerState samplerName
 			float4 _SunDir;
-
-			/// 绕Y轴旋转
-			float3 RotateAroundY(float3 postion,float speed)
-			{
-				speed *= _Time.x;
-				float x = cos(speed)*postion.x+sin(speed)*postion.z;
-				float y = postion.y;
-				float z = -sin(speed)*postion.x+cos(speed)*postion.z;
-				return float3(x,y,z);
-			}
-
-			// 旋转UV
-			float2 RotateUV(float2 uv,float degress)
-			{
-				degress = DegToRad(degress);
-				float u = cos(degress)*uv.x+sin(degress)*uv.y;
-				float v = -sin(degress)*uv.x+cos(degress)*uv.y;
-				return float2(u,v);
-			}
 			
 			v2f vert(a2v i)
 			{
@@ -79,8 +67,9 @@ Shader "LiJianhao/Cloud" {
 				//Output.positionCS = positionInputs.positionCS;
 				o.positionWS = positionInputs.positionWS;
 
-				// 添加摄像机位置的偏移，使云与摄像机保持相对位置
-				float3 newWorldPos = positionInputs.positionWS + GetCameraPositionWS();
+				// 添加摄像机位置的偏移,在C#中处理云对于摄像机的位置偏移和旋转
+				// float3 newWorldPos = positionInputs.positionWS + GetCameraPositionWS();
+				float3 newWorldPos = positionInputs.positionWS;
 				o.positionCS = TransformWorldToHClip(newWorldPos);
 				
 				VertexNormalInputs normalInputs = GetVertexNormalInputs(i.normalOS.xyz);
@@ -94,18 +83,20 @@ Shader "LiJianhao/Cloud" {
 			
 			half4 frag(v2f i) : SV_Target
 			{
+				// 云纹理: r-光照强度，g-背光强度，b-溶解阈值，a-透明度
 				half4 baseMap = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex,i.uv);
 
 				Light light = GetMainLight();
 				light.direction = _SunDir.xyz; // 在编辑器中设置
 
-				// 衡量光在垂直方向上的强度
-				float simpleLight = saturate(dot(light.direction, i.normalWS))*baseMap.r;
+				// 考虑光在云面方向上的强度
+				float simpleLight = saturate(dot(light.direction, i.normalWS)) * baseMap.r;
 				float3 pixelDir = normalize(i.positionWS);
 				float backLight = baseMap.g*saturate(dot(pixelDir,light.direction));
-				float alpha = saturate((baseMap.b)-_Dissolve)*baseMap.a;
+				float timeValue = 1.0f/6.0f * _CloudTime * (1.0f - 1.0f/24.0f * _CloudTime); // 云的时间变化,过(0,0) (12,1) (24,0)的抛物线
+				float alpha = saturate(baseMap.b - _Dissolve) * baseMap.a * timeValue;
 
-				backLight = 5*pow(backLight,8);
+				backLight = 5 * pow(backLight,8);
 
 				float3 diffuse = lerp(_CloudBottomColor,_CloudTopColor,simpleLight+backLight);
 				half3 color = diffuse * _BaseColor.rgb*light.color;
@@ -121,7 +112,43 @@ Shader "LiJianhao/Cloud" {
 			ENDHLSL
 		}
 		
-		// todo:ShadowCaster, for casting shadows
+	    Pass
+        {
+            Name "ShadowCaster"
+            Tags { "LightMode" = "ShadowCaster" "Queue" = "Transparent"}
+            HLSLPROGRAM
+            #pragma vertex vert
+            #pragma fragment frag
+            #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
+            
+            struct a2v
+            {
+                float4 positionOS : POSITION;
+				float2 uv : TEXCOORD0;
+            };
 
+            struct v2f
+            {
+                float4 positionHCS : SV_POSITION;
+            	float2 uv : TEXCOORD0;
+            };
+
+            sampler2D _MainTex;
+            v2f vert(a2v i)
+            {
+                v2f o;
+                o.positionHCS = TransformObjectToHClip(i.positionOS);
+            	o.uv = i.uv;
+                return o;
+            }
+
+            half4 frag(v2f i) : SV_Target
+            {
+            	half4 baseColor = tex2D(_MainTex, i.uv);
+            	clip(baseColor.b-_Dissolve);
+                return 0;
+            }
+            ENDHLSL
+        }
 	}
 }
