@@ -17,6 +17,7 @@ namespace SkySystem
         public float starIntensity;
         public float moonIntensity;
         public float moonDistance;
+        public float moonSize;
         public MoonElement(SkySystemData data)
         {
             moonTexture = data.moonTexture;
@@ -38,20 +39,19 @@ namespace SkySystem
             {
                 _moon = GameObject.Find("Moon");
             }
-            time = time % 24;
-            isDayTime = time > 6f && time <= 18f;
+            time %= 24;
+            isDayTime = time is > 6f and <= 18f;
 
             _moon.transform.LookAt(-SkySystem.Instance.LightDirection*10000);
-                //Debug.Log( rate);
             Shader.SetGlobalVector("_MoonDir",_moon.transform.forward);
             Shader.SetGlobalTexture("_MoonTexture",moonTexture);
             Shader.SetGlobalTexture("_StarTexture",starTexture);
-            //float rate = 
             Shader.SetGlobalVector("_MoonGlowColor",moonColorGradient.Evaluate(time/24));
             Shader.SetGlobalFloat("_StarIntensity",starIntensity*math.saturate( math.abs(time-12)-5.5f));
 
             Shader.SetGlobalFloat("_MoonIntensity",moonIntensity*math.saturate( math.abs(time-12)-5));
             Shader.SetGlobalFloat("_MoonDistance", moonDistance);
+            Shader.SetGlobalFloat("_MoonSize", moonSize);
 
         }
         public override void ManualUpdate()
@@ -63,6 +63,7 @@ namespace SkySystem
             _moon.transform.eulerAngles = new Vector3(moonRotation.y,moonRotation.x,0);
             Shader.SetGlobalVector("_MoonDir",_moon.transform.forward);
             Shader.SetGlobalTexture("_MoonTexture",moonTexture);
+            Shader.SetGlobalTexture("_StarTexture",starTexture);
             //Shader.SetGlobalVector("_MoonGlowColor",moonColorGradient);
         }
          

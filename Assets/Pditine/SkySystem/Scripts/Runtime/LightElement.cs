@@ -34,7 +34,7 @@ namespace SkySystem
 
         public override void AutoUpdate(float time)
         {
-            isDayTime = time > 6f && time <= 18f;
+            isDayTime = time is > 6f and <= 18f;
             
             if (isDayTime)
             {

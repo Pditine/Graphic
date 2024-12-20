@@ -10,60 +10,52 @@ namespace SkySystem
     public class ProbeElement : BaseElement
     {
         private ReflectionProbe _probe;
-        private Camera renderCam;
+        private Camera _renderCam;
 
-        public AmbientMode ambientMode
+        public AmbientMode AmbientMode
         {
             get => RenderSettings.ambientMode;
-            set{RenderSettings.ambientMode = value;}
+            set => RenderSettings.ambientMode = value;
         }
-        public ReflectionProbeMode mode
+        public ReflectionProbeMode Mode
         {
             get => _probe.mode;
             set { _probe.mode = value; }
         }
-        public Texture cubemap
+        public Texture CubeMap
         {
             get => _probe.customBakedTexture;
-            set { _probe.customBakedTexture = value; }
+            set => _probe.customBakedTexture = value;
         }
-        public bool boxProjection
+        public bool BoxProjection
         {
             get => _probe.boxProjection;
-            set { _probe.boxProjection = value; }
+            set => _probe.boxProjection = value;
         }
-        public Vector3 boxSize
+        public Vector3 BoxSize
         {
             get => _probe.size;
-            set { _probe.size = value; }
+            set => _probe.size = value;
         }
-        public int resolution
+        public int Resolution
         {
             get => _probe.resolution;
-            set { _probe.resolution = value; }
+            set => _probe.resolution = value;
         }
         public bool HDR
         {
             get => _probe.hdr;
-            set { _probe.hdr = value; }
+            set => _probe.hdr = value;
         }
-        public ReflectionProbeClearFlags clearFlags
+        public ReflectionProbeClearFlags ClearFlags
         {
             get => _probe.clearFlags;
-            set { _probe.clearFlags = value; }
+            set => _probe.clearFlags = value;
         }
-        public int cullingMask
+        public int CullingMask
         {
             get => _probe.cullingMask;
-            set { _probe.cullingMask = value; }
-        }
-
-        /// <summary>
-        /// 未完成，todo 异步渲染当前探针
-        /// </summary>
-        public void Bake()
-        {
-            _probe.RenderProbe();
+            set => _probe.cullingMask = value;
         }
         
         public ProbeElement(SkySystemData data)
@@ -78,21 +70,21 @@ namespace SkySystem
                 Debug.Log("No probeObj");
             }
             LoadData(data);
-            _probe.mode = mode;
+            _probe.mode = Mode;
             _probe.size = Vector3.one * 10000;
             _probe.refreshMode = ReflectionProbeRefreshMode.EveryFrame;
         }
 
         public void LoadData(SkySystemData data)
         {
-            ambientMode = data.ambientMode;
-            mode = data.mode;
-            cubemap = data.cubemap;
-            boxProjection = data.boxProjection;
-            resolution = (int)data.resolution;
+            AmbientMode = data.ambientMode;
+            Mode = data.mode;
+            CubeMap = data.cubemap;
+            BoxProjection = data.boxProjection;
+            Resolution = (int)data.resolution;
             HDR = data.HDR;
-            clearFlags = data.clearFlags;
-            cullingMask = data.cullingMask;
+            ClearFlags = data.clearFlags;
+            CullingMask = data.cullingMask;
         }
 
         public void RenderSkybox(string path)
@@ -106,36 +98,35 @@ namespace SkySystem
             Cubemap tempCubemap = new Cubemap(_probe.resolution,format,false);
             
             GameObject camObj = new GameObject("RenderCam");
-            renderCam = camObj.AddComponent<Camera>();
+            _renderCam = camObj.AddComponent<Camera>();
             camObj.transform.position = Vector3.zero;
             InitCamSetting();
             //renderCam.enabled = true;
-            renderCam.RenderToCubemap(tempCubemap);
+            _renderCam.RenderToCubemap(tempCubemap);
             Texture2D tex = GetTexture2DByCubeMap(tempCubemap, format);
             SaveTexture2DFile(tex, texturePath+"/Skybox_"+SkySystem.Instance.Hour+".png");
             AssetDatabase.Refresh();
-            SetTextureAsCubemap(texturePath);
+            SetTextureAsCubeMap(texturePath);
             //收尾工作
             AssetDatabase.Refresh();
-            //renderCam.enabled = false;
-            renderCam = null;
+            _renderCam = null;
             GameObject.DestroyImmediate(camObj);
         }
         
         private void InitCamSetting()
         {
             
-            renderCam.cameraType = CameraType.Reflection;
-            renderCam.hideFlags = HideFlags.HideAndDontSave;
-            renderCam.gameObject.SetActive(true);
-            renderCam.fieldOfView = 90;
-            renderCam.farClipPlane = _probe.farClipPlane;
-            renderCam.nearClipPlane = _probe.nearClipPlane;
-            renderCam.clearFlags = (CameraClearFlags)_probe.clearFlags;
-            renderCam.backgroundColor = _probe.backgroundColor;
-            renderCam.allowHDR = _probe.hdr;
-            renderCam.cullingMask = _probe.cullingMask;
-            renderCam.enabled = false;
+            _renderCam.cameraType = CameraType.Reflection;
+            _renderCam.hideFlags = HideFlags.HideAndDontSave;
+            _renderCam.gameObject.SetActive(true);
+            _renderCam.fieldOfView = 90;
+            _renderCam.farClipPlane = _probe.farClipPlane;
+            _renderCam.nearClipPlane = _probe.nearClipPlane;
+            _renderCam.clearFlags = (CameraClearFlags)_probe.clearFlags;
+            _renderCam.backgroundColor = _probe.backgroundColor;
+            _renderCam.allowHDR = _probe.hdr;
+            _renderCam.cullingMask = _probe.cullingMask;
+            _renderCam.enabled = false;
         }
         private void SaveTexture2DFile(Texture2D texture, string path)
         {
@@ -219,13 +210,13 @@ namespace SkySystem
             texture.Apply();
             return texture;
         }
-        private void SetTextureAsCubemap(string path)
+        private void SetTextureAsCubeMap(string path)
         {
             string[] paths = Directory.GetFiles(path, "*.png", SearchOption.AllDirectories);
 
-            for (int i = 0; i < paths.Length; i++)
+            foreach (var t in paths)
             {
-                string assetPath = paths[i].Substring(path.IndexOf("Assets/"));
+                string assetPath = t.Substring(path.IndexOf("Assets/"));
                 Debug.Log(assetPath);
                 TextureImporter importer = AssetImporter.GetAtPath(assetPath) as TextureImporter;
                 importer.textureShape = TextureImporterShape.TextureCube;

@@ -29,7 +29,7 @@ namespace SkySystem
             Shader.SetGlobalFloat("_CloudTime",time);
         }
         
-        private Texture2D applyGradient(Gradient ramp)
+        private Texture2D ApplyGradient(Gradient ramp)
         {
             Texture2D tempTex = new Texture2D(256,1,TextureFormat.ARGB32,false,true);
             tempTex.filterMode = FilterMode.Bilinear;

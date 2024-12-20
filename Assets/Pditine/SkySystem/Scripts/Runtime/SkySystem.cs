@@ -1,5 +1,4 @@
-﻿using System.IO;
-using Sirenix.OdinInspector;
+﻿using Sirenix.OdinInspector;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering;
@@ -37,7 +36,6 @@ namespace SkySystem
         {
             get => data.hour;
             set => data.hour = value;
-            // ChangeMainLightDirection(value);
         }
 
         public bool auto = true;
@@ -92,12 +90,6 @@ namespace SkySystem
             get => moonSettings.moonTexture;
             set => moonSettings.moonTexture = value;
         }
-        [ShowInInspector][FoldoutGroup("moon",true)]
-        public Vector2 moonRotation
-        {
-            get => moonSettings.moonRotation;
-            set => moonSettings.moonRotation = value;
-        }
         [FoldoutGroup("moon",true)]
         public Gradient moonColorGradient;
         [ShowInInspector][FoldoutGroup("moon",true)]
@@ -105,6 +97,12 @@ namespace SkySystem
         {
             get => moonSettings.moonIntensity;
             set => moonSettings.moonIntensity = value;
+        }
+        [ShowInInspector][PropertyRange(0.9f,1f)][FoldoutGroup("moon",true)]
+        public float moonSize
+        {
+            get => moonSettings.moonSize;
+            set => moonSettings.moonSize = value;
         }
         [ShowInInspector][FoldoutGroup("moon",true)]
         public float moonDistance
@@ -179,27 +177,27 @@ namespace SkySystem
         [ShowInInspector][FoldoutGroup("EnvironmentSettings",true)]
         public AmbientMode ambientMode
         {
-            get => probeSettings.ambientMode;
-            set => probeSettings.ambientMode = value;
+            get => probeSettings.AmbientMode;
+            set => probeSettings.AmbientMode = value;
         }
         [ShowInInspector][FoldoutGroup("EnvironmentSettings",true)]
         public ReflectionProbeMode reflectionProbeMode
         {
-            get => probeSettings.mode;
-            set => probeSettings.mode = value;
+            get => probeSettings.Mode;
+            set => probeSettings.Mode = value;
         }
 
         [ShowInInspector][FoldoutGroup("EnvironmentSettings",true)]
         public ReflectionResolution reflectionResolition
         {
-            get => (ReflectionResolution)probeSettings.resolution;
-            set => probeSettings.resolution = (int)value;
+            get => (ReflectionResolution)probeSettings.Resolution;
+            set => probeSettings.Resolution = (int)value;
         }
         [ShowInInspector][FoldoutGroup("EnvironmentSettings",true)]
         public bool boxProjection
         {
-            get => probeSettings.boxProjection;
-            set => probeSettings.boxProjection = value;
+            get => probeSettings.BoxProjection;
+            set => probeSettings.BoxProjection = value;
         }
         [ShowInInspector][FoldoutGroup("EnvironmentSettings",true)]
         public bool HDR
@@ -210,131 +208,27 @@ namespace SkySystem
         [ShowInInspector][FoldoutGroup("EnvironmentSettings",true)]
         public ReflectionProbeClearFlags clearFlags
         {
-            get => probeSettings.clearFlags;
-            set => probeSettings.clearFlags = value;
+            get => probeSettings.ClearFlags;
+            set => probeSettings.ClearFlags = value;
         }
 
         [ShowInInspector][FoldoutGroup("EnvironmentSettings",true)]
         public Texture skyboxCubemap
         {
-            get => probeSettings.cubemap;
-            set => probeSettings.cubemap=value;
+            get => probeSettings.CubeMap;
+            set => probeSettings.CubeMap=value;
         }
         [ShowInInspector][FoldoutGroup("EnvironmentSettings",true)]
         public LayerMask cullingMask
         {
-            get => probeSettings.cullingMask;
-            set => probeSettings.cullingMask = value;
+            get => probeSettings.CullingMask;
+            set => probeSettings.CullingMask = value;
         }
         
         private Material skyboxMat;
         private Material defaultSkyboxMat;
         private SkySystemData data;
-        // [Title("辅助功能")]
-        // [FilePath][BoxGroup("others")]
-        public string dataPath=Application.streamingAssetsPath + "/TestData.json";
-        // [Button("保存数据",Icon = SdfIconType.SaveFill)][BoxGroup("others")]
-        private void SaveData()
-        {
-            // 获取各element的数据
-            data.hour = Hour;
-            data.timeControlEverything = timeControlEverything;
-            // sky
-            data.daySkyGradient = daySkyGradient;
-            data.nightSkyGradient = nightSkyGradient;
-            // sun
-            data.sunDiscGradient = sunDiscGradient;
-            data.sunRotation = sunRotation;
-            data.sunHalo = sunHalo;
-            data.sunIntensity = sunIntensity;
-            data.sunColorGradient = sunColorGradient;
-            // moon
-            data.moonTexture = moonTexture;
-            data.moonRotation = moonRotation;
-            data.moonIntensity = moonIntensity;
-            data.moonDistance = moonDistance;
-            data.moonColorGradient = moonColorGradient;
-            data.starTexture = starTexture;
-            data.starIntensity = starIntensity;
-            // lighting
-            data.lightIntensity = lightIntensity;
-            data.sunLightGradient = sunLightGradient;
-            data.moonLightGradient = moonLightGradient;
-            data.lightRotation = lightRotation;
-            // cloud
-            data.tint = cloudTint;
-            data.cloudTopColor = cloudTopColor;
-            data.cloudBottomColor = cloudBottomColor;
-            data.GIIndex = GIIndex;
-            data.fogColorGradient = fogColorGradient;
-            // probe
-            data.ambientMode = ambientMode;
-            data.mode = reflectionProbeMode;
-            data.cubemap = skyboxCubemap;
-            data.boxProjection = boxProjection;
-            data.resolution = reflectionResolition;
-            data.HDR = HDR;
-            data.clearFlags = clearFlags;
-            data.cullingMask = cullingMask;
-            
-            // 保存到json
-            data.SaveSystemData(dataPath);
-        }
-        // [Button("读取数据",Icon = SdfIconType.Download)][BoxGroup("others")]
-        private void LoadData()
-        {
-            // 从json获取数据
-            data.LoadSystemData(dataPath);
-            // 赋予各element
-            Hour = data.hour;
-            timeControlEverything = data.timeControlEverything;
-            // sky
-            daySkyGradient = data.daySkyGradient;
-            nightSkyGradient = data.nightSkyGradient;
-            // sun
-            sunDiscGradient = data.sunDiscGradient;
-            sunRotation = data.sunRotation;
-            sunHalo = data.sunHalo;
-            sunIntensity = data.sunIntensity;
-            sunColorGradient = data.sunColorGradient;
-            // moon
-            moonTexture = data.moonTexture;
-            moonRotation = data.moonRotation;
-            moonIntensity = data.moonIntensity;
-            moonDistance = data.moonDistance;
-            moonColorGradient = data.moonColorGradient;
-            starTexture = data.starTexture;
-            starIntensity = data.starIntensity;
-            // lighting
-            lightIntensity = data.lightIntensity;
-            sunLightGradient = data.sunLightGradient;
-            moonLightGradient = data.moonLightGradient;
-            lightRotation = data.lightRotation;
-            // cloud
-            cloudTint = data.tint;
-            cloudTopColor = data.cloudTopColor;
-            cloudBottomColor = data.cloudBottomColor;
-            GIIndex = data.GIIndex;
-            fogColorGradient = data.fogColorGradient;
-            // probe
-            ambientMode = data.ambientMode;
-            reflectionProbeMode = data.mode;
-            skyboxCubemap = data.cubemap;
-            boxProjection = data.boxProjection;
-            reflectionResolition = data.resolution;
-            HDR = data.HDR;
-            clearFlags = data.clearFlags;
-            cullingMask = data.cullingMask;
-        }
         
-        // [FolderPath][BoxGroup]
-        public string path="Assets/SkySystem/Resources/Textures/Skyboxs";
-        // [BoxGroup]
-        // [Button("渲染当前天空盒保存在路径里")]
-        private void RenderSkybox()
-        {
-            probeSettings.RenderSkybox(path);
-        }
         private void Start()
         {
             if (data!=null)
@@ -391,7 +285,7 @@ namespace SkySystem
             }
             moonTexture = moonSettings.moonTexture;
             // starTexture = moonSettings.starTexture;
-            moonRotation = moonSettings.moonRotation;
+            // moonRotation = moonSettings.moonRotation;
             moonColorGradient = moonSettings.moonColorGradient;
             starIntensity = moonSettings.starIntensity;
             moonDistance = moonSettings.moonDistance;
@@ -481,40 +375,6 @@ namespace SkySystem
                 RenderSettings.skybox = defaultSkyboxMat;
             }
             data.SaveSystemData();
-        }
-        
-        public static Texture2D FlipPixels(Texture2D texture, bool flipX, bool flipY)
-        {
-            if (!flipX && !flipY)
-            {
-                return texture;
-            }
-            if (flipX)
-            {
-                for (int i = 0; i < texture.width / 2; i++)
-                {
-                    for (int j = 0; j < texture.height; j++)
-                    {
-                        Color tempC = texture.GetPixel(i, j);
-                        texture.SetPixel(i, j, texture.GetPixel(texture.width - 1 - i, j));
-                        texture.SetPixel(texture.width - 1 - i, j, tempC);
-                    }
-                }
-            }
-            if (flipY)
-            {
-                for (int i = 0; i < texture.width; i++)
-                {
-                    for (int j = 0; j < texture.height / 2; j++)
-                    {
-                        Color tempC = texture.GetPixel(i, j);
-                        texture.SetPixel(i, j, texture.GetPixel(i, texture.height - 1 - j));
-                        texture.SetPixel(i, texture.height - 1 - j, tempC);
-                    }
-                }
-            }
-            texture.Apply();
-            return texture;
         }
     }
 }
