@@ -8,8 +8,6 @@ namespace SkySystem
     [Serializable]
     public class LightElement : BaseElement
     {
-        // [Range(0f,24f)]
-        // public float time;
         //主光源：日光月光
         public float   lightIntensity;
         public Gradient sunLightGradient, moonLightGradient;
@@ -24,8 +22,6 @@ namespace SkySystem
             lightRotation = data.lightRotation;
             resolution = data.resolution;
         }
-
-
         
         public override void ManualUpdate()
         {
@@ -43,14 +39,12 @@ namespace SkySystem
             if (isDayTime)
             {
                 SkySystem.Instance.mainLight.color = GetNowLightColor(sunLightGradient, time/24);
-                //SkySystem.Instance.mainLight.gameObject.transform.LookAt( lightDir*10000);
                 SkySystem.Instance.mainLight.gameObject.transform.LookAt(SkySystem.Instance.LightDirection * 10000);
             }
             else
             {
                 SkySystem.Instance.mainLight.color = GetNowLightColor(moonLightGradient, time/24);
                 SkySystem.Instance.mainLight.gameObject.transform.LookAt(-SkySystem.Instance.LightDirection * 10000);
-                //Debug.Log( rate);
             }
         }
         private Color GetNowLightColor(Gradient gradient, float rate)
