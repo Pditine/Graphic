@@ -5,28 +5,19 @@ using UnityEngine;
 namespace SkySystem
 {
     [Serializable]
-    public class MoonElement:BaseElement
+    public class MoonElement : BaseElement
     {
         private GameObject _moon;
-
         public Texture2D moonTexture;
-        public Vector2 moonRotation;
-
         public Gradient moonColorGradient;
         public Texture starTexture;
         public float starIntensity;
         public float moonIntensity;
         public float moonDistance;
-        public float moonSize;
-        public MoonElement(SkySystemData data)
+        [Range(0,1)]public float moonSize;
+        
+        public override void Init()
         {
-            moonTexture = data.moonTexture;
-            moonRotation = data.moonRotation;
-            moonColorGradient = data.moonColorGradient;
-            starTexture = data.starTexture;
-            starIntensity = data.starIntensity;
-            moonIntensity = data.moonIntensity;
-            moonDistance = data.moonDistance;
             _moon = GameObject.Find("Moon");
             if (_moon==null)
             {
@@ -40,9 +31,8 @@ namespace SkySystem
                 _moon = GameObject.Find("Moon");
             }
             time %= 24;
-            isDayTime = time is > 6f and <= 18f;
-
-            _moon.transform.LookAt(-SkySystem.Instance.LightDirection*10000);
+            
+            _moon.transform.LookAt(-SkySystem.Instance.lightDirection*10000);
             Shader.SetGlobalVector("_MoonDir",_moon.transform.forward);
             Shader.SetGlobalTexture("_MoonTexture",moonTexture);
             Shader.SetGlobalTexture("_StarTexture",starTexture);
@@ -60,7 +50,6 @@ namespace SkySystem
             {
                 _moon = GameObject.Find("Moon");
             }
-            _moon.transform.eulerAngles = new Vector3(moonRotation.y,moonRotation.x,0);
             Shader.SetGlobalVector("_MoonDir",_moon.transform.forward);
             Shader.SetGlobalTexture("_MoonTexture",moonTexture);
             Shader.SetGlobalTexture("_StarTexture",starTexture);

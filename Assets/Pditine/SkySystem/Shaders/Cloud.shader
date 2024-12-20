@@ -93,7 +93,9 @@ Shader "LiJianhao/Cloud" {
 				float simpleLight = saturate(dot(light.direction, i.normalWS)) * baseMap.r;
 				float3 pixelDir = normalize(i.positionWS);
 				float backLight = baseMap.g*saturate(dot(pixelDir,light.direction));
-				float timeValue = 1.0f/6.0f * _CloudTime * (1.0f - 1.0f/24.0f * _CloudTime); // 云的时间变化,过(0,0) (12,1) (24,0)的抛物线
+				// 云的时间变化,过(0,0) (12,1) (24,0)的抛物线
+				// 所以当时间为12时,云的透明度最大
+				float timeValue = 1.0f/6.0f * _CloudTime * (1.0f - 1.0f/24.0f * _CloudTime); 
 				float alpha = saturate(baseMap.b - _Dissolve) * baseMap.a * timeValue;
 
 				backLight = 5 * pow(backLight,8);

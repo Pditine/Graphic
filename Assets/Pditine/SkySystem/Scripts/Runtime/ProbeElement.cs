@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using Sirenix.OdinInspector;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Rendering;
@@ -12,53 +13,62 @@ namespace SkySystem
         private ReflectionProbe _probe;
         private Camera _renderCam;
 
+        [ShowIf("@_probe != null")]
         public AmbientMode AmbientMode
         {
             get => RenderSettings.ambientMode;
             set => RenderSettings.ambientMode = value;
         }
+        [ShowIf("@_probe != null")]
         public ReflectionProbeMode Mode
         {
             get => _probe.mode;
-            set { _probe.mode = value; }
+            set => _probe.mode = value;
         }
+        [ShowIf("@_probe != null")]
         public Texture CubeMap
         {
             get => _probe.customBakedTexture;
             set => _probe.customBakedTexture = value;
         }
+        [ShowIf("@_probe != null")]
         public bool BoxProjection
         {
             get => _probe.boxProjection;
             set => _probe.boxProjection = value;
         }
+        [ShowIf("@_probe != null")]
         public Vector3 BoxSize
         {
             get => _probe.size;
             set => _probe.size = value;
         }
+        [ShowIf("@_probe != null")]
         public int Resolution
         {
             get => _probe.resolution;
             set => _probe.resolution = value;
         }
+        [ShowIf("@_probe != null")]
         public bool HDR
         {
             get => _probe.hdr;
             set => _probe.hdr = value;
         }
+        [ShowIf("@_probe != null")]
         public ReflectionProbeClearFlags ClearFlags
         {
             get => _probe.clearFlags;
             set => _probe.clearFlags = value;
         }
+        [ShowIf("@_probe != null")]
         public int CullingMask
         {
             get => _probe.cullingMask;
             set => _probe.cullingMask = value;
         }
         
-        public ProbeElement(SkySystemData data)
+        public override void Init()
         {
             GameObject obj = GameObject.Find("SkySystem_ReflectionProbe");
             if (obj!=null)
@@ -67,26 +77,12 @@ namespace SkySystem
             }
             else
             {
-                Debug.Log("No probeObj");
+                throw new Exception("No probeObj");
             }
-            LoadData(data);
-            _probe.mode = Mode;
             _probe.size = Vector3.one * 10000;
             _probe.refreshMode = ReflectionProbeRefreshMode.EveryFrame;
         }
-
-        public void LoadData(SkySystemData data)
-        {
-            AmbientMode = data.ambientMode;
-            Mode = data.mode;
-            CubeMap = data.cubemap;
-            BoxProjection = data.boxProjection;
-            Resolution = (int)data.resolution;
-            HDR = data.HDR;
-            ClearFlags = data.clearFlags;
-            CullingMask = data.cullingMask;
-        }
-
+        
         public void RenderSkybox(string path)
         {
             string texturePath = path;
@@ -140,25 +136,6 @@ namespace SkySystem
             fileStream.Write(vs , 0 , vs.Length);
             fileStream.Dispose();
             fileStream.Close();
-        }
-        
-        private void Convert2EXR(RenderTexture renderTexture, string path)
-        {
-            
-            int width = renderTexture.width;
-            int height = renderTexture.height;
-            Texture2D texture2D = new Texture2D(width, height, TextureFormat.RGBAFloat, false);
-            
-            RenderTexture.active = renderTexture;
-            texture2D.ReadPixels(new Rect(0,0,width,height),0,0);
-            texture2D.Apply();
-            byte[] vs = texture2D.EncodeToEXR(Texture2D.EXRFlags.CompressZIP);
-
-            FileStream fileStream = new FileStream(path, FileMode.Create, FileAccess.Write);
-            fileStream.Write(vs , 0 , vs.Length);
-            fileStream.Dispose();
-            fileStream.Close();
-            Debug.Log("保存成功");
         }
         private Texture2D GetTexture2DByCubeMap(Cubemap cubemap , TextureFormat format)
         {

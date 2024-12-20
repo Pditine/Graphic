@@ -15,17 +15,16 @@ namespace SkySystem
         public Vector4 sunHalo = new Vector4(0.25f,0.25f,0.25f,0.25f);
         public float sunIntensity;
         public Gradient sunColorGradient = new Gradient();
-        public SunElement(SkySystemData data)
+
+        public override void Init()
         {
             _sun = GameObject.Find("Sun");
             if (_sun==null)
             {
                 Debug.LogError("Sun Not Found");
             }
-            LoadData(data);
         }
 
-        //todo autoUpdateSunColor
         public override void AutoUpdate(float time)
         {
             if (_sun==null)
@@ -39,8 +38,8 @@ namespace SkySystem
             Shader.SetGlobalVector("_SunHalo",sunHalo);
             Shader.SetGlobalColor("_SunGlowColor",sunColorGradient.Evaluate(time/24));
             Shader.SetGlobalFloat("_SunIntensity",sunIntensity);
-            Shader.SetGlobalTexture("_SunDiscGradient",applyGradient(sunDiscGradient));
-            SkySystem.Instance.LightDirection = -_sun.transform.forward;
+            Shader.SetGlobalTexture("_SunDiscGradient",ApplyGradient(sunDiscGradient));
+            SkySystem.Instance.lightDirection = -_sun.transform.forward;
         }
         public override void ManualUpdate()
         {
@@ -52,18 +51,10 @@ namespace SkySystem
             Shader.SetGlobalVector("_SunDir",this._sun.transform.forward);
             Shader.SetGlobalVector("_SunHalo",sunHalo);
             Shader.SetGlobalColor("_SunGlowColor",sunColorGradient.Evaluate(0));
-            SkySystem.Instance.LightDirection = -_sun.transform.forward;
-        }
-        public void LoadData(SkySystemData data)
-        {
-            sunDiscGradient = data.sunDiscGradient;
-            sunRotation = data.sunRotation;
-            sunHalo = data.sunHalo;
-            sunIntensity = data.sunIntensity;
-            sunColorGradient = data.sunColorGradient;
+            SkySystem.Instance.lightDirection = -_sun.transform.forward;
         }
         
-        private Texture2D applyGradient(Gradient ramp)
+        private Texture2D ApplyGradient(Gradient ramp)
         {
             Texture2D tempTex = new Texture2D(256,1,TextureFormat.ARGB32,false,true);
             tempTex.filterMode = FilterMode.Bilinear;
