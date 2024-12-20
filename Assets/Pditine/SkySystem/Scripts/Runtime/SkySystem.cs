@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace SkySystem
 {
@@ -54,6 +55,11 @@ namespace SkySystem
             data.sunElement.Init();
             data.lightElement.Init();
             data.moonElement.Init();
+        }
+
+        private void OnEnable()
+        {
+            RenderSettings.skybox = skyboxMat;
         }
 
         private void Update()

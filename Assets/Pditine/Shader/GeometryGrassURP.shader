@@ -3,26 +3,24 @@ Shader"LiJianhao/Grass2"
 {
 	Properties
 	{
-		_TopColor("Top Color", Color) = (1,1,0,1)
-		_BottomColor("Bottom Color", Color) = (0,1,0,1)
-		_GrassHeight("Grass Height", Float) = 1
-		_GrassWidth("Grass Width", Float) = 0.06
-		_RandomHeight("Grass Height Randomness", Float) = 0.25
-		_Radius("Interactor Radius", Float) = 0.3
-		_Strength("Interactor Strength", Float) = 5
-		_Rad("Blade Radius", Range(0,1)) = 0.6
-		_BladeForward("Blade Forward Amount", Float) = 0.38
-		_BladeCurve("Blade Curvature Amount", Range(1, 4)) = 2
-		_AmbientStrength("Ambient Strength",  Range(0,1)) = 0.5
-		_GrassNumber("Grass Number", Range(0, 10)) = 4
-		_GrassSegments("Grass Segments", Range(0, 10)) = 5
-		_MinDist("Min Distance", Float) = 40
-		_MaxDist("Max Distance", Float) = 60
-		_TessellationUniform ("Tessellation Uniform", Range(1, 64)) = 1
-		_LightValue("Light Value", Range(0,5)) = 0.5
+		_TopColor("Top Color-草上部的颜色", Color) = (1,1,0,1)
+		_BottomColor("Bottom Color-草下部的颜色", Color) = (0,1,0,1)
+		_GrassHeight("Grass Height-草的高度", Float) = 1
+		_GrassWidth("Grass Width-草的宽度", Float) = 0.06
+		_RandomHeight("Grass Height Randomness-草高度的随机值", Float) = 0.25
+		_Radius("Interactor Radius-草交互的半径", Float) = 0.3
+		_Strength("Interactor Strength-草交互弯曲的力度", Float) = 5
+		_Rad("Blade Radius-草的位置随机", Range(0,1)) = 0.6
+		_BladeForward("Blade Forward Amount-草的倾倒", Float) = 0.38
+		_BladeCurve("Blade Curvature Amount-草的弯曲", Range(1, 4)) = 2
+		_AmbientStrength("Ambient Strength-环境光",  Range(0,1)) = 0.5
+		_GrassNumber("Grass Number-草的数量(单个顶点)", Range(0, 10)) = 4
+		_GrassSegments("Grass Segments-草的段数", Range(0, 10)) = 5
+		_TessellationUniform ("Tessellation Uniform-草的数量(曲面细分)", Range(1, 64)) = 1
+		_LightValue("Light Value-受光照影响的强度", Range(0,5)) = 0.5
 		_WindDistortionMap("Wind Distortion Map", 2D) = "white" {}
-		_WindSpeed("Wind Speed", Vector) = (0.05, 0.05, 0, 0)
-		_WindStrength("Wind Strength", Range(0,0.1)) = 0.05
+		_WindSpeed("Wind Speed-风的速度", Vector) = (0.05, 0.05, 0, 0)
+		_WindStrength("Wind Strength-风的力度", Range(0,0.1)) = 0.05
 	}
 
 	// 由于我们的着色器是基于URP的，所以我们需要使用HLSLINCLUDE和ENDHLSL来包裹我们的HLSL代码。
@@ -83,7 +81,6 @@ Shader"LiJianhao/Grass2"
 	float _RandomHeight;
 	float _BladeForward;
 	float _BladeCurve;
-	float _MinDist, _MaxDist;
 	float _GrassNumber;
 	float _GrassSegments;
 	float _TessellationUniform;
