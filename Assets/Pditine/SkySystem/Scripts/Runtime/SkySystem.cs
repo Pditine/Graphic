@@ -78,7 +78,6 @@ namespace SkySystem
                 data.lightElement.AutoUpdate(Hour);
                 data.moonElement.AutoUpdate(Hour);
             }
-             
             else
             {
                 data.sunElement.ManualUpdate();

@@ -83,32 +83,6 @@ namespace SkySystem
             _probe.refreshMode = ReflectionProbeRefreshMode.EveryFrame;
         }
         
-        public void RenderSkybox(string path)
-        {
-            string texturePath = path;
-            if (!Directory.Exists(texturePath))
-            {
-                Directory.CreateDirectory(texturePath);
-            }
-            TextureFormat format = _probe.hdr ? TextureFormat.RGBAFloat : TextureFormat.RGBA64;
-            Cubemap tempCubemap = new Cubemap(_probe.resolution,format,false);
-            
-            GameObject camObj = new GameObject("RenderCam");
-            _renderCam = camObj.AddComponent<Camera>();
-            camObj.transform.position = Vector3.zero;
-            InitCamSetting();
-            //renderCam.enabled = true;
-            _renderCam.RenderToCubemap(tempCubemap);
-            Texture2D tex = GetTexture2DByCubeMap(tempCubemap, format);
-            SaveTexture2DFile(tex, texturePath+"/Skybox_"+SkySystem.Instance.Hour+".png");
-            AssetDatabase.Refresh();
-            SetTextureAsCubeMap(texturePath);
-            //收尾工作
-            AssetDatabase.Refresh();
-            _renderCam = null;
-            GameObject.DestroyImmediate(camObj);
-        }
-        
         private void InitCamSetting()
         {
             
@@ -136,69 +110,6 @@ namespace SkySystem
             fileStream.Write(vs , 0 , vs.Length);
             fileStream.Dispose();
             fileStream.Close();
-        }
-        private Texture2D GetTexture2DByCubeMap(Cubemap cubemap , TextureFormat format)
-        {
-            int everyW = cubemap.width;
-            int everyH = cubemap.height;
-
-            Texture2D texture2D = new Texture2D(everyW * 4, everyH * 3,format,false);
-            texture2D.SetPixels(everyW, 0, everyW, everyH, cubemap.GetPixels(CubemapFace.PositiveY));
-            texture2D.SetPixels(0, everyH, everyW, everyH, cubemap.GetPixels(CubemapFace.NegativeX));
-            texture2D.SetPixels(everyW, everyH, everyW, everyH, cubemap.GetPixels(CubemapFace.PositiveZ));
-            texture2D.SetPixels(2 * everyW, everyH, everyW, everyH, cubemap.GetPixels(CubemapFace.PositiveX));
-            texture2D.SetPixels(3 * everyW, everyH, everyW, everyH, cubemap.GetPixels(CubemapFace.NegativeZ));
-            texture2D.SetPixels(everyW, 2 * everyH, everyW, everyH, cubemap.GetPixels(CubemapFace.NegativeY));
-            texture2D.Apply();
-            texture2D = FlipPixels(texture2D, false, true);
-            return texture2D;
-        }
-        
-        private Texture2D FlipPixels(Texture2D texture, bool flipX, bool flipY)
-        {
-            if (!flipX && !flipY)
-            {
-                return texture;
-            }
-            if (flipX)
-            {
-                for (int i = 0; i < texture.width / 2; i++)
-                {
-                    for (int j = 0; j < texture.height; j++)
-                    {
-                        Color tempC = texture.GetPixel(i, j);
-                        texture.SetPixel(i, j, texture.GetPixel(texture.width - 1 - i, j));
-                        texture.SetPixel(texture.width - 1 - i, j, tempC);
-                    }
-                }
-            }
-            if (flipY)
-            {
-                for (int i = 0; i < texture.width; i++)
-                {
-                    for (int j = 0; j < texture.height / 2; j++)
-                    {
-                        Color tempC = texture.GetPixel(i, j);
-                        texture.SetPixel(i, j, texture.GetPixel(i, texture.height - 1 - j));
-                        texture.SetPixel(i, texture.height - 1 - j, tempC);
-                    }
-                }
-            }
-            texture.Apply();
-            return texture;
-        }
-        private void SetTextureAsCubeMap(string path)
-        {
-            string[] paths = Directory.GetFiles(path, "*.png", SearchOption.AllDirectories);
-
-            foreach (var t in paths)
-            {
-                string assetPath = t.Substring(path.IndexOf("Assets/"));
-                Debug.Log(assetPath);
-                TextureImporter importer = AssetImporter.GetAtPath(assetPath) as TextureImporter;
-                importer.textureShape = TextureImporterShape.TextureCube;
-                AssetDatabase.ImportAsset(assetPath);
-            }
         }
     }
 }

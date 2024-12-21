@@ -95,20 +95,20 @@ Shader "LiJianhao/Cloud" {
 				float backLight = baseMap.g*saturate(dot(pixelDir,light.direction));
 				// 云的时间变化,过(0,0) (12,1) (24,0)的抛物线
 				// 所以当时间为12时,云的透明度最大
-				float timeValue = 1.0f/6.0f * _CloudTime * (1.0f - 1.0f/24.0f * _CloudTime); 
+				float timeValue = 1.0f / 6.0f * _CloudTime * (1.0f - 1.0f/24.0f * _CloudTime); 
 				float alpha = saturate(baseMap.b - _Dissolve) * baseMap.a * timeValue;
 
-				backLight = 5 * pow(backLight,8);
+				backLight = 5 * pow(backLight, 8);
 
-				float3 diffuse = lerp(_CloudBottomColor,_CloudTopColor,simpleLight+backLight);
-				half3 color = diffuse * _BaseColor.rgb*light.color;
+				float3 diffuse = lerp(_CloudBottomColor, _CloudTopColor, simpleLight + backLight);
+				half3 color = diffuse * _BaseColor.rgb * light.color;
 				
 				half3 bakedGI = SAMPLE_GI(Input.lightmapUV, i.vertexSH, i.normalWS);
-				color+= bakedGI*_GIIndex;
+				color += bakedGI * _GIIndex;
 				
 				half3 reflDir = reflect(-GetWorldSpaceViewDir(i.positionWS),i.normalWS);
 				float3 test= GlossyEnvironmentReflection(reflDir,i.positionWS,1,1);
-				color+=test;
+				color += test;
 				return half4(color, alpha);
 			}
 			ENDHLSL
