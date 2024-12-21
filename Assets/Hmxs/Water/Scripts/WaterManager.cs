@@ -15,12 +15,18 @@ namespace Hmxs.Water.Scripts.Editor
 	public class WaterManager : SingletonMono<WaterManager>
 	{
 		#region Cached References
+
 		private static readonly int WaterColorGradient = Shader.PropertyToID("_WaterColorGradient");
+		private static readonly int WaveSteepness = Shader.PropertyToID("_WaveSteepness");
+		private static readonly int WaveLength = Shader.PropertyToID("_WaveLength");
+		private static readonly int WaveSpeed = Shader.PropertyToID("_WaveSpeed");
+		private static readonly int WaveDirection = Shader.PropertyToID("_WaveDirection");
+
 		#endregion
 
 		[Title("References")]
 		[OnValueChanged("UpdateMaterial")] [SerializeField] private MeshRenderer water;
-		[OnValueChanged("AssignMaterial")] [SerializeField] private Material shaderGraphMaterial;
+		[OnValueChanged("UpdateMaterial")] [SerializeField] private Material material;
 
 		[Title("Setting")]
 		[InfoBox("Save the water color gradient texture to disk and re-import it to apply changes to the material.")]
@@ -29,7 +35,15 @@ namespace Hmxs.Water.Scripts.Editor
 		[OnValueChanged("UpdateMaterial")] [InlineButton("SaveWaterColorGradient", SdfIconType.Save, " SAVE")] [SerializeField] private Gradient waterColorGradient;
 		[FolderPath] [SerializeField] private string gradientTextSavePath;
 
-		private Material _waterMaterial;
+		public void GetWaveSetting(out float steepness, out float wavelength, out float speed, out Vector4 direction)
+		{
+			steepness = material.GetFloat(WaveSteepness);
+			wavelength = material.GetFloat(WaveLength);
+			speed = material.GetFloat(WaveSpeed);
+			direction = material.GetVector(WaveDirection);
+		}
+
+		public Vector3 GetPosition() => water.transform.position;
 
 		private Texture2D UpdateWaterColorGradient(bool applyTexture = true)
 		{
@@ -47,25 +61,24 @@ namespace Hmxs.Water.Scripts.Editor
 			texture.Apply(false);
 
 			// assign it to material
-			if (applyTexture) _waterMaterial.SetTexture(WaterColorGradient, texture);
+			if (applyTexture) material.SetTexture(WaterColorGradient, texture);
 			return texture;
-		}
-
-		private void AssignMaterial()
-		{
-			_waterMaterial = shaderGraphMaterial;
-			UpdateMaterial();
 		}
 
 		[Button(SdfIconType.Archive, Stretch = false)]
 		private void UpdateMaterial()
 		{
-			if (!_waterMaterial)
+			if (!material)
 			{
 				Debug.LogError("Water material is not assigned.");
 				return;
 			}
-			water.material = _waterMaterial;
+			if (!water)
+			{
+				Debug.LogError("Water mesh renderer is not assigned.");
+				return;
+			}
+			water.material = material;
 			UpdateWaterColorGradient();
 		}
 
@@ -91,7 +104,7 @@ namespace Hmxs.Water.Scripts.Editor
 				return;
 			}
 
-			string path = Path.Combine(gradientTextSavePath, $"{_waterMaterial.name}_{texture.name}.png");
+			string path = Path.Combine(gradientTextSavePath, $"{material.name}_{texture.name}.png");
 			byte[] pngData = texture.EncodeToPNG();
 			if (pngData == null)
 			{
@@ -124,7 +137,7 @@ namespace Hmxs.Water.Scripts.Editor
 			}
 
 			// re-assign it to material
-			_waterMaterial.SetTexture(WaterColorGradient, loadedTexture);
+			material.SetTexture(WaterColorGradient, loadedTexture);
 			Debug.Log($"Saved water color gradient to {path}");
 		}
 #endif
