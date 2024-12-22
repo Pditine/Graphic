@@ -85,8 +85,8 @@ Material:
     - _QueueControl: 1
     - _QueueOffset: 0
     - _ReflectionBlendFactor: 0.452
-    - _ReflectionFresnel: 2.81
-    - _ReflectionStrength: 0.527
+    - _ReflectionFresnel: 2.5
+    - _ReflectionStrength: 1
     - _RefractionScale: 0.0065
     - _RefractionSpeed: 0.03
     - _RefractionStrength: 0.005
