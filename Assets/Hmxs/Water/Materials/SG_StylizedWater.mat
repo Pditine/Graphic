@@ -68,8 +68,8 @@ Material:
     - _DepthFadeFactor: 1
     - _DstBlend: 10
     - _HorizonDistance: 10
-    - _IntersectionFoamBlendFactor: 0.5
-    - _IntersectionFoamCutoff: 0.85
+    - _IntersectionFoamBlendFactor: 1
+    - _IntersectionFoamCutoff: 1
     - _IntersectionFoamDepthFactor: 3
     - _IntersectionFoamDepthFadeFactor: 3
     - _IntersectionFoamDirAngle: 0
