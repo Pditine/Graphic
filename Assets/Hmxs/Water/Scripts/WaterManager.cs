@@ -85,7 +85,12 @@ namespace Hmxs.Water.Scripts.Editor
 #if UNITY_EDITOR
 		static WaterManager()
 		{
-			EditorSceneManager.sceneSaved += _ => Instance.SaveWaterColorGradient();
+			EditorSceneManager.sceneSaved += scene =>
+			{
+				if (Instance.gradientTextSavePath == null || Instance.material == null || Instance.water == null)
+					return;
+				Instance.SaveWaterColorGradient();
+			};
 		}
 
 		public void SaveWaterColorGradient()

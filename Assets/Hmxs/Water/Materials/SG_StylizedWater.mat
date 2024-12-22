@@ -84,6 +84,9 @@ Material:
     - _NormalStrength: 0.2
     - _QueueControl: 1
     - _QueueOffset: 0
+    - _ReflectionBlendFactor: 0.452
+    - _ReflectionFresnel: 2.81
+    - _ReflectionStrength: 0.527
     - _RefractionScale: 0.0065
     - _RefractionSpeed: 0.03
     - _RefractionStrength: 0.005
@@ -113,6 +116,7 @@ Material:
     - _HorizonColor: {r: 0.5, g: 0, b: 0.09038949, a: 0.50980395}
     - _IntersectionFoamColor: {r: 1, g: 1, b: 1, a: 1}
     - _IntersectionFoamOffset: {r: 0, g: 0, b: 0, a: 0}
+    - _ReflectionOffset: {r: 0, g: 0, b: 0, a: 0}
     - _ShallowColor: {r: 0.6264151, g: 1, b: 0.9907757, a: 0}
     - _SpecularColor: {r: 1, g: 1, b: 1, a: 1}
     - _Step: {r: 4, g: 4, b: 4, a: 3.43}
