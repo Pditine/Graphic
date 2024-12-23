@@ -30,10 +30,6 @@ Shader"LiJianhao/Grass2"
 	#pragma domain domain
 	#pragma geometry geom
 	#pragma fragment frag // rider这里会报错,可能是因为frag在subshader
-	#pragma target 4.6
-	
-	// #define GrassSegments 5 // 每个草片的段数
-	// #define GrassBlades 4 // 每个顶点的草片数
 	
 	// 用于生成可以显示阴影的shader变体
 	#pragma multi_compile _ _MAIN_LIGHT_SHADOWS
@@ -43,6 +39,7 @@ Shader"LiJianhao/Grass2"
 	#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Lighting.hlsl"
 	#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Shadows.hlsl"
 	#include "HLSLSupport.cginc"
+	
 	// 顶点输入结构体
 	struct a2v
 	{
@@ -70,7 +67,6 @@ Shader"LiJianhao/Grass2"
 		float3 norm : NORMAL;
 		float2 uv : TEXCOORD0;
 		float3 worldPos : TEXCOORD3;
-		// float fogFactor : TEXCOORD5;
 	};
 
 	half _GrassHeight;
@@ -126,32 +122,26 @@ Shader"LiJianhao/Grass2"
 
 		float4 positionCS = TransformWorldToHClip(ApplyShadowBias(positionWS, normalWS, 0));
 		
-	#if UNITY_REVERSED_Z // 是否使用反向ZBuffer
-			positionCS.z = min(positionCS.z, UNITY_NEAR_CLIP_VALUE);
-	#else
-			positionCS.z = max(positionCS.z, UNITY_NEAR_CLIP_VALUE);
-	#endif
-			return positionCS;
-		}
-
-	// 计算用于片元着色器的草片数据
-	g2f GrassVertex(float3 vertexPos, float width, float height, float offset, float curve, float2 uv, float3x3 rotation, float3 faceNormal) {
-		g2f OUT;
-		float3 offsetvertices = vertexPos + mul(rotation, float3(width, height, curve) + float3(0, 0, offset));
-		OUT.pos = GetShadowPositionHClip(offsetvertices, faceNormal);
-		OUT.norm = faceNormal;
-		OUT.uv = uv;
-		VertexPositionInputs vertexInput = GetVertexPositionInputs(vertexPos + mul(rotation, float3(width, height, curve)));
-		OUT.worldPos = vertexInput.positionWS;
-		// 通过顶点的z坐标计算雾因子
-		// float fogFactor = ComputeFogFactor(OUT.pos.z);
-		// OUT.fogFactor = fogFactor;
-		return OUT;
+		positionCS.z = min(positionCS.z, UNITY_NEAR_CLIP_VALUE);
+		return positionCS;
 	}
 
-	a2v vert(a2v v)
+	// 计算用于片元着色器的草片数据
+	g2f GrassVertex(float3 vertexPos, float width, float height, float offset, float curve, float2 uv, float3x3 rotation, float3 faceNormal)
 	{
-		return v;
+		g2f o;
+		float3 offsetvertices = vertexPos + mul(rotation, float3(width, height, curve) + float3(0, 0, offset));
+		o.pos = GetShadowPositionHClip(offsetvertices, faceNormal);
+		o.norm = faceNormal;
+		o.uv = uv;
+		VertexPositionInputs vertexInput = GetVertexPositionInputs(vertexPos + mul(rotation, float3(width, height, curve)));
+		o.worldPos = vertexInput.positionWS;
+		return o;
+	}
+
+	a2v vert(a2v i)
+	{
+		return i;
 	}
 
 	struct TessellationFactors 
@@ -160,32 +150,32 @@ Shader"LiJianhao/Grass2"
 		float inside : SV_InsideTessFactor;
 	};
 
-	v2g tessVert(a2v v)
+	v2g TessVert(a2v i)
 	{
-		v2g OUT;
-		OUT.pos = v.positionOS;
-		OUT.uv = v.texcoord;
-		OUT.color = v.color;
-		OUT.norm = TransformObjectToWorldNormal(v.normal);
-		OUT.tangent = v.tangent;
-		return OUT;
+		v2g o;
+		o.pos = i.positionOS;
+		o.uv = i.texcoord;
+		o.color = i.color;
+		o.norm = TransformObjectToWorldNormal(i.normal);
+		o.tangent = i.tangent;
+		return o;
 	}
 
-	TessellationFactors patchConstantFunction(InputPatch<a2v, 3> patch)
+	TessellationFactors PatchConstantFunction(InputPatch<a2v, 3> patch)
 	{
-	    TessellationFactors f;
-	    f.edge[0] = _TessellationUniform;
-	    f.edge[1] = _TessellationUniform;
-	    f.edge[2] = _TessellationUniform;
-	    f.inside = _TessellationUniform;
-	    return f;
+	    TessellationFactors o;
+	    o.edge[0] = _TessellationUniform;
+	    o.edge[1] = _TessellationUniform;
+	    o.edge[2] = _TessellationUniform;
+	    o.inside = _TessellationUniform;
+	    return o;
 	}
 
 	[UNITY_domain("tri")]
 	[UNITY_outputcontrolpoints(3)]
 	[UNITY_outputtopology("triangle_cw")]
 	[UNITY_partitioning("integer")]
-	[UNITY_patchconstantfunc("patchConstantFunction")]
+	[UNITY_patchconstantfunc("PatchConstantFunction")]
 	a2v hull (InputPatch<a2v, 3> patch, uint id : SV_OutputControlPointID)
 	{
 		return patch[id];
@@ -194,7 +184,7 @@ Shader"LiJianhao/Grass2"
 	[UNITY_domain("tri")]
 	v2g domain(TessellationFactors factors, OutputPatch<a2v, 3> patch, float3 barycentricCoordinates : SV_DomainLocation)
 	{
-		a2v v;
+		a2v v; // 名字只能是v
 
 		#define MY_DOMAIN_PROGRAM_INTERPOLATE(fieldName) v.fieldName = \
 			patch[0].fieldName * barycentricCoordinates.x + \
@@ -205,7 +195,7 @@ Shader"LiJianhao/Grass2"
 		MY_DOMAIN_PROGRAM_INTERPOLATE(normal)
 		MY_DOMAIN_PROGRAM_INTERPOLATE(tangent)
 
-		return tessVert(v);
+		return TessVert(v);
 	}
 	
 	[maxvertexcount(64)]
@@ -213,9 +203,8 @@ Shader"LiJianhao/Grass2"
 	{
 		// 获得一个随机的前向偏移
 		float forward = rand(IN[0].pos.yyz) * _BladeForward;
-
-		// 草片的法线
-		float3 faceNormal = float3(0, 1, 0);
+		
+		float3 worldNormal = float3(0, 1, 0);
 		float3 worldPos = TransformObjectToWorld(IN[0].pos.xyz);
 
 		// 随着距离的增加，distanceFade接近0，单个定点的草片数减少
@@ -223,12 +212,10 @@ Shader"LiJianhao/Grass2"
 		// float distanceFade = 1 - saturate((distanceFromCamera - _MinDist) / _MaxDist);
 
 		// 风的影响
-		// todo:使用流动贴图
 		float3 v0 = IN[0].pos.xyz;
 		// float3 wind = float3(sin(_Time.x * _WindSpeed + v0.x) + sin(_Time.x * _WindSpeed + v0.z * 2) + sin(_Time.x * _WindSpeed * 0.1 + v0.x), 0,
 		// 	cos(_Time.x * _WindSpeed + v0.x * 2) + cos(_Time.x * _WindSpeed + v0.z));
 		// wind *= _WindStrength;
-
 		float2 uv = IN[0].pos.xz * _WindDistortionMap_ST.xy + _WindDistortionMap_ST.zw + _WindSpeed * _Time.y;
 		float2 windSample = (tex2Dlod(_WindDistortionMap, float4(uv, 0, 0)).xy * 2 - 1) * _WindStrength;
 		float3 wind = normalize(float3(windSample.x, windSample.y, 0));
@@ -242,9 +229,8 @@ Shader"LiJianhao/Grass2"
 		
 		// 草片高度，有随机性
 		_GrassHeight *= clamp(rand(IN[0].pos.xyz), 1 - _RandomHeight, 1 + _RandomHeight);
-
+		
 		// 对于此次处理的顶点的每个草片
-		// for (int j = 0; j < (_GrassNumber * distanceFade); j++)
 		for (int j = 0; j < _GrassNumber; j++)
 		{
 			// 随机旋转矩阵
@@ -252,9 +238,9 @@ Shader"LiJianhao/Grass2"
 
 			float3x3 transformationMatrix = facingRotationMatrix;
 
-			faceNormal = mul(faceNormal, transformationMatrix);
-			float radius = j / _GrassNumber;
-			float offset = (1 - radius) * _Rad;
+			worldNormal = mul(worldNormal, transformationMatrix);
+			float offset = (1 - j / _GrassNumber) * _Rad;
+			
 			// 对于草片的每个段
 			for (int i = 0; i < _GrassSegments; i++)
 			{
@@ -275,12 +261,12 @@ Shader"LiJianhao/Grass2"
 				float3 newPos = i == 0 ? v0 : v0 + ((float3(sphereDisp.x, sphereDisp.y, sphereDisp.z) + wind) * t);
 
 				// 草片的底部顶点
-				triStream.Append(GrassVertex(newPos, segmentWidth, segmentHeight, offset, segmentForward, float2(0, t), transformMatrix, faceNormal));
-				triStream.Append(GrassVertex(newPos, -segmentWidth, segmentHeight, offset, segmentForward, float2(1, t), transformMatrix, faceNormal));
+				triStream.Append(GrassVertex(newPos, segmentWidth, segmentHeight, offset, segmentForward, float2(0, t), transformMatrix, worldNormal));
+				triStream.Append(GrassVertex(newPos, -segmentWidth, segmentHeight, offset, segmentForward, float2(1, t), transformMatrix, worldNormal));
 				
 			}
 			// 草片的顶部顶点
-			triStream.Append(GrassVertex(v0 + float3(sphereDisp.x * 1.5, sphereDisp.y, sphereDisp.z * 1.5) + wind, 0, _GrassHeight, offset, forward, float2(0.5, 1), transformationMatrix, faceNormal));
+			triStream.Append(GrassVertex(v0 + float3(sphereDisp.x * 1.5, sphereDisp.y, sphereDisp.z * 1.5) + wind, 0, _GrassHeight, offset, forward, float2(0.5, 1), transformationMatrix, worldNormal));
 			
 			triStream.RestartStrip();
 		}
@@ -363,7 +349,7 @@ Shader"LiJianhao/Grass2"
 //			#pragma geometry geom
 //			#pragma hull hull
 //			#pragma domain domain
-//            #pragma fragment frag
+//          #pragma fragment frag
 //			#pragma target 4.6
 //			
 //			#define SHADERPASS_SHADOWCASTER

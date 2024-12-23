@@ -23,11 +23,14 @@ namespace SkySystem
                 normal = {textColor = Color.white},
             };
             EditorGUILayout.LabelField("Sky System", style);
+            EditorGUILayout.Space();
             base.OnInspectorGUI();
             EditorGUILayout.Space();
             style.fontSize = 15;
             EditorGUILayout.LabelField("Data", style);
             ShowData();
+            var a = PlayerPrefs.GetFloat("321");
+            Debug.Log(a);
         }
         
         private void ShowData()
