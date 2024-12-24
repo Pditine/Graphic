@@ -29,8 +29,6 @@ namespace SkySystem
             style.fontSize = 15;
             EditorGUILayout.LabelField("Data", style);
             ShowData();
-            var a = PlayerPrefs.GetFloat("321");
-            Debug.Log(a);
         }
         
         private void ShowData()

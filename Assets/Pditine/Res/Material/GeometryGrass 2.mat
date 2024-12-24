@@ -42,7 +42,7 @@ Material:
     - _BladeWidth: 0.05
     - _BladeWidthRandom: 0.02
     - _GrassHeight: 6.24
-    - _GrassNumber: 0.04
+    - _GrassNumber: 4
     - _GrassSegments: 5
     - _GrassWidth: 0.24
     - _LightValue: 3.32
@@ -51,15 +51,16 @@ Material:
     - _Rad: 0.064
     - _Radius: 1
     - _RandomHeight: 0.22
+    - _RandomPos: 1
     - _Strength: 5
     - _TessellationUniform: 2
     - _TranslucentGain: 0.5
     - _WindSpeed: 0.005
     - _WindStrength: 0.001
     m_Colors:
-    - _BottomColor: {r: 0.19274396, g: 0.4716981, b: 0.08232467, a: 1}
+    - _BottomColor: {r: 0.14688897, g: 0.41509432, b: 0.041117832, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _TopColor: {r: 0.07843137, g: 1, b: 0, a: 1}
+    - _TopColor: {r: 0, g: 1, b: 0.09575987, a: 1}
     - _WindFrequency: {r: 0.05, g: 0.05, b: 0, a: 0}
     - _WindSpeed: {r: 0.05, g: 0.05, b: 0, a: 0}
   m_BuildTextureStacks: []

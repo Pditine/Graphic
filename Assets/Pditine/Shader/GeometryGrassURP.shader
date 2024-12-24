@@ -10,7 +10,7 @@ Shader"LiJianhao/Grass2"
 		_RandomHeight("Grass Height Randomness-草高度的随机值", Float) = 0.25
 		_Radius("Interactor Radius-草交互的半径", Float) = 0.3
 		_Strength("Interactor Strength-草交互弯曲的力度", Float) = 5
-		_Rad("Blade Radius-草的位置随机", Range(0,1)) = 0.6
+		_RandomPos("Random Pos-草的位置随机", Range(0,1)) = 0.6
 		_BladeForward("Blade Forward Amount-草的倾倒", Float) = 0.38
 		_BladeCurve("Blade Curvature Amount-草的弯曲", Range(1, 4)) = 2
 		_AmbientStrength("Ambient Strength-环境光",  Range(0,1)) = 0.5
@@ -73,7 +73,7 @@ Shader"LiJianhao/Grass2"
 	half _GrassWidth;
 	float _WindStrength;
 	half _Radius, _Strength;
-	float _Rad;
+	float _RandomPos;
 	float _RandomHeight;
 	float _BladeForward;
 	float _BladeCurve;
@@ -84,7 +84,7 @@ Shader"LiJianhao/Grass2"
 	sampler2D _WindDistortionMap;
 	float4 _WindDistortionMap_ST;
 	float4 _WindSpeed;
-	uniform float3 _InteractorPosition; // 交互物位置，C#脚本中设置
+	uniform float3 _InteractorPosition; // 交互物位置，C#中设置
 	
 	/// https://forum.unity.com/threads/am-i-over-complicating-this-random-function.454887/#post-2949326
 	/// Simple noise function, sourced from http://answers.unity.com/answers/624136/view.html
@@ -92,6 +92,7 @@ Shader"LiJianhao/Grass2"
 	/// Returns a number in the 0...1 range.
 	float rand(float3 co)
 	{
+		// 我看不懂，但我大受震撼
 		return frac(sin(dot(co.xyz, float3(12.9898, 78.233, 53.539))) * 43758.5453);
 	}
 
@@ -184,7 +185,7 @@ Shader"LiJianhao/Grass2"
 	[UNITY_domain("tri")]
 	v2g domain(TessellationFactors factors, OutputPatch<a2v, 3> patch, float3 barycentricCoordinates : SV_DomainLocation)
 	{
-		a2v v; // 名字只能是v
+		a2v v;
 
 		#define MY_DOMAIN_PROGRAM_INTERPOLATE(fieldName) v.fieldName = \
 			patch[0].fieldName * barycentricCoordinates.x + \
@@ -231,34 +232,34 @@ Shader"LiJianhao/Grass2"
 		_GrassHeight *= clamp(rand(IN[0].pos.xyz), 1 - _RandomHeight, 1 + _RandomHeight);
 		
 		// 对于此次处理的顶点的每个草片
-		for (int j = 0; j < _GrassNumber; j++)
+		for (int i = 0; i < _GrassNumber; i++)
 		{
 			// 随机旋转矩阵
-			float3x3 facingRotationMatrix = AngleAxis3x3(rand(IN[0].pos.xyz) * TWO_PI + j, float3(0, 1, -0.1));
+			float3x3 facingRotationMatrix = AngleAxis3x3(rand(IN[0].pos.xyz) * TWO_PI + i, float3(0, 1, -0.1));
 
 			float3x3 transformationMatrix = facingRotationMatrix;
 
 			worldNormal = mul(worldNormal, transformationMatrix);
-			float offset = (1 - j / _GrassNumber) * _Rad;
+			float offset = (1 - i / _GrassNumber) * _RandomPos;
 			
 			// 对于草片的每个段
-			for (int i = 0; i < _GrassSegments; i++)
+			for (int j = 0; j < _GrassSegments; j++)
 			{
 				// 变细变高
-				float t = i / _GrassSegments;
+				float t = j / _GrassSegments;
 				float segmentHeight = _GrassHeight * t;
 				float segmentWidth = _GrassWidth * (1 - t);
 
 				// 最下面的段要稍细一点
-				segmentWidth = i == 0 ? _GrassWidth * 0.3 : segmentWidth;
+				segmentWidth = j == 0 ? _GrassWidth * 0.3 : segmentWidth;
 
 				float segmentForward = pow(abs(t), _BladeCurve) * forward;
 
 				// 草片朝向的旋转矩阵
-				float3x3 transformMatrix = i == 0 ? facingRotationMatrix : transformationMatrix;
+				float3x3 transformMatrix = j == 0 ? facingRotationMatrix : transformationMatrix;
 
 				// 获得风吹，交互物体的影响后，草片的位置，第一个顶点不会受到影响
-				float3 newPos = i == 0 ? v0 : v0 + ((float3(sphereDisp.x, sphereDisp.y, sphereDisp.z) + wind) * t);
+				float3 newPos = j == 0 ? v0 : v0 + ((float3(sphereDisp.x, sphereDisp.y, sphereDisp.z) + wind) * t);
 
 				// 草片的底部顶点
 				triStream.Append(GrassVertex(newPos, segmentWidth, segmentHeight, offset, segmentForward, float2(0, t), transformMatrix, worldNormal));
@@ -302,35 +303,36 @@ Shader"LiJianhao/Grass2"
 			half4 frag(g2f i) : SV_Target
 			{
 				float4 shadowCoord = TransformWorldToShadowCoord(i.worldPos);
-			#if _MAIN_LIGHT_SHADOWS_CASCADE || _MAIN_LIGHT_SHADOWS
-			Light mainLight = GetMainLight(shadowCoord);
-			#else
-				Light mainLight = GetMainLight();
-			#endif
+				#if _MAIN_LIGHT_SHADOWS_CASCADE || _MAIN_LIGHT_SHADOWS
+				Light mainLight = GetMainLight(shadowCoord);
+				#else
+					Light mainLight = GetMainLight();
+				#endif
+				
 				float shadow = mainLight.shadowAttenuation;
+					
+				float3 extraLights;
+				int pixelLightCount = GetAdditionalLightsCount();
+				// 对于每个除了主光源之外的光源
+				for (int j = 0; j < pixelLightCount; ++j) {
+					Light light = GetAdditionalLight(j, i.worldPos, half4(1, 1, 1, 1));
+					float3 attenuatedLightColor = light.color * (light.distanceAttenuation * light.shadowAttenuation);
+					extraLights += attenuatedLightColor;
+				}
+				// 通过uv的y值插值颜色
+				float4 baseColor = lerp(_BottomColor, _TopColor, saturate(i.uv.y));
 				
-			float3 extraLights;
-			int pixelLightCount = GetAdditionalLightsCount();
-			// 对于每个除了主光源之外的光源
-			for (int j = 0; j < pixelLightCount; ++j) {
-				Light light = GetAdditionalLight(j, i.worldPos, half4(1, 1, 1, 1));
-				float3 attenuatedLightColor = light.color * (light.distanceAttenuation * light.shadowAttenuation);
-				extraLights += attenuatedLightColor;
-			}
-			// 通过uv的y值插值颜色
-			float4 baseColor = lerp(_BottomColor, _TopColor, saturate(i.uv.y));
-			
-			float4 lightColor = baseColor * float4(mainLight.color,1);
-			lightColor += float4(extraLights,1);
-			// 通过LightValue插值颜色，否则颜色会太亮，同时增加光对明暗效果的影响
-			float lightValue = (lightColor.r + lightColor.g + lightColor.b) /3 * _LightValue;
-			lightColor = lerp( baseColor - float4(0.5,0.5,0.5,0), lightColor, lightValue); 
-				
-			float4 final = lightColor * shadow;
-			final += saturate((1 - shadow) * baseColor * 0.2);
-				
-			final += (unity_AmbientSky * _AmbientStrength);
-		   return final;
+				float4 lightColor = baseColor * float4(mainLight.color,1);
+				lightColor += float4(extraLights,1);
+				// 通过LightValue插值颜色，否则颜色会太亮，同时增加光对草上明暗效果的影响
+				float lightValue = (lightColor.r + lightColor.g + lightColor.b) /3 * _LightValue;
+				lightColor = lerp( baseColor - float4(0.5,0.5,0.5,0), lightColor, lightValue); 
+					
+				float4 final = lightColor * shadow;
+				final += saturate((1 - shadow) * baseColor * 0.2);
+					
+				final += unity_AmbientSky * _AmbientStrength;
+			   return final;
 		   }
 		   ENDHLSL
 	   }
