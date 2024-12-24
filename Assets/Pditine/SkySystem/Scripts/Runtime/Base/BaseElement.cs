@@ -2,11 +2,12 @@
 
 namespace SkySystem
 {
-    public class BaseElement
+    public abstract class BaseElement
     {
-        [HideInInspector]
-        public bool isDayTime;
-
+        public virtual void Init()
+        {
+            
+        }
         public virtual void ManualUpdate()
         {
             
@@ -25,5 +26,4 @@ namespace SkySystem
 
         }
     }
-    
 }
