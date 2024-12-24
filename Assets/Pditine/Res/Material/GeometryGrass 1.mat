@@ -41,21 +41,23 @@ Material:
     - _BladeHeightRandom: 0.3
     - _BladeWidth: 0.05
     - _BladeWidthRandom: 0.02
-    - _GrassHeight: 6.24
+    - _GrassHeight: 3.16
     - _GrassNumber: 0.04
     - _GrassSegments: 5
-    - _GrassWidth: 0.24
+    - _GrassWidth: 0.19
     - _LightValue: 3.32
     - _MaxDist: 60
     - _MinDist: 40
     - _Rad: 0.064
-    - _Radius: 1
-    - _RandomHeight: 0.22
-    - _Strength: 5
+    - _Radius: 2
+    - _RandomHeight: 0.59
+    - _RandomPos: 0.6
+    - _Strength: 2
     - _TessellationUniform: 2
     - _TranslucentGain: 0.5
+    - _WindScale: 0.503
     - _WindSpeed: 0.005
-    - _WindStrength: 0.001
+    - _WindStrength: 0.345
     m_Colors:
     - _BottomColor: {r: 0.19274396, g: 0.4716981, b: 0.08232467, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}

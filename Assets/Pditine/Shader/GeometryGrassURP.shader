@@ -20,7 +20,8 @@ Shader"LiJianhao/Grass2"
 		_LightValue("Light Value-受光照影响的强度", Range(0,5)) = 0.5
 		_WindDistortionMap("Wind Distortion Map", 2D) = "white" {}
 		_WindSpeed("Wind Speed-风的速度", Vector) = (0.05, 0.05, 0, 0)
-		_WindStrength("Wind Strength-风的力度", Range(0,0.1)) = 0.05
+		_WindStrength("Wind Strength-风的力度", Range(0,1)) = 0.05
+//		_WindScale("Wind Scale-风的力度(总体)", Range(0,1)) = 0.5
 	}
 
 	// 由于我们的着色器是基于URP的，所以我们需要使用HLSLINCLUDE和ENDHLSL来包裹我们的HLSL代码。
@@ -72,6 +73,7 @@ Shader"LiJianhao/Grass2"
 	half _GrassHeight;
 	half _GrassWidth;
 	float _WindStrength;
+	// float _WindScale;
 	half _Radius, _Strength;
 	float _RandomPos;
 	float _RandomHeight;
@@ -218,8 +220,8 @@ Shader"LiJianhao/Grass2"
 		// 	cos(_Time.x * _WindSpeed + v0.x * 2) + cos(_Time.x * _WindSpeed + v0.z));
 		// wind *= _WindStrength;
 		float2 uv = IN[0].pos.xz * _WindDistortionMap_ST.xy + _WindDistortionMap_ST.zw + _WindSpeed * _Time.y;
-		float2 windSample = (tex2Dlod(_WindDistortionMap, float4(uv, 0, 0)).xy * 2 - 1) * _WindStrength;
-		float3 wind = normalize(float3(windSample.x, windSample.y, 0));
+		float2 windSample = tex2Dlod(_WindDistortionMap, float4(uv, 0, 0)).xy * 2 - 1;
+		float3 wind = normalize(float3(windSample.x, windSample.y, 0)) * _WindStrength;
 
 		// 交互物体的影响
 		float3 dis = distance(_InteractorPosition, worldPos); // 与交互物体的距离
