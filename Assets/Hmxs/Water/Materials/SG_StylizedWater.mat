@@ -90,7 +90,7 @@ Material:
     - _RefractionScale: 0.0065
     - _RefractionSpeed: 0.03
     - _RefractionStrength: 0.005
-    - _SpecularHardness: 0.5
+    - _SpecularHardness: 0.75
     - _SpecularSmoothness: 0.75
     - _SrcBlend: 5
     - _Step: 5.54
@@ -120,7 +120,7 @@ Material:
     - _ShallowColor: {r: 0.6264151, g: 1, b: 0.9907757, a: 0}
     - _SpecularColor: {r: 1, g: 1, b: 1, a: 1}
     - _Step: {r: 4, g: 4, b: 4, a: 3.43}
-    - _SurfaceFoamColor: {r: 1, g: 1, b: 1, a: 0.09803922}
+    - _SurfaceFoamColor: {r: 1, g: 1, b: 1, a: 0.15686275}
     - _SurfaceFoamOffset: {r: 0, g: 0, b: 0, a: 0}
     - _WaveDirection: {r: 0, g: 0.5, b: 1, a: 0.2}
   m_BuildTextureStacks: []
