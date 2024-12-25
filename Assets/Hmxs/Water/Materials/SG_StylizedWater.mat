@@ -100,7 +100,7 @@ Material:
     - _SurfaceFoamDirAngle: 0
     - _SurfaceFoamDistortion: 2
     - _SurfaceFoamSpeed: 0
-    - _SurfaceFoamTilling: 40
+    - _SurfaceFoamTilling: 75
     - _UnderWaterColorVisibility: 0
     - _WaterDepthFadeFactor: 1
     - _WaveCount: 1
