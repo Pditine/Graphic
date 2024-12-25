@@ -23,6 +23,7 @@ namespace SkySystem
                 normal = {textColor = Color.white},
             };
             EditorGUILayout.LabelField("Sky System", style);
+            EditorGUILayout.Space();
             base.OnInspectorGUI();
             EditorGUILayout.Space();
             style.fontSize = 15;
