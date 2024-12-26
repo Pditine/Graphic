@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e1df7b6bb094e958d65f71a8f5784e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  reflectionPlane: {fileID: 0}
+  reflectionPlane: {fileID: 5750199421087262605}
   textureSize: 512
   clipPlaneOffset: 0.07
   reflectLayers:

@@ -7,7 +7,7 @@ using UnityEditor;
 using UnityEditor.SceneManagement;
 #endif
 
-namespace Hmxs.Water.Scripts.Editor
+namespace Hmxs.Water.Scripts
 {
 #if UNITY_EDITOR
 	[InitializeOnLoad]

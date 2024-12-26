@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Hmxs.Water.Scripts.Editor
+namespace Hmxs.Water.Scripts
 {
 	public static class GerstnerWaveUtility
 	{

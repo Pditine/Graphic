@@ -2,7 +2,7 @@
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace Hmxs.Water.Scripts.Editor
+namespace Hmxs.Water.Scripts
 {
 	public class BuoyantObject : MonoBehaviour
 	{

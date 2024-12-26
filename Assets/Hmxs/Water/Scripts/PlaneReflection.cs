@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
 
-namespace Hmxs.Water.Scripts.Editor
+namespace Hmxs.Water.Scripts
 {
 	public class PlaneReflection : MonoBehaviour
 	{
@@ -26,12 +26,13 @@ namespace Hmxs.Water.Scripts.Editor
 			_mainCamera = Camera.main;
 			if (_mainCamera == null) throw new Exception("Main camera not found.");
 
-			var reflectionCameraObject = new GameObject("Reflection Camera" + reflectionPlane.GetInstanceID());
+			var reflectionCameraObject = new GameObject("Reflection Camera_" + _mainCamera.name);
 			_reflectionCamera = reflectionCameraObject.AddComponent<Camera>();
 			_reflectionCamera.aspect = _mainCamera.aspect;
 			_reflectionCamera.fieldOfView = _mainCamera.fieldOfView;
 			_reflectionCamera.depth = -10;
 			_reflectionCamera.enabled = false;
+			_reflectionCamera.hideFlags = HideFlags.HideAndDontSave;
 
 			var cameraData = _reflectionCamera.GetUniversalAdditionalCameraData();
 			cameraData.requiresColorOption = CameraOverrideOption.Off;
@@ -40,9 +41,10 @@ namespace Hmxs.Water.Scripts.Editor
 
 			_reflectionTexture = new RenderTexture(textureSize, textureSize, 24)
 			{
-				name = "_Reflection" + reflectionPlane.GetInstanceID(),
+				name = "_Reflection_" + _mainCamera.name,
 				format = RenderTextureFormat.ARGB32
 			};
+
 
 			_reflectionCamera.targetTexture = _reflectionTexture;
 			_reflectionCamera.cullingMask = reflectLayers.value;
@@ -53,7 +55,7 @@ namespace Hmxs.Water.Scripts.Editor
 
 		private void OnBeginCameraRendering(ScriptableRenderContext context, Camera currentCamera)
 		{
-			if (currentCamera.cameraType is CameraType.Reflection or CameraType.Preview) return;
+			if (currentCamera.cameraType is CameraType.Reflection or CameraType.Preview or CameraType.SceneView) return;
 
 			// Calculate reflection plane
 			Vector3 planePosition = reflectionPlane.position;
@@ -71,8 +73,11 @@ namespace Hmxs.Water.Scripts.Editor
 
 			// Render reflection
 			GL.invertCulling = true;
+#pragma warning disable CS0618
 			UniversalRenderPipeline.RenderSingleCamera(context, _reflectionCamera);
+#pragma warning restore CS0618
 			GL.invertCulling = false;
+
 			reflectiveMaterial.SetTexture(ReflectionTex, _reflectionTexture);
 		}
 
