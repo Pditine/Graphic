@@ -159,12 +159,14 @@ Material:
     - _Smoothness: 0.351
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
+    - _Speed: 3
     - _SrcBlend: 1
     - _SrcBlendAlpha: 1
     - _StencilMask: 128
     - _StencilPass: 0
     - _StencilRef: 128
     - _StencilZFail: 0
+    - _Strength: 1
     - _Surface: 0
     - _SurfaceInputs: 0
     - _SurfaceOptions: 0
