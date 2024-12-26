@@ -55,9 +55,10 @@
 			float3 SetMoon(v2f i)
 			{
 				float3 viewDir = normalize(GetWorldSpaceViewDir(i.positionWS));
-				// 如果一个点,不在月亮应该在的地方,那么这个点就不是月亮(脱裤子放屁)
+				// 如果一个点,不在月亮应该在的地方,那么这个点就不是月亮
 				// 通过视角和月亮方向的点积判断,太阳同理
 				float moonValue = saturate(dot(_MoonDir.xyz, viewDir));
+				// 这里是MoonSize越小,月亮越大，MoonSize为0~1
 				moonValue = _MoonSize - moonValue < 0 ? 1 : 0;
 				float4 moonTex = _MoonIntensity * SAMPLE_TEXTURE2D(_MoonTexture, sampler_MoonTexture, i.moonUV.xy) * moonValue;
 				return moonTex * _MoonGlowColor.rgb;

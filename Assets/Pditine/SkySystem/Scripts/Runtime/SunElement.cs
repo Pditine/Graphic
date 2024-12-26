@@ -10,11 +10,11 @@ namespace SkySystem
     {
         private GameObject _sun;
 
-        public Gradient sunDiscGradient = new Gradient();
+        public Gradient sunDiscGradient = new();
         public Vector2 sunRotation;
-        public Vector4 sunHalo = new Vector4(0.25f,0.25f,0.25f,0.25f);
+        public Vector4 sunHalo = new(0.25f,0.25f,0.25f,0.25f);
         public float sunIntensity;
-        public Gradient sunColorGradient = new Gradient();
+        public Gradient sunColorGradient = new();
 
         public override void Init()
         {
@@ -32,7 +32,7 @@ namespace SkySystem
                 _sun = GameObject.Find("Sun");
             }
             
-            sunRotation.y = 90 + time * 90f / 6f;
+            sunRotation.y = 90f + time * 90f / 6f;
             _sun.transform.eulerAngles = new Vector3(sunRotation.y,sunRotation.x,0);
             Shader.SetGlobalVector("_SunDir",this._sun.transform.forward);
             Shader.SetGlobalVector("_SunHalo",sunHalo);
