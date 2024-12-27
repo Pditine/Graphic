@@ -70,7 +70,7 @@ Material:
     - _HorizonDistance: 20
     - _IntersectionFoamBlendFactor: 1
     - _IntersectionFoamCutoff: 1
-    - _IntersectionFoamDepthFactor: 2
+    - _IntersectionFoamDepthFactor: 1
     - _IntersectionFoamDepthFadeFactor: 3
     - _IntersectionFoamDirAngle: 0
     - _IntersectionFoamFadeFactor: 1
@@ -105,8 +105,8 @@ Material:
     - _WaterDepthFadeFactor: 1
     - _WaveCount: 1
     - _WaveLength: 2
-    - _WaveSpeed: 0.5
-    - _WaveSteepness: 0.1
+    - _WaveSpeed: 0.2
+    - _WaveSteepness: 0.7
     - _WaveStrength: 5
     - _ZTest: 4
     - _ZWrite: 0
