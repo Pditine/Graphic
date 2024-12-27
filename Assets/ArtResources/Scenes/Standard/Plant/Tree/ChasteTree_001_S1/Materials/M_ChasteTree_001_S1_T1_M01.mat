@@ -21,19 +21,20 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: M_ChasteTree_001_S1_T1_M01
-  m_Shader: {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
-  m_Parent: {fileID: 0}
-  m_ModifiedSerializedProperties: 0
+  m_Shader: {fileID: 4800000, guid: 35b406f7b5eeb694cb997bd52f89976d, type: 3}
+  m_Parent: {fileID: 2100000, guid: 8ace94b001264e649ba29d99e3ed9b5a, type: 2}
+  m_ModifiedSerializedProperties: 8
   m_ValidKeywords:
+  - _WIGGLE_ON
+  - _WIND_ON
+  m_InvalidKeywords:
   - _ALPHATEST_ON
   - _SPECULAR_SETUP
-  m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 1
-  m_CustomRenderQueue: 2450
-  stringTagMap:
-    RenderType: TransparentCutout
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
   disabledShaderPasses: []
   m_LockedProperties: 
   m_SavedProperties:
@@ -43,169 +44,21 @@ Material:
         m_Texture: {fileID: 2800000, guid: 92dfd70249948924d9598e500717d67f, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _BumpMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _DetailAlbedoMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _DetailMask:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _DetailNormalMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _EmissionMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     - _MainTex:
         m_Texture: {fileID: 2800000, guid: 92dfd70249948924d9598e500717d67f, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _MetallicGlossMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _Normal_M_SMap:
-        m_Texture: {fileID: 2800000, guid: 5c5e6974021ce9f44bf430d8a570633b, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _OcclusionMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _ParallaxMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _SpecGlossMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - unity_Lightmaps:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - unity_LightmapsInd:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - unity_ShadowMasks:
-        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
     - _AlphaClip: 1
     - _AlphaToMask: 1
-    - _BackFaceStr: 0.127
-    - _BackSubScatterAttenByDistance: 1
-    - _BackSubScatterDistortion: 1
-    - _BackSubScatterOptions: 0
-    - _BackSubScatterParams: 0
-    - _BackSubScatterPower: 6.89
-    - _BackSubScatterScale: 1
-    - _BackSubScatterThicknessScale: 7.75
-    - _BackSubScatterToggle: 0
-    - _Blend: 0
-    - _BlendModePreserveSpecular: 1
-    - _BumpScale: 1
-    - _ChangeColWeight: 0
-    - _ClearCoatMask: 0
-    - _ClearCoatSmoothness: 0
     - _Cull: 0
-    - _Cutoff: 0.5
-    - _DetailAlbedoMapScale: 1
-    - _DetailNormalMapScale: 1
-    - _DstBlend: 0
-    - _DstBlendAlpha: 0
-    - _EmissionStrength: 0
-    - _EnableChangeCol: 0
-    - _EnvironmentReflections: 1
-    - _FlipBack: 0
-    - _GlobalCBufferIndex: 0
     - _GlossMapScale: 1
-    - _Glossiness: 0
-    - _GlossyReflections: 0
-    - _GrassMaxSmoothnessVal: 1
-    - _GrassOcclusionStrength: 0.25
-    - _GroupAdvanced: 0
-    - _HorizonFade: 0.5
-    - _LDotNSScale: 0.5
-    - _LDotNSSmooth: 0.5
-    - _LDotNSStrength: 0.5
-    - _LdotNToggle: 1
-    - _LightDotNumrlOptions: 0
     - _Metallic: 1
-    - _OcclusionAddValue: 0.5
-    - _OcclusionStrength: 1
-    - _Parallax: 0.005
-    - _QueueOffset: 0
-    - _RampColLengthMax: 1
-    - _RampColLengthMin: 0
-    - _RampColMaskMax: 1
-    - _RampColMaskMin: 0
-    - _RampColWeightDownMax: 1
-    - _RampColWeightDownMin: 0
-    - _RampColWeightTopMax: 1
-    - _RampColWeightTopMin: 0
-    - _ReceiveShadows: 1
-    - _SRPBatchEnable: 1
-    - _ScreenDoorFadeDistance: 5
-    - _ScreenDoorFadeRange: 2
-    - _ScreenDoorOptions: 0
-    - _ScreenDoorParams: 0
-    - _ScreenDoorToggle: 0
-    - _ShadowViewDirOffset: 0
     - _Smoothness: 0.363
-    - _SmoothnessTextureChannel: 0
-    - _SpecularHighlights: 1
-    - _SrcBlend: 1
-    - _SrcBlendAlpha: 1
-    - _StencilMask: 128
-    - _StencilPass: 0
-    - _StencilRef: 128
-    - _StencilZFail: 0
-    - _Surface: 0
-    - _SurfaceInputs: 0
-    - _SurfaceOptions: 0
-    - _TextureArray: 0
-    - _Transparency: 1
-    - _UselessParams: 0
-    - _VertexColor: 0
-    - _VertexDarkening: 0.1
-    - _WindBranchScaleStretch: 1
-    - _WindCaculateCenterPosByOffset: 1
-    - _WindCusHangPointToggle: 0
-    - _WindGlobalStretch: 0.01
-    - _WindLeafScalePow: 0
-    - _WindLeafScaleStretch: 1
-    - _WindMaskMode: 1
-    - _WindModeType: 0
-    - _WindNoiseShadowStrength: 1
-    - _WindOptions: 1
-    - _WindParams: 0
-    - _WindRandomStretch: 0.024
-    - _WindVertexToRootPow: 1.42
-    - _WindVertexToRootPowScale: 0.817
-    - _WindisLeaf: 1
+    - _Snow: 0
+    - _WiggleStrenght: 0.166
+    - _WindStrenght: 0.479
     - _WorkflowMode: 0
-    - _ZWrite: 1
-    m_Colors:
-    - _BackSubScatterColor: {r: 1, g: 0.8915094, b: 0.8915094, a: 1}
-    - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
-    - _ChangeCol1: {r: 1, g: 1, b: 1, a: 1}
-    - _ChangeCol2: {r: 0, g: 0, b: 0, a: 1}
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _PivotOffest: {r: 0, g: 0, b: 0, a: 0}
-    - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
-    - _WindCusHangPointPivotOS: {r: 1, g: 1, b: 0, a: 0}
-    - _WindCusHangPointPositionOS: {r: 0, g: 0, b: 0, a: 0}
-    - _WindCusHangPointWeight: {r: 0, g: 0, b: 0, a: 0}
+    m_Colors: []
   m_BuildTextureStacks: []

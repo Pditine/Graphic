@@ -1,0 +1,139 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: SG_StylizedWater 1
+  m_Shader: {fileID: -6465566751694194690, guid: dd1e347a6b65f4d46ae7fd1dabd0a22e, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords:
+  - _SURFACE_TYPE_TRANSPARENT
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: 3000
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _IntersectionFoamTex:
+        m_Texture: {fileID: 2800000, guid: bb1c977465184c668542bc20ff3bf34c, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _NormalTex:
+        m_Texture: {fileID: 2800000, guid: d34c5272518a4baf9c60b6ca39ec407c, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SurfaceFoamTex:
+        m_Texture: {fileID: 2800000, guid: e953230f012d4a509a8db28c0697c9d0, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _WaterColorGradient:
+        m_Texture: {fileID: 2800000, guid: 4bba6bce5e34bdc4ba53d7a46e13c305, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _WaterColorTex:
+        m_Texture: {fileID: 2800000, guid: 0233f1596f3a81e4e8dc12e2adefc5dd, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_Lightmaps:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_LightmapsInd:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_ShadowMasks:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _AlphaClip: 0
+    - _AlphaToMask: 0
+    - _AmbientStrength: 0.3
+    - _Blend: 0
+    - _CastShadows: 0
+    - _Cull: 2
+    - _DepthFadeDistance: 3.57
+    - _DepthFadeFactor: 1
+    - _DstBlend: 10
+    - _HorizonDistance: 20
+    - _IntersectionFoamBlendFactor: 1
+    - _IntersectionFoamCutoff: 1
+    - _IntersectionFoamDepthFactor: 1
+    - _IntersectionFoamDepthFadeFactor: 3
+    - _IntersectionFoamDirAngle: 0
+    - _IntersectionFoamFadeFactor: 1
+    - _IntersectionFoamOffset: 0
+    - _IntersectionFoamSpeed: 0.1
+    - _IntersectionFoamTilling: 50
+    - _LightingHardness: 5.59
+    - _LightingSmoothness: 0.6
+    - _NormalScale: 0.05
+    - _NormalSpeed: 0.05
+    - _NormalStrength: 0.2
+    - _QueueControl: 1
+    - _QueueOffset: 0
+    - _ReflectionBlendFactor: 0.452
+    - _ReflectionFresnel: 9
+    - _ReflectionStrength: 0.4
+    - _RefractionScale: 0.0065
+    - _RefractionSpeed: 0.03
+    - _RefractionStrength: 0.005
+    - _SpecularHardness: 0.75
+    - _SpecularSmoothness: 0.75
+    - _SrcBlend: 5
+    - _Step: 5.54
+    - _Surface: 1
+    - _SurfaceFoamBlend: 0.821
+    - _SurfaceFoamBlendFactor: 0
+    - _SurfaceFoamDirAngle: 0
+    - _SurfaceFoamDistortion: 2
+    - _SurfaceFoamSpeed: 0
+    - _SurfaceFoamTilling: 75
+    - _UnderWaterColorVisibility: 0
+    - _WaterDepthFadeFactor: 1
+    - _WaveCount: 1
+    - _WaveLength: 2
+    - _WaveSpeed: 0.2
+    - _WaveSteepness: 0.7
+    - _WaveStrength: 5
+    - _ZTest: 4
+    - _ZWrite: 0
+    - _ZWriteControl: 0
+    m_Colors:
+    - _DeepColor: {r: 0.24905658, g: 0.4253343, b: 1, a: 0}
+    - _HorizonColor: {r: 0, g: 0.08039363, b: 1.2830188, a: 0.8235294}
+    - _IntersectionFoamColor: {r: 0.9481132, g: 1, b: 0.9920345, a: 1}
+    - _IntersectionFoamOffset: {r: 0, g: 0, b: 0, a: 0}
+    - _ReflectionOffset: {r: 0, g: 0, b: 0, a: 0}
+    - _ShallowColor: {r: 0.6264151, g: 1, b: 0.9907757, a: 0}
+    - _SpecularColor: {r: 0.8820755, g: 1, b: 0.99400383, a: 1}
+    - _Step: {r: 4, g: 4, b: 4, a: 3.43}
+    - _SurfaceFoamColor: {r: 1, g: 1, b: 1, a: 0.15686275}
+    - _SurfaceFoamOffset: {r: 0, g: 0, b: 0, a: 0}
+    - _WaveDirection: {r: 0, g: 0.5, b: 1, a: 0.2}
+  m_BuildTextureStacks: []
+--- !u!114 &3491483810373364350
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 7
