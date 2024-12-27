@@ -24,29 +24,29 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _BaseMap:
-        m_Texture: {fileID: 2800000, guid: 38c5b0506c318514fbc7758414f0861a, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DiffuseRamp:
-        m_Texture: {fileID: 2800000, guid: feeb1ea362802df4480c9e2b32602ad9, type: 2}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _NormalMap:
-        m_Texture: {fileID: 2800000, guid: b12af18cd581ce3439713249227ac7f0, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _DiffuseAdditive: 0
+    - _DiffuseAdditive: 0.054
     - _DiffuseStrength: 1
     - _NormalStrength: 0
     - _OutlineWidth: 0.016
     - _RimStep: 0
     - _RimStepSmooth: 0
-    - _ShadowStep: 0.5
-    - _ShadowStepSmooth: 0.04
-    - _SpecularStep: 0.538
-    - _SpecularStepSmooth: 0.241
+    - _ShadowStep: 0.106
+    - _ShadowStepSmooth: 0.111
+    - _SpecularStep: 0.091
+    - _SpecularStepSmooth: 0.089
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}

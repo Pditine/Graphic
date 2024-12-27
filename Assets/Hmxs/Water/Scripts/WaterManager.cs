@@ -16,7 +16,6 @@ namespace Hmxs.Water.Scripts
 		#endregion
 
 		[Title("References")]
-		[OnValueChanged("UpdateMaterial")] [SerializeField] private MeshRenderer water;
 		[OnValueChanged("UpdateMaterial")] [SerializeField] private Material material;
 
 		[Title("Setting")]
@@ -24,16 +23,7 @@ namespace Hmxs.Water.Scripts
 		[InfoBox("Other material settings should be set directly in the material.")]
 		[OnValueChanged("UpdateMaterial")] [SerializeField] private Vector2Int waterColorTextureSize = new(128, 4);
 		[OnValueChanged("UpdateMaterial")] [InlineButton("SaveWaterColorGradient", SdfIconType.Save, " SAVE")] [SerializeField] private Gradient waterColorGradient;
-		[FolderPath] [SerializeField] private string gradientTextSavePath;
-
-		private Texture2D UpdateWaterColorGradient(bool applyTexture = true)
-		{
-			// create texture
-			var texture = GradientTextureGenerator.Generate(waterColorGradient, waterColorTextureSize.x, waterColorTextureSize.y, material.name);
-			// assign it to material
-			if (applyTexture) material.SetTexture(WaterColorGradient, texture);
-			return texture;
-		}
+		[FolderPath] [SerializeField] private string gradientTextSavePath = "Assets/Hmxs/Water/Textures";
 
 		[Button(SdfIconType.Archive, Stretch = false)]
 		private void UpdateMaterial()
@@ -43,13 +33,16 @@ namespace Hmxs.Water.Scripts
 				Debug.LogError("Water material is not assigned.");
 				return;
 			}
-			if (!water)
-			{
-				Debug.LogError("Water mesh renderer is not assigned.");
-				return;
-			}
-			water.material = material;
 			UpdateWaterColorGradient();
+		}
+
+		private Texture2D UpdateWaterColorGradient(bool applyTexture = true)
+		{
+			// create texture
+			var texture = GradientTextureGenerator.Generate(waterColorGradient, waterColorTextureSize.x, waterColorTextureSize.y, material.name);
+			// assign it to material
+			if (applyTexture) material.SetTexture(WaterColorGradient, texture);
+			return texture;
 		}
 
 #if UNITY_EDITOR

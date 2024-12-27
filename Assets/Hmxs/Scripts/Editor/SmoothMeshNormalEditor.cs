@@ -23,7 +23,7 @@ namespace Hmxs.Scripts.Editor
 		[SerializeField] private bool createNewMesh = true;
 
 		[EnableIf("createNewMesh")][FolderPath]
-		[SerializeField] private string folder = "Assets/Hmxs/Outline/Mesh";
+		[SerializeField] private string folder = "Assets/Hmxs/Toon/Mesh";
 
 
 

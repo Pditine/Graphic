@@ -104,13 +104,15 @@ float4 frag(Varyings IN) : SV_TARGET
     // diffuse
     float diffuseStrength = saturate(NdotL * _DiffuseStrength + _DiffuseAdditive);
     float diffuseFactor = SAMPLE_TEXTURE2D(_DiffuseRamp, sampler_DiffuseRamp, float2(diffuseStrength, 0.5)).r;
-    float3 diffuse = baseColor.rgb * mainLight.color * diffuseFactor * shadow * shadowNdotL;
+    // float3 diffuse = baseColor.rgb * mainLight.color * diffuseFactor * shadow * shadowNdotL;
+    float3 diffuse = baseColor.rgb * mainLight.color * diffuseFactor;
 
     // specular
     float specularStep = 1 - _SpecularStep * 0.05;
     float specularStepSmooth = _SpecularStepSmooth * 0.05;
     float specularFactor = smoothstep(specularStep  - specularStepSmooth, specularStep + specularStepSmooth, NdotH) ;
-    float3 specular = _SpecularColor.rgb * specularFactor * shadow * shadowNdotL;
+    // float3 specular = _SpecularColor.rgb * specularFactor * shadow * shadowNdotL;
+    float3 specular = _SpecularColor.rgb * specularFactor;
 
     // rim
     float rimStep = 1 - _RimStep;
