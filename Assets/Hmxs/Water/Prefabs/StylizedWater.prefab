@@ -129,7 +129,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 191d032ee7d8499cb2d6d44d5ec4331f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  water: {fileID: 0}
+  water: {fileID: 2237401211085558321}
   material: {fileID: 2100000, guid: 6302dfd90780a0e4cb65aa83d35281cd, type: 2}
   waterColorTextureSize: {x: 128, y: 4}
   waterColorGradient:

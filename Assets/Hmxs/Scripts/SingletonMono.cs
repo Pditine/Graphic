@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Hmxs.Toolkit
+namespace Hmxs.Scripts
 {
     /// <summary>
     /// generic singleton base class - inherit from MonoBehaviour

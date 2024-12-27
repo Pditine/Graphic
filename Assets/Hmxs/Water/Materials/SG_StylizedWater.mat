@@ -37,7 +37,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _WaterColorGradient:
-        m_Texture: {fileID: 2800000, guid: db7534615395743418c23a5e39279e7b, type: 3}
+        m_Texture: {fileID: 2800000, guid: 3ef1a28c6b738f54dba33ed6345b075b, type: 2}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _WaterColorTex:
