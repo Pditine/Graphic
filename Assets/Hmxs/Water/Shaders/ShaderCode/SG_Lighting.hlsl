@@ -17,7 +17,7 @@ void MainLighting_float(float3 normalWS, float3 positionWS, float3 viewWS, float
     Light mainLight = GetMainLight(TransformWorldToShadowCoord(positionWS));
 
     // ambient
-    ambient = mainLight.color * ambientStrength;
+    ambient = mainLight.color * SampleSH(normalWS) * ambientStrength;
 
     // diffuse
     float3 lightDirWS = SafeNormalize(float3(mainLight.direction));
@@ -33,7 +33,9 @@ void MainLighting_float(float3 normalWS, float3 positionWS, float3 viewWS, float
     #endif
 }
 
-void AdditionalLighting_float(float3 normalWS, float3 positionWS, float3 viewWS, float specularSmoothness, float specularHardness, float3 specularColor, out float3 diffuse, out float3 specular)
+void AdditionalLighting_float(float3 normalWS, float3 positionWS, float3 viewWS,
+                              float specularSmoothness, float specularHardness, float3 specularColor,
+                              out float3 diffuse, out float3 specular)
 {
     diffuse = float3(0.0f, 0.0f, 0.0f);
     specular = float3(0.0f, 0.0f, 0.0f);

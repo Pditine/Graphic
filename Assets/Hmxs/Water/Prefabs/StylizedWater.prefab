@@ -129,7 +129,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 191d032ee7d8499cb2d6d44d5ec4331f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  water: {fileID: 2237401211085558321}
   material: {fileID: 2100000, guid: 6302dfd90780a0e4cb65aa83d35281cd, type: 2}
   waterColorTextureSize: {x: 128, y: 4}
   waterColorGradient:
@@ -192,7 +191,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 100, y: 1, z: 100}
+  m_LocalScale: {x: 30, y: 1, z: 30}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3221678162261949750}
@@ -204,7 +203,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8252677162043173525}
-  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 4300000, guid: 271463b40de47f04eb7859acbb0e15f9, type: 2}
 --- !u!23 &2237401211085558321
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -268,4 +267,4 @@ MeshCollider:
   serializedVersion: 5
   m_Convex: 0
   m_CookingOptions: 30
-  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 4300000, guid: 271463b40de47f04eb7859acbb0e15f9, type: 2}

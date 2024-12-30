@@ -67,16 +67,16 @@ Material:
     - _DepthFadeDistance: 3.57
     - _DepthFadeFactor: 1
     - _DstBlend: 10
-    - _HorizonDistance: 20
+    - _HorizonDistance: 6.24
     - _IntersectionFoamBlendFactor: 1
     - _IntersectionFoamCutoff: 1
     - _IntersectionFoamDepthFactor: 2
     - _IntersectionFoamDepthFadeFactor: 3
     - _IntersectionFoamDirAngle: 0
-    - _IntersectionFoamFadeFactor: 1
+    - _IntersectionFoamFadeFactor: 0.5
     - _IntersectionFoamOffset: 0
-    - _IntersectionFoamSpeed: 0.1
-    - _IntersectionFoamTilling: 50
+    - _IntersectionFoamSpeed: 0.05
+    - _IntersectionFoamTilling: 100
     - _LightingHardness: 5.59
     - _LightingSmoothness: 0.6
     - _NormalScale: 0.05
@@ -98,29 +98,29 @@ Material:
     - _SurfaceFoamBlend: 0.821
     - _SurfaceFoamBlendFactor: 0
     - _SurfaceFoamDirAngle: 0
-    - _SurfaceFoamDistortion: 2
+    - _SurfaceFoamDistortion: 1.15
     - _SurfaceFoamSpeed: 0
-    - _SurfaceFoamTilling: 75
+    - _SurfaceFoamTilling: 62.6
     - _UnderWaterColorVisibility: 0
-    - _WaterDepthFadeFactor: 1
+    - _WaterDepthFadeFactor: 0.43
     - _WaveCount: 1
-    - _WaveLength: 2
-    - _WaveSpeed: 0.5
-    - _WaveSteepness: 0.1
+    - _WaveLength: 2.91
+    - _WaveSpeed: 0.81
+    - _WaveSteepness: 0.177
     - _WaveStrength: 5
     - _ZTest: 4
     - _ZWrite: 0
     - _ZWriteControl: 0
     m_Colors:
     - _DeepColor: {r: 0.24905658, g: 0.4253343, b: 1, a: 0}
-    - _HorizonColor: {r: 0, g: 0.08039363, b: 1.2830188, a: 0.8235294}
+    - _HorizonColor: {r: 0.75294244, g: 0.22322798, b: 0.11443538, a: 0.8235294}
     - _IntersectionFoamColor: {r: 0.9481132, g: 1, b: 0.9920345, a: 1}
     - _IntersectionFoamOffset: {r: 0, g: 0, b: 0, a: 0}
     - _ReflectionOffset: {r: 0, g: 0, b: 0, a: 0}
     - _ShallowColor: {r: 0.6264151, g: 1, b: 0.9907757, a: 0}
     - _SpecularColor: {r: 0.8820755, g: 1, b: 0.99400383, a: 1}
     - _Step: {r: 4, g: 4, b: 4, a: 3.43}
-    - _SurfaceFoamColor: {r: 1, g: 1, b: 1, a: 0.15686275}
+    - _SurfaceFoamColor: {r: 1, g: 1, b: 1, a: 0.16470589}
     - _SurfaceFoamOffset: {r: 0, g: 0, b: 0, a: 0}
     - _WaveDirection: {r: 0, g: 0.5, b: 1, a: 0.2}
   m_BuildTextureStacks: []
