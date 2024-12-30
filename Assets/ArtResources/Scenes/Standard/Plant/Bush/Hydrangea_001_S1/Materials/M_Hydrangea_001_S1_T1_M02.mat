@@ -14,8 +14,7 @@ Material:
   m_ValidKeywords:
   - _WIGGLE_ON
   - _WIND_ON
-  m_InvalidKeywords:
-  - _ALPHATEST_ON
+  m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 1
@@ -40,6 +39,7 @@ Material:
     - _AlphaToMask: 1
     - _Cull: 0
     - _GlossMapScale: 1
+    - _QueueControl: 0
     - _Smoothness: 0.236
     - _Snow: 0
     - _WiggleStrenght: 0.523

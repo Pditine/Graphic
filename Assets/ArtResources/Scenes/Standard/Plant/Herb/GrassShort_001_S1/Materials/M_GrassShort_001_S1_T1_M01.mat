@@ -30,6 +30,7 @@ Material:
     m_Floats:
     - _Cull: 0
     - _Metallic: 0.022
+    - _QueueControl: 0
     - _Smoothness: 0.378
     - _WiggleStrenght: 0.176
     - _WindStrenght: 0.096

@@ -33,7 +33,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _AmbientStrength: 0.506
+    - _AmbientStrength: 0.573
     - _BendRotationRandom: 0.2
     - _BladeCurve: 4
     - _BladeForward: 0.38
@@ -51,14 +51,14 @@ Material:
     - _MinDist: 40
     - _PosRandom: 0.6
     - _Rad: 0.064
-    - _Radius: 2.38
+    - _Radius: 2.97
     - _RandomHeight: 0.22
-    - _RandomPos: 0.6
+    - _RandomPos: 0.717
     - _Strength: 31.05
     - _TessellationUniform: 7.7
     - _TranslucentGain: 0.5
     - _WindSpeed: 0.005
-    - _WindStrength: 0.001
+    - _WindStrength: 0.1
     m_Colors:
     - _BottomColor: {r: 0, g: 0.2735849, b: 0.0706291, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
