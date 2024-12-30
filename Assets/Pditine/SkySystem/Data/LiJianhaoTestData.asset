@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7857d44cc1c7364a9491bd8ea46f434, type: 3}
   m_Name: LiJianhaoTestData
   m_EditorClassIdentifier: 
-  hour: 15
+  hour: 1.4
   timeControlEverything: 1
   skyElement:
     daySkyGradient:
@@ -136,7 +136,7 @@ MonoBehaviour:
       m_ColorSpace: -1
       m_NumColorKeys: 4
       m_NumAlphaKeys: 2
-    sunRotation: {x: 198.5, y: 315}
+    sunRotation: {x: 198.5, y: 111}
     sunHalo: {x: 0, y: 0.25, z: 0.25, w: 0}
     sunIntensity: 1
     sunColorGradient:
@@ -207,7 +207,6 @@ MonoBehaviour:
     moonDistance: 5.56
     moonSize: 0.995
   lightElement:
-    lightIntensity: 1
     sunLightGradient:
       serializedVersion: 2
       key0: {r: 0.011764706, g: 0.08235294, b: 0.1882353, a: 1}
@@ -269,7 +268,6 @@ MonoBehaviour:
       m_NumColorKeys: 8
       m_NumAlphaKeys: 2
     lightRotation: {x: 0, y: 0}
-    resolution: 256
   cloudElement:
     tint: {r: 1, g: 1, b: 1, a: 0}
     cloudTopColor: {r: 1, g: 1, b: 1, a: 0}

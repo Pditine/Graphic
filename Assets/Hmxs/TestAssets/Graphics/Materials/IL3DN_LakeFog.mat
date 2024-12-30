@@ -128,7 +128,7 @@ Material:
     - _Parallax: 0.02
     - _SF_Blend: 0
     - _SmoothnessTextureChannel: 0
-    - _SoftParticleFactor: 5
+    - _SoftParticleFactor: 5.78
     - _SoftParticlesEnabled: 1
     - _SoftParticlesFarFadeDistance: 5
     - _SoftParticlesNearFadeDistance: 0
@@ -141,7 +141,7 @@ Material:
     - _CameraFadeParams: {r: 0, g: Infinity, b: 0, a: 0}
     - _CenterColor: {r: 0.3773585, g: 0.18867925, b: 0, a: 0}
     - _CloseColor: {r: 1, g: 0.033107374, b: 0, a: 0}
-    - _Color: {r: 0.48235294, g: 0.57238066, b: 0.74509805, a: 0.85490197}
+    - _Color: {r: 0.27450982, g: 0.63529414, b: 0.79215693, a: 1}
     - _Color0: {r: 0.015686274, g: 1, b: 0, a: 0}
     - _ColorAddSubDiff: {r: 1, g: 0, b: 0, a: 0}
     - _Colour: {r: 0.47641504, g: 0.9408201, b: 1, a: 0.7058824}

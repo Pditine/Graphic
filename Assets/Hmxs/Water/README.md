@@ -1,4 +1,4 @@
-﻿# 「风格化水体渲染」
+﻿# 「风格化水体」
 
 ## 获取水的深度
 
@@ -94,7 +94,7 @@ Gradient着色
 
 Gradient控制脚本
 
-![image-20241211003223611](https://hmxs-1315810738.cos.ap-shanghai.myqcloud.com/img/202412110032680.png)
+
 
 <img src="https://hmxs-1315810738.cos.ap-shanghai.myqcloud.com/img/202412110106112.png" alt="image-20241211010645991" style="zoom:67%;" />
 
@@ -205,6 +205,12 @@ Gradient控制脚本
 ```c#
 
 ```
+
+
+
+## 水面反射
+
+
 
 ## 参考
 
