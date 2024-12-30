@@ -6,12 +6,8 @@ namespace SkySystem
     [Serializable]
     public class LightElement : BaseElement
     {
-        //主光源：日光月光
-        public float   lightIntensity;
         public Gradient sunLightGradient, moonLightGradient;
         public Vector2 lightRotation;
-
-        public ReflectionResolution resolution;
         public override void ManualUpdate()
         {
 
@@ -43,7 +39,6 @@ namespace SkySystem
             {
                 c = gradient.Evaluate(rate);
             }
-
             return c;
         }
     }

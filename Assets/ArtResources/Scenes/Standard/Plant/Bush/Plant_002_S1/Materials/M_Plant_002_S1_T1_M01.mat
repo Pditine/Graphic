@@ -8,18 +8,18 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: M_Plant_002_S1_T1_M01
-  m_Shader: {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
-  m_Parent: {fileID: 0}
+  m_Shader: {fileID: 4800000, guid: 35b406f7b5eeb694cb997bd52f89976d, type: 3}
+  m_Parent: {fileID: 2100000, guid: 18b7db765d520b148b03c98a2c121018, type: 2}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
-  - _ALPHATEST_ON
+  - _WIGGLE_ON
+  - _WIND_ON
   m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 2450
-  stringTagMap:
-    RenderType: TransparentCutout
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
   disabledShaderPasses: []
   m_LockedProperties: 
   m_SavedProperties:
@@ -29,166 +29,20 @@ Material:
         m_Texture: {fileID: 2800000, guid: 99bcc7531cbbf1443bb92b31f0914616, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _BumpMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _DetailAlbedoMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _DetailMask:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _DetailNormalMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _EmissionMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     - _MainTex:
         m_Texture: {fileID: 2800000, guid: 99bcc7531cbbf1443bb92b31f0914616, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _MetallicGlossMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _Normal_M_SMap:
-        m_Texture: {fileID: 2800000, guid: f4c8c5bac20bedf4bb880305fff0d29a, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _OcclusionMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _ParallaxMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _SpecGlossMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - unity_Lightmaps:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - unity_LightmapsInd:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - unity_ShadowMasks:
-        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
     - _AlphaClip: 1
     - _AlphaToMask: 1
-    - _BackFaceStr: 0
-    - _BackSubScatterAttenByDistance: 1
-    - _BackSubScatterDistortion: 1
-    - _BackSubScatterParams: 0
-    - _BackSubScatterPower: 1
-    - _BackSubScatterScale: 1
-    - _BackSubScatterThicknessScale: 1
-    - _BackSubScatterToggle: 0
-    - _Blend: 0
-    - _BlendModePreserveSpecular: 1
-    - _BumpScale: 1
-    - _ChangeColWeight: 0
-    - _ClearCoatMask: 0
-    - _ClearCoatSmoothness: 0
-    - _Cull: 2
-    - _Cutoff: 0.5
-    - _DetailAlbedoMapScale: 1
-    - _DetailNormalMapScale: 1
-    - _DstBlend: 0
-    - _DstBlendAlpha: 0
-    - _EmissionStrength: 0
-    - _EnableChangeCol: 0
-    - _EnvironmentReflections: 1
-    - _GlobalCBufferIndex: 0
-    - _GlossMapScale: 0
-    - _Glossiness: 0
-    - _GlossyReflections: 0
-    - _GrassMaxSmoothnessVal: 1
-    - _GroupAdvanced: 0
-    - _HorizonFade: 0.5
-    - _LDotNSScale: 0.5
-    - _LDotNSSmooth: 0.5
-    - _LDotNSStrength: 0.5
-    - _LdotNToggle: 1
-    - _Metallic: 0
-    - _OcclusionAddValue: 0.5
-    - _OcclusionStrength: 1
-    - _Parallax: 0.005
-    - _QueueOffset: 0
-    - _RampColLengthMax: 1
-    - _RampColLengthMin: 0
-    - _RampColMaskMax: 1
-    - _RampColMaskMin: 0
-    - _RampColWeightDownMax: 1
-    - _RampColWeightDownMin: 0
-    - _RampColWeightTopMax: 1
-    - _RampColWeightTopMin: 0
-    - _RandomYScale: 1
-    - _RandomYScaleMax: 1
-    - _RandomYScaleTilling: 1
-    - _ReceiveShadows: 1
-    - _ScreenDoorFadeDistance: 5
-    - _ScreenDoorFadeRange: 2
-    - _ScreenDoorParams: 0
-    - _ScreenDoorToggle: 0
-    - _ShadowViewDirOffset: 0
+    - _QueueControl: 0
     - _Smoothness: 0.079
-    - _SmoothnessTextureChannel: 0
-    - _SpecularHighlights: 1
-    - _SrcBlend: 1
-    - _SrcBlendAlpha: 1
-    - _StencilMask: 128
-    - _StencilParams: 0
-    - _StencilPass: 0
-    - _StencilPassReadMask: 0
-    - _StencilPassRef: 0
-    - _StencilPassWriteMask: 0
-    - _StencilRef: 0
-    - _StencilWritePassEnable: 0
-    - _StencilZFail: 0
-    - _Surface: 0
-    - _SurfaceInputs: 0
-    - _SurfaceOptions: 0
-    - _TextureArray: 0
-    - _Transparency: 1
-    - _UVOffsetParams: 0
-    - _UVOffsetScale: 1
-    - _UVOffsetToggle: 0
-    - _UselessParams: 0
-    - _VertexColor: 0
-    - _WindBranchScaleStretch: 0.293
-    - _WindCaculateCenterPosByOffset: 1
-    - _WindGlobalStretch: 0.049
-    - _WindMaskMode: 0.818
-    - _WindNoiseShadowStrength: 1
-    - _WindParams: 0
-    - _WindRandomStretch: 0.12
-    - _WindVertexToRootPow: 2.15
-    - _WindVertexToRootPowScale: 1
-    - _WorkflowMode: 1
-    - _ZWrite: 1
-    m_Colors:
-    - _BackSubScatterColor: {r: 1, g: 1, b: 1, a: 1}
-    - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
-    - _ChangeCol1: {r: 1, g: 1, b: 1, a: 1}
-    - _ChangeCol2: {r: 0, g: 0, b: 0, a: 1}
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _PivotOffest: {r: 0, g: 0, b: 0, a: 0}
-    - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
+    - _Snow: 0
+    - _WiggleStrenght: 0.141
+    - _WindStrenght: 1
+    m_Colors: []
   m_BuildTextureStacks: []
 --- !u!114 &1965627995637392357
 MonoBehaviour:

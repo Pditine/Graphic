@@ -9,7 +9,6 @@ Shader "LiJianhao/Cloud" {
 			"RenderPipeline"="UniversalPipeline"
 			"RenderType"="Opaque"
 			"Queue"= "Transparent"
-			
 		}
 
 		HLSLINCLUDE
@@ -28,10 +27,9 @@ Shader "LiJianhao/Cloud" {
 			Cull Front // 剔除背面
 			Blend SrcAlpha OneMinusSrcAlpha // Result=(Source×SrcAlpha)+(Destination×(1−SrcAlpha))
 			
-			// 云不应写入深度，并且应该被所有物体遮挡
 			Tags { "Queue" = "Background" }
-			ZWrite Off
-			ZTest Always
+//			ZWrite Off
+//			ZTest Always
 			
 			HLSLPROGRAM
 			#pragma vertex vert
