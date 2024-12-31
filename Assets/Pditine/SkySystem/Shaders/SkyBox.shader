@@ -121,7 +121,7 @@
 				
 				// 地平线
 				float skyLineValue = abs(i.uv.y * 5) + 0.3;
-				// 地平线上靠近太阳或月球的渐变
+				// 地平线上靠近太阳的渐变
 				skyLineValue = 1 - smoothstep(0.0, 0.6, skyLineValue);
 				
 				// sun

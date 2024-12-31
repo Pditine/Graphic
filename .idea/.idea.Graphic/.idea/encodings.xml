@@ -3,5 +3,6 @@
   <component name="Encoding" addBOMForNewFiles="with BOM under Windows, with no BOM otherwise">
     <file url="file://$PROJECT_DIR$/Assets/Render Style/Line/Editor/SmoothedNormalsUtility.cs" charset="GBK" />
     <file url="file://$PROJECT_DIR$/Assets/Render Technology/Transform/Plane Reflection/PlaneReflection.cs" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/Assets/Starlight/Wind/WindTest.cs" charset="GBK" />
   </component>
 </project>
