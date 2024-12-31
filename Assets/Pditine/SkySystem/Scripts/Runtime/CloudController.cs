@@ -19,10 +19,10 @@ namespace SkySystem
 
         private void Update()
         {
-            Sync();
+            Move();
         }
 
-        private void Sync()
+        private void Move()
         {
             _angle += Time.deltaTime * speed;
             var currentRotation = Quaternion.Euler(0, _angle, 0);

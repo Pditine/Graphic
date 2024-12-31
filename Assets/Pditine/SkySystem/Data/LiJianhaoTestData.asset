@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7857d44cc1c7364a9491bd8ea46f434, type: 3}
   m_Name: LiJianhaoTestData
   m_EditorClassIdentifier: 
-  hour: 4.7
+  hour: 17.7
   timeControlEverything: 1
   skyElement:
     daySkyGradient:
@@ -136,7 +136,7 @@ MonoBehaviour:
       m_ColorSpace: -1
       m_NumColorKeys: 4
       m_NumAlphaKeys: 2
-    sunRotation: {x: 198.5, y: 160.5}
+    sunRotation: {x: 198.5, y: 355.5}
     sunHalo: {x: 0, y: 0.25, z: 0.25, w: 0}
     sunIntensity: 1
     sunColorGradient:
@@ -272,4 +272,4 @@ MonoBehaviour:
     tint: {r: 1, g: 1, b: 1, a: 0}
     cloudTopColor: {r: 1, g: 1, b: 1, a: 0}
     cloudBottomColor: {r: 0, g: 0, b: 0, a: 0}
-    GIIndex: 0.203
+    GIIndex: 1.82

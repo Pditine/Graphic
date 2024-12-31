@@ -30,9 +30,8 @@ Shader"LiJianhao/Grass2"
 	#pragma hull hull
 	#pragma domain domain
 	#pragma geometry geom
-	#pragma fragment frag // rider这里会报错,可能是因为frag在subshader
-	
-	// 用于生成可以显示阴影的shader变体
+	#pragma fragment frag // rider这里会报错
+
 	#pragma multi_compile _ _MAIN_LIGHT_SHADOWS
 	
 	// urp支持三件套
@@ -278,7 +277,7 @@ Shader"LiJianhao/Grass2"
 	
 	SubShader
 	{
-		Tags{ "RenderType" = "Opaque" "RenderPipeline" = "UniversalRenderPipeline" }
+		Tags{ "RenderType" = "Opaque" "RenderPipeline" = "UniversalPipeline" }
 
 		Cull Off
 		Pass

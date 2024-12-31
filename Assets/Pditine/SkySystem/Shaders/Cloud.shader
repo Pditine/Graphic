@@ -83,19 +83,15 @@ Shader "LiJianhao/Cloud" {
 			{
 				// 云纹理: r-光照强度，g-背光强度，b-溶解阈值，a-透明度
 				half4 baseMap = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex,i.uv);
-
+				
 				Light light = GetMainLight();
-				light.direction = _SunDir.xyz; // 在编辑器中设置
+				light.direction = _SunDir.xyz; // 在C#中设置
 
-				// 考虑光在云面方向上的强度
+				// 简化版的兰伯特漫反射光照模型
 				float simpleLight = saturate(dot(light.direction, i.normalWS)) * baseMap.r;
 				float3 pixelDir = normalize(i.positionWS);
-				float backLight = baseMap.g*saturate(dot(pixelDir,light.direction));
-				// 云的时间变化,过(0,0) (12,1) (24,0)的抛物线
-				// 所以当时间为12时,云的透明度最大
-				float timeValue = 1.0f / 6.0f * _CloudTime * (1.0f - 1.0f/24.0f * _CloudTime); 
-				float alpha = saturate(baseMap.b - _Dissolve) * baseMap.a * timeValue;
-
+				float backLight = baseMap.g * saturate(dot(pixelDir,light.direction));
+				
 				backLight = 5 * pow(backLight, 8);
 
 				float3 diffuse = lerp(_CloudBottomColor, _CloudTopColor, simpleLight + backLight);
@@ -107,6 +103,12 @@ Shader "LiJianhao/Cloud" {
 				half3 reflDir = reflect(-GetWorldSpaceViewDir(i.positionWS),i.normalWS);
 				float3 test= GlossyEnvironmentReflection(reflDir,i.positionWS,1,1);
 				color += test;
+
+				// 云的时间变化,过(0,0) (12,1) (24,0)的抛物线
+				// 所以当时间为12时,云的透明度最大
+				float timeValue = 1.0f / 6.0f * _CloudTime * (1.0f - 1.0f/24.0f * _CloudTime); 
+				float alpha = saturate(baseMap.b - _Dissolve) * baseMap.a * timeValue;
+				
 				return half4(color, alpha);
 			}
 			ENDHLSL

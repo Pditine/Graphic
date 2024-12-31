@@ -20,11 +20,6 @@ public class WindTest : MonoBehaviour
     public float GrassWiggle = .5f; //草的摇摆幅度
     private float WindGizmo = 0.5f; //风示意图(OnDrawGizmos绘制的）的显示强度
 
-    private void Start()
-    {
-        Cursor.visible = false;
-    }
-
     //更新Shader参数
     void Update()
     {
