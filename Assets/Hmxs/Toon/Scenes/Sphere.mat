@@ -40,7 +40,7 @@ Material:
     - _DiffuseAdditive: 0
     - _DiffuseStrength: 1
     - _NormalStrength: 0
-    - _OutlineWidth: 0.043
+    - _OutlineWidth: 0
     - _RimStep: 0.659
     - _RimStepSmooth: 0.592
     - _ShadowStep: 0
