@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7857d44cc1c7364a9491bd8ea46f434, type: 3}
   m_Name: SkySystemDefaultData
   m_EditorClassIdentifier: 
-  hour: 12.5
+  hour: 4.5
   timeControlEverything: 1
   skyElement:
     daySkyGradient:
@@ -136,7 +136,7 @@ MonoBehaviour:
       m_ColorSpace: -1
       m_NumColorKeys: 4
       m_NumAlphaKeys: 2
-    sunRotation: {x: 198.5, y: 277.5}
+    sunRotation: {x: 198.5, y: 157.5}
     sunHalo: {x: 0, y: 1.47, z: 0.52, w: 0}
     sunIntensity: 1
     sunColorGradient:

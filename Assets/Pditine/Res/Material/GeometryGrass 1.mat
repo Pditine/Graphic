@@ -57,7 +57,7 @@ Material:
     - _TranslucentGain: 0.5
     - _WindScale: 0.503
     - _WindSpeed: 0.005
-    - _WindStrength: 0.345
+    - _WindStrength: 0.737
     m_Colors:
     - _BottomColor: {r: 0.19274396, g: 0.4716981, b: 0.08232467, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}

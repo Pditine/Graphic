@@ -33,7 +33,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _AmbientStrength: 0.227
+    - _AmbientStrength: 0.273
     - _BendRotationRandom: 0.2
     - _BladeCurve: 4
     - _BladeForward: 0.38
@@ -41,19 +41,19 @@ Material:
     - _BladeHeightRandom: 0.3
     - _BladeWidth: 0.05
     - _BladeWidthRandom: 0.02
-    - _GrassHeight: 6.24
+    - _GrassHeight: 23.01
     - _GrassNumber: 4
     - _GrassSegments: 5
-    - _GrassWidth: 0.24
+    - _GrassWidth: 1.41
     - _LightValue: 3.32
     - _MaxDist: 60
     - _MinDist: 40
     - _Rad: 0.064
-    - _Radius: 1
-    - _RandomHeight: 0.22
+    - _Radius: 1.91
+    - _RandomHeight: 0.61
     - _RandomPos: 1
-    - _Strength: 5
-    - _TessellationUniform: 2
+    - _Strength: 8
+    - _TessellationUniform: 10.3
     - _TranslucentGain: 0.5
     - _WindSpeed: 0.005
     - _WindStrength: 0.001
